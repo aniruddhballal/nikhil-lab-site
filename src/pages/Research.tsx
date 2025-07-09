@@ -1,8 +1,4 @@
-import { useState } from 'react';
-
 export default function Research() {
-  const [activeMethod, setActiveMethod] = useState<number | null>(null);
-
   const methods = [
     "TIRF microscopy",
     "Confocal microscopy",
@@ -41,11 +37,7 @@ export default function Research() {
         <h2>Methods Used to Address the Research Questions</h2>
         <div>
           {methods.map((method, index) => (
-            <div
-              key={index}
-              onMouseEnter={() => setActiveMethod(index)}
-              onMouseLeave={() => setActiveMethod(null)}
-            >
+            <div key={index}>
               <p>{method}</p>
             </div>
           ))}

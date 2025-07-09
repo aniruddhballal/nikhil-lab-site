@@ -1,8 +1,4 @@
-import { useState } from 'react';
-
 export default function Home() {
-  const [isHovered, setIsHovered] = useState(false);
-
   const focusAreas = [
     { title: "Treatment Strategies" },
     { title: "Diagnostic Tools" },
@@ -14,10 +10,7 @@ export default function Home() {
       <a href="/research">Research →</a>
       
       <div>
-        <div 
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
+        <div>
           <h1>Diabetes</h1>
           <h2>More than meets the eye</h2>
           <p>NRG Laboratory</p>
