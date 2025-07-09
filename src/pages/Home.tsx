@@ -212,6 +212,26 @@ export default function Home() {
       fontWeight: 500,
       margin: 0,
     },
+    navigationButton: {
+      position: 'absolute' as const,
+      top: '32px',
+      right: '32px',
+      padding: '12px 24px',
+      backgroundColor: 'rgba(59, 130, 246, 0.1)',
+      color: '#1e40af',
+      border: '1px solid rgba(59, 130, 246, 0.3)',
+      borderRadius: '8px',
+      fontSize: '1rem',
+      fontWeight: 500,
+      cursor: 'pointer',
+      transition: 'all 0.3s ease',
+      textDecoration: 'none',
+      display: 'inline-block',
+    },
+    navigationButtonHover: {
+      backgroundColor: 'rgba(59, 130, 246, 0.2)',
+      transform: 'translateY(-2px)',
+    },
     particles: {
       position: 'absolute' as const,
       inset: 0,
@@ -246,6 +266,19 @@ export default function Home() {
         <div style={styles.circle2} />
         <div style={styles.square} />
       </div>
+
+      <a 
+        href="/research"
+        style={styles.navigationButton}
+        onMouseEnter={(e) => {
+          Object.assign((e.target as HTMLElement).style, styles.navigationButtonHover);
+        }}
+        onMouseLeave={(e) => {
+          Object.assign((e.target as HTMLElement).style, styles.navigationButton);
+        }}
+      >
+        Research →
+      </a>
 
       <div style={styles.mainContent}>
         <div style={styles.contentWrapper}>
