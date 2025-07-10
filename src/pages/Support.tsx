@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { memo } from 'react';
+import styles from './Support.module.css';
 
 // Move static data outside component to prevent re-creation on every render
 const fundingItems = [
@@ -17,30 +18,45 @@ const fundingItems = [
 
 const Support = memo(function Support() {
   return (
-    <div>
-      <Link to="/">← Back to Home</Link>
-      <h1>Support</h1>
-      <h2>Funding</h2>
-      <ul>
-        {fundingItems.map((item, index) => (
-          <li key={index}>
-            {item}
-          </li>
-        ))}
-      </ul>
-      <h2>Donate</h2>
-      <p>
-        Only research has answers to cure people from diabetes. Donations through trusts, or foundations or individuals
-        will help us propel innovative research with a goal of finding a cure for diabetes and develop tools to manage
-        diabetes.
-      </p>
-      <p>
-        The lives we change and the progress we make could not be done without people like you. Thanks for your interest
-        and contribution.
-      </p>
-      <p>
-        If you are interested to contribute, please contact <strong>Dr. Nikhil Gandasi</strong>.
-      </p>
+    <div className={styles['support-page']}>
+      <nav className={styles['breadcrumb-nav']}>
+        <Link to="/" className={styles['back-link']}>← Back to Home</Link>
+      </nav>
+      
+      <header className={styles['page-header']}>
+        <h1>Support</h1>
+      </header>
+      
+      <main className={styles['support-content']}>
+        <section className={styles['funding-section']}>
+          <h2>Funding</h2>
+          <ul className={styles['funding-list']}>
+            {fundingItems.map((item, index) => (
+              <li key={index} className={styles['funding-item']}>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </section>
+        
+        <section className={styles['donate-section']}>
+          <h2>Donate</h2>
+          <div className={styles['donate-content']}>
+            <p>
+              Only research has answers to cure people from diabetes. Donations through trusts, or foundations or individuals
+              will help us propel innovative research with a goal of finding a cure for diabetes and develop tools to manage
+              diabetes.
+            </p>
+            <p>
+              The lives we change and the progress we make could not be done without people like you. Thanks for your interest
+              and contribution.
+            </p>
+            <p>
+              If you are interested to contribute, please contact <strong>Dr. Nikhil Gandasi</strong>.
+            </p>
+          </div>
+        </section>
+      </main>
     </div>
   );
 });

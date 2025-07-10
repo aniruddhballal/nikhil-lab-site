@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
+import styles from './Research.module.css';
 
 export default function Research() {
   const methods = [
     "TIRF microscopy",
-    "Confocal microscopy", 
+    "Confocal microscopy",
     "Multi-photon imaging",
     "Single molecule microscopy/PALM superresolution",
     "Image analysis",
@@ -14,20 +15,20 @@ export default function Research() {
   ];
 
   return (
-    <div className="research-page">
-      <nav className="breadcrumb-nav">
-        <Link to="/" className="back-link">← Back to Home</Link>
+    <div className={styles['research-page']}>
+      <nav className={styles['breadcrumb-nav']}>
+        <Link to="/" className={styles['back-link']}>← Back to Home</Link>
       </nav>
-
-      <header className="page-header">
+      
+      <header className={styles['page-header']}>
         <h1>Research</h1>
-        <p className="lab-name">NRG Laboratory</p>
+        <p className={styles['lab-name']}>NRG Laboratory</p>
       </header>
-
-      <main className="research-content">
-        <section className="focus-areas">
+      
+      <main className={styles['research-content']}>
+        <section className={styles['focus-areas']}>
           <h2>Our Focus Areas</h2>
-          <div className="focus-content">
+          <div className={styles['focus-content']}>
             <p>
               <strong>Type-2-diabetes</strong> is characterized by high-blood sugar levels. Understanding and developing treatment strategies have been focused on blood sugar lowering hormone insulin. Apart from there are other factors that influence islet environment which are crucial for islet functioning and secretion of islet hormones. Islet cells bring about their biological actions at different time scales. Therefore the challenge is to investigate both short-duration and long-duration events within single cells. Advancements in microscopy techniques have made this possible to understand variable spatiotemporal scales in cell biology to navigate complex and heterogenic environments in an islet.
             </p>
@@ -37,12 +38,12 @@ export default function Research() {
             </p>
           </div>
         </section>
-
-        <section className="methods-section">
+        
+        <section className={styles['methods-section']}>
           <h2>Methods Used to Address the Research Questions</h2>
-          <ul className="methods-list">
+          <ul className={styles['methods-list']}>
             {methods.map((method, index) => (
-              <li key={index} className="method-item">
+              <li key={index} className={styles['method-item']}>
                 {method}
               </li>
             ))}
