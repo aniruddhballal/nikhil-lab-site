@@ -1,7 +1,7 @@
 // Import the JSON data files
-import principalInvestigator from '../data/principalInvestigator.json';
-import currentMembers from '../data/currentMembers.json';
-import pastMembers from '../data/pastMembers.json';
+import principalInvestigator from '../data/people/principalInvestigator.json';
+import currentMembers from '../data/people/currentMembers.json';
+import pastMembers from '../data/people/pastMembers.json';
 import { Link } from 'react-router-dom';
 
 const People = () => {

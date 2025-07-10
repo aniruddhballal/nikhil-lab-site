@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 import { memo } from 'react';
 
 // Import data from JSON files
-import publicationsData from '../data/publications.json';
-import bookChaptersData from '../data/bookChapters.json';
-import lecturesData from '../data/lectures.json';
-import linksData from '../data/links.json';
-import scholarData from '../data/scholar.json';
+import publicationsData from '../data/pubcom/publications.json';
+import bookChaptersData from '../data/pubcom/bookChapters.json';
+import lecturesData from '../data/pubcom/lectures.json';
+import linksData from '../data/pubcom/links.json';
+import scholarData from '../data/pubcom/scholar.json';
 
 const Publications = memo(function Publications() {
   return (
