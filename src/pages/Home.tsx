@@ -4,6 +4,8 @@ export default function Home() {
       <a href="/research">Research →</a>
       <br />
       <a href="/support">Support →</a>
+      <br />
+      <a href="/publications">Publications →</a>
       <div>
         <div>
           <h1>Diabetes</h1>
