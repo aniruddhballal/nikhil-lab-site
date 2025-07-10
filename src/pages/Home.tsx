@@ -1,10 +1,4 @@
 export default function Home() {
-  const focusAreas = [
-    { title: "Treatment Strategies" },
-    { title: "Diagnostic Tools" },
-    { title: "Prognostic Analysis" }
-  ];
-
   return (
     <div>
       <a href="/research">Research →</a>
@@ -24,14 +18,6 @@ export default function Home() {
           <p>
             Diabetes is a life-long disease caused by the body's inability to metabolize glucose. The focus of our work is to look in to <strong>pancreatic islet tissue</strong> in subcellular resolution to find treatment strategies, diagnostic and prognostic tools to fight diabetes.
           </p>
-        </div>
-
-        <div>
-          {focusAreas.map((item, index) => (
-            <div key={index}>
-              <h3>{item.title}</h3>
-            </div>
-          ))}
         </div>
       </div>
     </div>
