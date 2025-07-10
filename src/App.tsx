@@ -4,7 +4,7 @@ import Research from './pages/Research.tsx';
 import Publications from './pages/Publications.tsx';
 import Support from './pages/Support';
 import People from './pages/People';
-// import Contact from './pages/Contact';
+import Contact from './pages/Contact';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         <Route path="/publications" element={<Publications />} />
         <Route path="/support" element={<Support />} />
         <Route path="/people" element={<People />} />
-        {/* <Route path="/contact" element={<Contact />} /> */}
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </Router>
   );

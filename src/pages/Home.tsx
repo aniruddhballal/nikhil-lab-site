@@ -8,6 +8,8 @@ export default function Home() {
       <a href="/publications">Publications →</a>
       <br />
       <a href="/people">People →</a>
+      <br />
+      <a href="/contact">Contact →</a>
       <div>
         <div>
           <h1>Diabetes</h1>
