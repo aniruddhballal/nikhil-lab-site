@@ -2,7 +2,8 @@ export default function Home() {
   return (
     <div>
       <a href="/research">Research →</a>
-      
+      <br />
+      <a href="/support">Support →</a>
       <div>
         <div>
           <h1>Diabetes</h1>
