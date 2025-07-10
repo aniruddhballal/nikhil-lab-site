@@ -3,7 +3,7 @@ import Home from './pages/Home.tsx';
 import Research from './pages/Research.tsx';
 import Publications from './pages/Publications.tsx';
 import Support from './pages/Support';
-// import People from './pages/People';
+import People from './pages/People';
 // import Contact from './pages/Contact';
 
 function App() {
@@ -14,8 +14,8 @@ function App() {
         <Route path="/research" element={<Research />} />
         <Route path="/publications" element={<Publications />} />
         <Route path="/support" element={<Support />} />
-        {/* <Route path="/people" element={<People />} />
-        <Route path="/contact" element={<Contact />} /> */}
+        <Route path="/people" element={<People />} />
+        {/* <Route path="/contact" element={<Contact />} /> */}
       </Routes>
     </Router>
   );
