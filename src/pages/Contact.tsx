@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom';
+
 export default function Contact() {
   return (
     <div>
-    <a href="/">← Back to Home</a>
+      <Link to="/">← Back to Home</Link>
       <h1>Get in Touch!</h1>
       
       <div>

@@ -1,0 +1,35 @@
+{
+  "principalInvestigator": {
+    "name": "Nikhil R. Gandasi (NRG)",
+    "email": "grnikhil@iisc.ac.in",
+    "linkedin": "https://www.linkedin.com/in/nikhil-gandasi-246743153/"
+  },
+  "recruitment": {
+    "description": "We are looking for candidates from Interdisciplinary backgrounds - Biophysics, Optics, Machine learning and Biology backgrounds",
+    "closingMessage": "Joining Us means you will receive complete support and mentorship to navigate through your science career! Welcome.."
+  },
+  "positions": [
+    {
+      "id": "postdoc",
+      "title": "Competitive Postdoc",
+      "description": "Individuals interested in pursuing a Competitive Postdoc: Please check this link for eligibility. If the prospective candidates meet the eligibility criteria and are interested in work we do, please write to Nikhil. Candidates are advised to attach a short motivation letter and a CV.",
+      "requirements": ["Check eligibility criteria", "Attach motivation letter", "Attach CV"],
+      "contact": "Nikhil"
+    },
+    {
+      "id": "phd",
+      "title": "Ph.D. Students",
+      "description": "We are looking for Ph.D. students: Please check this link for eligibility, procedures and deadlines for the institute's Ph.D. program. If you are interviewing at the institute and considering joining the lab - check our labs interests in Links section of Publications and Communications page and please write to Nikhil.",
+      "requirements": ["Check eligibility and procedures", "Review lab interests", "Write to Nikhil if interviewing"],
+      "contact": "Nikhil"
+    },
+    {
+      "id": "masters",
+      "title": "Masters Thesis",
+      "description": "Look through the interests of the lab and see if it aligns with your plans. If it does write to any of the current lab members. At least 4-6 months duration is a must for thesis projects/lab experience. Candidates are advised to attach a short motivation letter and a CV. Please write to us at least 4-6 months in advance. We are constantly looking for \"motivated candidates\".",
+      "requirements": ["4-6 months duration minimum", "Attach motivation letter", "Attach CV", "Write 4-6 months in advance"],
+      "contact": "Any current lab member",
+      "duration": "4-6 months minimum"
+    }
+  ]
+}

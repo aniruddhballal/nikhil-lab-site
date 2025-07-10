@@ -1,26 +1,33 @@
-export default function Support() {
+import { Link } from 'react-router-dom';
+import { memo } from 'react';
+
+// Move static data outside component to prevent re-creation on every render
+const fundingItems = [
+  "Science and Engineering Research Board - Start-up grant - 2024",
+  "Indian Council of Medical Research - Grant in Aid Scheme - 2023",
+  "Indian Institute of Science - Startup grant - 2021",
+  "DBT-Ramalingaswami Fellowship - 2021",
+  "O. E. och Edla Johanssons Foundation - 2019 - Utilized",
+  "Swedish Strategic Foundation for collaboration between industry and academia - 2018 - Utilized",
+  "European Council for Study of Diabetes (EFSD) Rising Star Award Programme grant - 2018 - Utilized",
+  "NovoNordisk Foundation - Young Investigator Award grant - 2017",
+  "Swedish Society for Medical Research Foundation (SSMF) - 2016 - Utilized",
+  "European Council for Study of Diabetes (EFSD)/Lilly (Also known as EFSD Young Investigator Award grant) - 2015 - Utilized"
+];
+
+const Support = memo(function Support() {
   return (
     <div>
-    <a href="/">← Back to Home</a>
+      <Link to="/">← Back to Home</Link>
       <h1>Support</h1>
-
       <h2>Funding</h2>
       <ul>
-        <li>Science and Engineering Research Board - Start-up grant - 2024</li>
-        <li>Indian Council of Medical Research - Grant in Aid Scheme - 2023</li>
-        <li>Indian Institute of Science - Startup grant - 2021</li>
-        <li>DBT-Ramalingaswami Fellowship - 2021</li>
-        <li>O. E. och Edla Johanssons Foundation - 2019 - Utilized</li>
-        <li>Swedish Strategic Foundation for collaboration between industry and academia - 2018 - Utilized</li>
-        <li>European Council for Study of Diabetes (EFSD) Rising Star Award Programme grant - 2018 - Utilized</li>
-        <li>NovoNordisk Foundation - Young Investigator Award grant - 2017</li>
-        <li>Swedish Society for Medical Research Foundation (SSMF) - 2016 - Utilized</li>
-        <li>
-          European Council for Study of Diabetes (EFSD)/Lilly (Also known as EFSD Young Investigator Award grant) -
-          2015 - Utilized
-        </li>
+        {fundingItems.map((item, index) => (
+          <li key={index}>
+            {item}
+          </li>
+        ))}
       </ul>
-
       <h2>Donate</h2>
       <p>
         Only research has answers to cure people from diabetes. Donations through trusts, or foundations or individuals
@@ -36,4 +43,6 @@ export default function Support() {
       </p>
     </div>
   );
-}
+});
+
+export default Support;

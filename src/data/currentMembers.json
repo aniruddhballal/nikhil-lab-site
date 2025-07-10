@@ -1,0 +1,114 @@
+[
+  {
+    "name": "Aishwarya M A",
+    "position": "PhD Student, Indian Institute of Science, Bengaluru (2022-present)",
+    "education": "Masters in Biochemistry - Bengaluru City University, Bengaluru, India",
+    "achievements": ["DBT-JRF - 2021", "DST-INSPIRE - 2020", "GATE - 2020, 2021"],
+    "contact": {
+      "email": "aishwaryama2@gmail.com",
+      "phone": "+91-80-22932490"
+    }
+  },
+  {
+    "name": "Anuma Pallavi",
+    "position": "PhD Student, Indian Institute of Science, Bengaluru (2022-present)",
+    "education": "Masters in Animal Biology and Biotechnology - University of Hyderabad, Hyderabad, India",
+    "achievements": ["DBT-JRF - 2021", "GATE - 2021", "CSIR-NET (LS) - 2020", "TIFR - 2021", "Prathibha Award for University toppers - 2019"],
+    "contact": {
+      "email": "anumapallavi@iisc.ac.in",
+      "phone": "+91-80-22932490"
+    }
+  },
+  {
+    "name": "Meetu Singh",
+    "position": "Integrated- PhD Student (with Prof. Anu Rangarajan)",
+    "duration": "Indian Institute of Science, Bengaluru (2022-present)",
+    "education": "Bachelors in Life Sciences - Delhi University - Delhi, India",
+    "achievements": ["IIT-JAM - 2020"],
+    "contact": {
+      "email": "meetusingh@iisc.ac.in",
+      "phone": "+91-80-22932490"
+    }
+  },
+  {
+    "name": "Ananya Sarkar",
+    "position": "Integrated- PhD Student",
+    "duration": "Indian Institute of Science, Bengaluru (2024-present)",
+    "education": "Bachelors (Hons) in Microbiology - University of Calcutta - Kolkota, India",
+    "achievements": ["JAM BT - 2023", "TIFR-GS 2023", "GATE BT 2023", "GATE XL 2024"],
+    "contact": {
+      "email": "sananya@iisc.ac.in",
+      "phone": "+91-80-22932490"
+    }
+  },
+  {
+    "name": "Priyadarshini V",
+    "position": "PhD Student, Indian Institute of Science, Bengaluru (2022-present)",
+    "education": "Masters in Biotechnology - Indian Institute of Technology - Hyderabad, Hyderabad, India",
+    "achievements": ["DBT-JRF - 2021", "GATE - 2019"],
+    "contact": {
+      "email": "vpriyadarshi@iisc.ac.in",
+      "phone": "+91-80-22932490"
+    }
+  },
+  {
+    "name": "Sagarika Prabhakar",
+    "position": "PhD Student, Indian Institute of Science, Bengaluru (2024-present)",
+    "education": "M.Tech in Biotechnology - PSG College of Technology - Coimbatore, India",
+    "achievements": ["CSIR-NET - 2024", "GATE - 2021"],
+    "contact": {
+      "email": "sagarikap@iisc.ac.in",
+      "phone": "+91-80-22932490"
+    }
+  },
+  {
+    "name": "Saptadipa Paul",
+    "position": "Postdoc, Indian Institute of Science, Bengaluru (2023-present)",
+    "education": "PhD - Jain University - Bengaluru, India",
+    "achievements": [],
+    "contact": {
+      "email": "saptadipapaul08@gmail.com",
+      "phone": "+91-80-22932490"
+    }
+  },
+  {
+    "name": "Bhavana S P",
+    "position": "Masters thesis student, Indian Institute of Science, Bengaluru (2024-present)",
+    "education": "Masters in Human Genetics, Dayananda Sagar University, Bengaluru , India",
+    "achievements": [],
+    "contact": {
+      "email": "bhavanasp22@gmail.com",
+      "phone": "+91-80-22932490"
+    }
+  },
+  {
+    "name": "Yavanica S",
+    "position": "Masters thesis student , Indian Institute of Science, Bengaluru (2024-present)",
+    "education": "Int MSc, Yuvaraja's College, Mysore, India",
+    "achievements": [],
+    "contact": {
+      "email": "yavanica009@gmail.com",
+      "phone": "+91-80-22932490"
+    }
+  },
+  {
+    "name": "Satyam Roy",
+    "position": "Masters thesis, Indian Institute of Science, Bengaluru (2024-present)",
+    "education": "MSc Life Sciences, Indian Institute of Science, Bengaluru",
+    "achievements": [],
+    "contact": {
+      "email": "satyamroy@iisc.ac.in",
+      "phone": "+91-80-22932490"
+    }
+  },
+  {
+    "name": "Gangadhar",
+    "position": "Lab helper, Indian Institute of Science, Bengaluru (2022-present)",
+    "education": "",
+    "achievements": [],
+    "contact": {
+      "email": "",
+      "phone": "+91-80-22932490"
+    }
+  }
+]
