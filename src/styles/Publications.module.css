@@ -401,21 +401,3 @@
   }
 }
 
-/* Touch device improvements */
-@media (hover: none) and (pointer: coarse) {
-  .back-link:hover,
-  .publication-item:hover,
-  .scholar-section a:hover,
-  .links-section .link-item:hover {
-    transform: none;
-    box-shadow: none;
-  }
-  
-  .back-link:active,
-  .publication-item:active,
-  .scholar-section a:active,
-  .links-section .link-item:active {
-    transform: scale(0.98);
-    transition: transform 0.1s ease;
-  }
-}
