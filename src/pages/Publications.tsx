@@ -36,6 +36,7 @@ const Publications = memo(function Publications() {
      
       <header className={styles['page-header']}>
         <h1>Publications</h1>
+        <p className={styles['lab-name']}>NRG Laboratory</p>
       </header>
      
       <main className={styles['publications-content']}>
