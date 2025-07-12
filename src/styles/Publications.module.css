@@ -327,17 +327,17 @@
 /* Improved Responsive Design */
 @media (max-width: 768px) {
   .publications-page {
-    padding: 0rem; /* Reduced from 1.5rem */
+    padding: 1.5rem; /* Increased from 0rem */
   }
   
   .publications-content {
     gap: 2rem;
-    width: calc(100% - 2rem); /* Account for page padding */
-    margin: 0 1rem;
+    width: calc(100% - 3rem); /* Increased margin for more space */
+    margin: 0 1.5rem;
   }
   
   .publications-section {
-    padding: 0.5rem; /* Reduced from 2rem */
+    padding: 1.5rem; /* Increased from 0.5rem */
   }
   
   .publication-item {
@@ -357,21 +357,26 @@
 
 @media (max-width: 480px) {
   .publications-page {
-    padding: 0rem; /* Further reduced */
+    padding: 1.5rem; /* Increased from 0rem */
   }
   
   .publications-content {
-    width: calc(100% - 1.5rem); /* Tighter constraints */
-    margin: 0 0.75rem;
+    width: calc(100% - 3rem); /* Much more generous spacing */
+    margin: 0 1.5rem;
     gap: 1.5rem;
   }
   
   .publications-section {
-    padding: 0rem; /* Much tighter */
+    padding: 1.5rem; /* Much more generous padding */
+  }
+  
+  .back-link {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
   }
   
   .publication-item {
-    padding: 0rem; /* Tighter padding */
+    padding: 1rem; /* More generous padding */
   }
   
   .publication-item p {
@@ -388,19 +393,19 @@
 /* Extra small screens */
 @media (max-width: 360px) {
   .publications-page {
-    padding: 0.5rem;
+    padding: 1.5rem; /* Increased from 0.5rem */
   }
   
   .publications-content {
-    width: calc(100% - 1rem);
-    margin: 0 0.5rem;
+    width: calc(100% - 3rem); /* More generous spacing */
+    margin: 0 1.5rem;
   }
   
   .publications-section {
-    padding: 0.75rem;
+    padding: 1.5rem; /* More generous padding */
   }
   
   .publication-item {
-    padding: 0.5rem;
+    padding: 1rem; /* More generous padding */
   }
 }
