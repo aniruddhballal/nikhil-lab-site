@@ -1,10 +1,34 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import Sidebar from '../components/Sidebar';
 import styles from '../styles/Contact.module.css';
 
 export default function Contact() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+  
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
+
   return (
     <div className={styles.contactContainer}>
-      <Link to="/" className={styles['back-link']}>← Back to Home</Link>
+      <button
+        onClick={toggleSidebar}
+        className={styles.menuButton}
+        aria-label="Open navigation menu"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      
+      <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
+      
       <h1 className={styles.mainTitle}>Get in Touch!</h1>
      
       <div className={styles.contactInfo}>
@@ -12,11 +36,11 @@ export default function Contact() {
         <p>Email: grnikhil@iisc.ac.in</p>
         <p>Linkedin: https://www.linkedin.com/in/nikhil-gandasi-246743153/</p>
       </div>
-      
+     
       <div className={styles.recruitmentInfo}>
         <p>We are looking for candidates from Interdisciplinary backgrounds - Biophysics, Optics, Machine learning and Biology backgrounds</p>
       </div>
-      
+     
       <div className={styles.joinSection}>
         <h2>Join Us</h2>
        
@@ -24,18 +48,18 @@ export default function Contact() {
           <h3>Competitive Postdoc</h3>
           <p>Individuals interested in pursuing a Competitive Postdoc: Please check this link for eligibility. If the prospective candidates meet the eligibility criteria and are interested in work we do, please write to Nikhil. Candidates are advised to attach a short motivation letter and a CV.</p>
         </div>
-        
+       
         <div className={styles.positionCard}>
           <h3>Ph.D. Students</h3>
           <p>We are looking for Ph.D. students: Please check this link for eligibility, procedures and deadlines for the institute's Ph.D. program. If you are interviewing at the institute and considering joining the lab - check our labs interests in Links section of Publications and Communications page and please write to Nikhil.</p>
         </div>
-        
+       
         <div className={styles.positionCard}>
           <h3>Masters Thesis</h3>
           <p>Look through the interests of the lab and see if it aligns with your plans. If it does write to any of the current lab members. At least 4-6 months duration is a must for thesis projects/lab experience. Candidates are advised to attach a short motivation letter and a CV. Please write to us at least 4-6 months in advance. We are constantly looking for "motivated candidates".</p>
         </div>
       </div>
-      
+     
       <div className={styles.welcomeMessage}>
         <p>Joining Us means you will receive complete support and mentorship to navigate through your science career! Welcome..</p>
       </div>
