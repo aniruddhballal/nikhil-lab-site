@@ -38,6 +38,15 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         <div className={styles.sidebarContent}>
           <ul className={styles.sidebarNav}>
             <li>
+              <Link to="/" onClick={onClose} className={styles.sidebarLink}>
+                <span>Home</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12,5 19,12 12,19"></polyline>
+                </svg>
+              </Link>
+            </li>
+            <li>
               <Link to="/research" onClick={onClose} className={styles.sidebarLink}>
                 <span>Research</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
