@@ -1,14 +1,38 @@
 // Import the JSON data files
+import { useState } from 'react';
+import Sidebar from '../components/Sidebar';
 import principalInvestigator from '../data/people/principalInvestigator.json';
 import currentMembers from '../data/people/currentMembers.json';
 import pastMembers from '../data/people/pastMembers.json';
-import { Link } from 'react-router-dom';
 import styles from '../styles/People.module.css';
 
 const People = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+  
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
+
   return (
     <div className={styles.peopleContainer}>
-      <Link to="/" className={styles['back-link']}>← Back to Home</Link>
+      <button
+        onClick={toggleSidebar}
+        className={styles.menuButton}
+        aria-label="Open navigation menu"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      
+      <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
+      
       <h1 className={styles.pageTitle}>People</h1>
      
       <h2 className={styles.sectionTitle}>Principal Investigator</h2>
@@ -30,7 +54,6 @@ const People = () => {
           <p className={styles.infoText}>Phone: {principalInvestigator.contact.phone}</p>
         </div>
       </div>
-
       <div className={styles.currentMembersSection}>
         <h2 className={styles.sectionTitle}>Current Lab Members</h2>
         {currentMembers.map((member, index) => (
@@ -57,7 +80,6 @@ const People = () => {
           </div>
         ))}
       </div>
-
       <div className={styles.pastMembersSection}>
         <h2 className={styles.sectionTitle}>Past Members</h2>
         {pastMembers.map((member, index) => (
