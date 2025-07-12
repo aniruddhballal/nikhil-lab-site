@@ -44,6 +44,7 @@ const Support = memo(function Support() {
      
       <header className={styles['page-header']}>
         <h1>Support</h1>
+        <p className={styles['lab-name']}>NRG Laboratory</p>
       </header>
      
       <main className={styles['support-content']}>

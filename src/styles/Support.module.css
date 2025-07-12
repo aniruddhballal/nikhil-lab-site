@@ -90,6 +90,22 @@
   }
 }
 
+.lab-name {
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  position: relative;
+  padding: 0.5rem 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.05);
+  margin: 0;
+  display: inline-block;
+}
+
 .support-content {
   max-width: 1000px;
   margin: 0 auto;
