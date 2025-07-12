@@ -282,6 +282,7 @@
 @media (max-width: 768px) {
   .contactContainer {
     padding: 1rem;
+    margin: 1.5rem; /* Add this or increase this value */
   }
   
   .backLink {
