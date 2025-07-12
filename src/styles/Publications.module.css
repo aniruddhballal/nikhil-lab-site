@@ -89,6 +89,32 @@
   background-clip: text;
 }
 
+.page-header:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.8), transparent);
+  transform: translateX(-50%);
+  animation: expandUnderline 1.5s ease-out 0.5s forwards;
+}
+
+@keyframes expandUnderline {
+  from {
+    width: 0;
+  }
+  to {
+    width: 300px;
+  }
+}
+
 .publications-content {
   max-width: 1200px;
   margin: 0 auto;
