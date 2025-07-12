@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styles from '../styles/Sidebar.module.css';
 
 interface SidebarProps {
@@ -7,6 +7,12 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
+  const location = useLocation();
+
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
+
   return (
     <>
       {isOpen && (
@@ -38,7 +44,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         <div className={styles.sidebarContent}>
           <ul className={styles.sidebarNav}>
             <li>
-              <Link to="/" onClick={onClose} className={styles.sidebarLink}>
+              <Link 
+                to="/" 
+                onClick={onClose} 
+                className={`${styles.sidebarLink} ${isActive('/') ? styles.sidebarLinkActive : ''}`}
+              >
                 <span>Home</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -47,7 +57,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               </Link>
             </li>
             <li>
-              <Link to="/research" onClick={onClose} className={styles.sidebarLink}>
+              <Link 
+                to="/research" 
+                onClick={onClose} 
+                className={`${styles.sidebarLink} ${isActive('/research') ? styles.sidebarLinkActive : ''}`}
+              >
                 <span>Research</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -56,7 +70,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               </Link>
             </li>
             <li>
-              <Link to="/support" onClick={onClose} className={styles.sidebarLink}>
+              <Link 
+                to="/support" 
+                onClick={onClose} 
+                className={`${styles.sidebarLink} ${isActive('/support') ? styles.sidebarLinkActive : ''}`}
+              >
                 <span>Support</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -65,7 +83,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               </Link>
             </li>
             <li>
-              <Link to="/publications" onClick={onClose} className={styles.sidebarLink}>
+              <Link 
+                to="/publications" 
+                onClick={onClose} 
+                className={`${styles.sidebarLink} ${isActive('/publications') ? styles.sidebarLinkActive : ''}`}
+              >
                 <span>Publications</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -74,7 +96,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               </Link>
             </li>
             <li>
-              <Link to="/people" onClick={onClose} className={styles.sidebarLink}>
+              <Link 
+                to="/people" 
+                onClick={onClose} 
+                className={`${styles.sidebarLink} ${isActive('/people') ? styles.sidebarLinkActive : ''}`}
+              >
                 <span>People</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -83,7 +109,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               </Link>
             </li>
             <li>
-              <Link to="/contact" onClick={onClose} className={styles.sidebarLink}>
+              <Link 
+                to="/contact" 
+                onClick={onClose} 
+                className={`${styles.sidebarLink} ${isActive('/contact') ? styles.sidebarLinkActive : ''}`}
+              >
                 <span>Contact</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <line x1="5" y1="12" x2="19" y2="12"></line>

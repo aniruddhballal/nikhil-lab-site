@@ -133,6 +133,23 @@
   opacity: 0.5;
 }
 
+.sidebarLinkActive {
+  color: #000000 !important;
+  background: rgba(0, 0, 0, 0.1) !important;
+  border-left-color: rgba(0, 0, 0, 0.5) !important;
+  transform: translateX(8px);
+  font-weight: 400;
+}
+
+.sidebarLinkActive::before {
+  width: 100% !important;
+}
+
+.sidebarLinkActive svg {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
 .sidebarFooter {
   padding: 2rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
