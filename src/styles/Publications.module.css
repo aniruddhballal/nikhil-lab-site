@@ -327,21 +327,21 @@
 /* Improved Responsive Design */
 @media (max-width: 768px) {
   .publications-page {
-    padding: 1.5rem 2rem 1.5rem 1rem; /* Less left, more right */
+    padding: 1.5rem 3rem 1.5rem 1rem; /* Much more right padding */
   }
   
   .publications-content {
     gap: 2rem;
-    width: calc(100% - 2rem); /* Back to original width calculation */
-    margin: 0 1rem 0 1rem;
+    width: calc(100% - 4rem); /* More aggressive right spacing */
+    margin: 0 2rem 0 1rem; /* Much more right margin */
   }
   
   .publications-section {
-    padding: 1.5rem 2rem 1.5rem 1.5rem; /* More padding on right */
+    padding: 1.5rem 2.5rem 1.5rem 1.5rem; /* More padding on right */
   }
   
   .publication-item {
-    padding: 1rem 1.5rem 1rem 1rem; /* More padding on right */
+    padding: 1rem 2rem 1rem 1rem; /* Much more right padding */
     margin: 0;
   }
   
@@ -357,17 +357,17 @@
 
 @media (max-width: 480px) {
   .publications-page {
-    padding: 1.5rem 2rem 1.5rem 0.75rem; /* Less left, more right */
+    padding: 1.5rem 3rem 1.5rem 0.75rem; /* Much more right padding */
   }
   
   .publications-content {
-    width: calc(100% - 1.5rem); /* Back to tighter left constraint */
-    margin: 0 1.5rem 0 0.75rem; /* Less left margin, more right */
+    width: calc(100% - 4rem); /* Much more aggressive right spacing */
+    margin: 0 2rem 0 0.75rem; /* Much more right margin */
     gap: 1.5rem;
   }
   
   .publications-section {
-    padding: 1.5rem 2rem 1.5rem 1rem; /* More padding on right */
+    padding: 1.5rem 2.5rem 1.5rem 1rem; /* More padding on right */
   }
   
   .back-link {
@@ -376,7 +376,7 @@
   }
   
   .publication-item {
-    padding: 1rem 1.5rem 1rem 0.75rem; /* More padding on right */
+    padding: 1rem 2rem 1rem 0.75rem; /* Much more right padding */
   }
   
   .publication-item p {
@@ -393,19 +393,19 @@
 /* Extra small screens */
 @media (max-width: 360px) {
   .publications-page {
-    padding: 1.5rem 2rem 1.5rem 0.5rem; /* Less left, more right */
+    padding: 1.5rem 3rem 1.5rem 0.5rem; /* Much more right padding */
   }
   
   .publications-content {
-    width: calc(100% - 1rem); /* Back to tighter left constraint */
-    margin: 0 1.5rem 0 0.5rem; /* Less left margin, more right */
+    width: calc(100% - 3.5rem); /* Much more aggressive right spacing */
+    margin: 0 2rem 0 0.5rem; /* Much more right margin */
   }
   
   .publications-section {
-    padding: 1.5rem 2rem 1.5rem 0.75rem; /* More padding on right */
+    padding: 1.5rem 2.5rem 1.5rem 0.75rem; /* More padding on right */
   }
   
   .publication-item {
-    padding: 1rem 1.5rem 1rem 0.5rem; /* More padding on right */
+    padding: 1rem 2rem 1rem 0.5rem; /* Much more right padding */
   }
 }
