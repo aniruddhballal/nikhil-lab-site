@@ -60,11 +60,8 @@
   content: '';
   position: absolute;
   top: -2rem;
-  left: 50%;
-  transform: translateX(-50%);
   width: 100px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.3), transparent);
+  height: 4px;
 }
 
 .heroHeader h1 {
