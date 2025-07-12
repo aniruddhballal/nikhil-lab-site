@@ -1,10 +1,9 @@
-/* Layout.module.css */
 .appLayout {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #000000;
-  color: #ffffff;
+  background: #ffffff;
+  color: #000000;
   position: relative;
   overflow-x: hidden;
 }
@@ -17,18 +16,18 @@
   right: 0;
   bottom: 0;
   background:
-    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+    radial-gradient(circle at 10% 20%, rgba(0, 0, 0, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(0, 0, 0, 0.02) 0%, transparent 50%);
   pointer-events: none;
   z-index: 0;
 }
 
 .siteHeader {
   position: relative;
-  z-index: 50; /* Reduced from 100 to 50 so it stays below home navigation */
+  z-index: 50;
   backdrop-filter: blur(20px);
-  background: rgba(0, 0, 0, 0.9);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 2rem 0;
 }
 
@@ -39,7 +38,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.02));
   pointer-events: none;
 }
 
@@ -57,14 +56,14 @@
   font-weight: 100;
   margin: 0;
   letter-spacing: 0.05em;
-  background: linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.8));
+  background: linear-gradient(135deg, #000000, rgba(0, 0, 0, 0.8));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+  text-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   text-decoration: none;
-  position: relative; /* Add this for the pseudo-element */
+  position: relative;
 }
 
 .siteTitle:hover {
@@ -75,13 +74,13 @@
 .siteTitle::after {
   content: '';
   position: absolute;
-  bottom: -8px; /* Adjust distance from title */
+  bottom: -8px;
   left: 50%;
   width: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.8), transparent);
   transform: translateX(-50%);
-  animation: expandUnderline 1.5s ease-out 0.5s forwards; /* Delay of 0.5s, then animate */
+  animation: expandUnderline 1.5s ease-out 0.5s forwards;
 }
 
 @keyframes expandUnderline {
@@ -89,14 +88,14 @@
     width: 0;
   }
   to {
-    width: 300px; /* Adjust width as needed */
+    width: 300px;
   }
 }
 
 .siteTagline {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.6);
-  margin: 1.5rem 0 0 0; /* Increased from 0.5rem to 1.5rem */
+  color: rgba(0, 0, 0, 0.6);
+  margin: 1.5rem 0 0 0;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 300;
@@ -112,10 +111,10 @@
 
 .siteFooter {
   position: relative;
-  z-index: 50; /* Reduced from 100 to 50 */
+  z-index: 50;
   backdrop-filter: blur(20px);
-  background: rgba(0, 0, 0, 0.9);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding: 2rem 0;
   text-align: center;
 }
@@ -127,13 +126,13 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.05));
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.05));
   pointer-events: none;
 }
 
 .siteFooter p {
   margin: 0;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(0, 0, 0, 0.5);
   font-size: 0.9rem;
   font-weight: 300;
   letter-spacing: 0.05em;
@@ -142,19 +141,18 @@
   padding: 1rem 2rem;
   border-radius: 20px;
   backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   display: inline-block;
   transition: all 0.3s ease;
 }
 
 .siteFooter p:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
   transform: translateY(-1px);
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .headerContent {
     padding: 0 1rem;
