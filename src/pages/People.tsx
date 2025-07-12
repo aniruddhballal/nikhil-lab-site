@@ -33,7 +33,11 @@ const People = () => {
       
       <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
       
-      <h1 className={styles.pageTitle}>People</h1>
+      <header className={styles['page-header']}>
+        <h1>People</h1>
+        <p className={styles['lab-name']}>NRG Laboratory</p>
+      </header>
+
      
       <h2 className={styles.sectionTitle}>Principal Investigator</h2>
       <div className={styles.principalInvestigator}>
