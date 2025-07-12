@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import { memo } from 'react';
+import { useState, memo } from 'react';
+import Sidebar from '../components/Sidebar';
 import styles from '../styles/Support.module.css';
 
 const fundingItems = [
@@ -16,16 +16,36 @@ const fundingItems = [
 ];
 
 const Support = memo(function Support() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+  
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
+
   return (
     <div className={styles['support-page']}>
-      <nav className={styles['breadcrumb-nav']}>
-        <Link to="/" className={styles['back-link']}>← Back to Home</Link>
-      </nav>
+      <button
+        onClick={toggleSidebar}
+        className={styles.menuButton}
+        aria-label="Open navigation menu"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
       
+      <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
+     
       <header className={styles['page-header']}>
         <h1>Support</h1>
       </header>
-      
+     
       <main className={styles['support-content']}>
         <section className={styles['funding-section']}>
           <h2>Funding</h2>
@@ -37,7 +57,7 @@ const Support = memo(function Support() {
             ))}
           </ul>
         </section>
-        
+       
         <section className={styles['donate-section']}>
           <h2>Donate</h2>
           <div className={styles['donate-content']}>
