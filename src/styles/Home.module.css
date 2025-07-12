@@ -139,6 +139,7 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border-left: 3px solid transparent;
   position: relative;
+  width: 96%;
 }
 
 .sidebarLink::before {
