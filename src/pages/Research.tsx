@@ -1,7 +1,18 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import Sidebar from '../components/Sidebar';
 import styles from '../styles/Research.module.css';
 
 export default function Research() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
+
   const methods = [
     "TIRF microscopy",
     "Confocal microscopy",
@@ -16,15 +27,25 @@ export default function Research() {
 
   return (
     <div className={styles['research-page']}>
-      <nav className={styles['breadcrumb-nav']}>
-        <Link to="/" className={styles['back-link']}>← Back to Home</Link>
-      </nav>
-      
+      <button 
+        onClick={toggleSidebar}
+        className={styles.menuButton}
+        aria-label="Open navigation menu"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
+     
       <header className={styles['page-header']}>
         <h1>Research</h1>
         <p className={styles['lab-name']}>NRG Laboratory</p>
       </header>
-      
+     
       <main className={styles['research-content']}>
         <section className={styles['focus-areas']}>
           <h2>Our Focus Areas</h2>
@@ -38,7 +59,7 @@ export default function Research() {
             </p>
           </div>
         </section>
-        
+       
         <section className={styles['methods-section']}>
           <h2>Methods Used to Address the Research Questions</h2>
           <ul className={styles['methods-list']}>
