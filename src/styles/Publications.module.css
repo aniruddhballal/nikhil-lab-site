@@ -419,23 +419,3 @@
     transition: transform 0.1s ease;
   }
 }
-
-/* Improve readability on small screens */
-@media (max-width: 768px) {
-  .publication-item strong,
-  .publication-item em,
-  .publication-item span {
-    word-break: break-word;
-  }
-  
-  /* Ensure links don't break layout */
-  .scholar-section a {
-    word-break: break-word;
-    max-width: 100%;
-  }
-  
-  /* Better spacing for mobile */
-  .publications-section::before {
-    border-radius: 16px;
-  }
-}
