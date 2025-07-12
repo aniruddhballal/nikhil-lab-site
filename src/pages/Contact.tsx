@@ -29,8 +29,10 @@ export default function Contact() {
       
       <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
       
-      <h1 className={styles.mainTitle}>Get in Touch!</h1>
-     
+      <header className={styles['page-header']}>
+        <h1>Get In Touch!</h1>
+        <p className={styles['lab-name']}>NRG Laboratory</p>
+      </header>     
       <div className={styles.contactInfo}>
         <h2>Nikhil R. Gandasi (NRG)</h2>
         <p>Email: grnikhil@iisc.ac.in</p>

@@ -41,12 +41,18 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 }
 
-.mainTitle {
+.page-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.page-header h1 {
   font-size: clamp(3rem, 6vw, 5rem);
   font-weight: 100;
   color: #000000;
-  margin: 6rem 0 4rem 0;
-  text-align: center;
+  margin: 0 0 1rem 0;
   letter-spacing: -0.02em;
   line-height: 0.9;
   text-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
@@ -54,16 +60,14 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  position: relative;
-  z-index: 1;
 }
 
-.mainTitle:hover {
+.page-header:hover {
   transform: translateY(-2px);
   filter: brightness(1.1);
 }
 
-.mainTitle::after {
+.page-header::after {
   content: '';
   position: absolute;
   bottom: -20px;
@@ -82,6 +86,22 @@
   to {
     width: 300px;
   }
+}
+
+.lab-name {
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  position: relative;
+  padding: 0.5rem 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.05);
+  margin: 0;
+  display: inline-block;
 }
 
 .contactInfo {
