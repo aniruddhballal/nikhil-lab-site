@@ -1,10 +1,5 @@
 /* Publications.module.css - Light Theme */
 
-/* Add this to the top of your CSS for better box model */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
 .publications-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
