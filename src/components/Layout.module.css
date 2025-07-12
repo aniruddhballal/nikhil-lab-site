@@ -63,6 +63,8 @@
   background-clip: text;
   text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
+  text-decoration: none;
+  position: relative; /* Add this for the pseudo-element */
 }
 
 .siteTitle:hover {
@@ -70,25 +72,35 @@
   filter: brightness(1.1);
 }
 
+.siteTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -8px; /* Adjust distance from title */
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  transform: translateX(-50%);
+  animation: expandUnderline 1.5s ease-out 0.5s forwards; /* Delay of 0.5s, then animate */
+}
+
+@keyframes expandUnderline {
+  from {
+    width: 0;
+  }
+  to {
+    width: 300px; /* Adjust width as needed */
+  }
+}
+
 .siteTagline {
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.6);
-  margin: 0.5rem 0 0 0;
+  margin: 1.5rem 0 0 0; /* Increased from 0.5rem to 1.5rem */
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 300;
   position: relative;
-}
-
-.siteTagline::before {
-  content: '';
-  position: absolute;
-  top: -0.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
 }
 
 .mainContent {

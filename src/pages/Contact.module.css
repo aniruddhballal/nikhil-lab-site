@@ -1,0 +1,330 @@
+/* Contact.module.css */
+.contactContainer {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.contactContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.back-link:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
+}
+
+.back-link::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #ffffff, transparent);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.back-link:hover::after {
+  width: 80%;
+}
+
+.mainTitle {
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 100;
+  color: #ffffff;
+  margin: 6rem 0 4rem 0;
+  text-align: center;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.7));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  z-index: 1;
+}
+
+.contactInfo {
+  max-width: 600px;
+  margin: 0 auto 3rem auto;
+  padding: 2.5rem;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.contactInfo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-radius: 24px;
+  pointer-events: none;
+}
+
+.contactInfo h2 {
+  font-size: 1.8rem;
+  font-weight: 200;
+  color: #ffffff;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: 0.05em;
+  position: relative;
+  z-index: 1;
+}
+
+.contactInfo p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0.75rem 0;
+  font-weight: 300;
+  position: relative;
+  z-index: 1;
+}
+
+.recruitmentInfo {
+  max-width: 800px;
+  margin: 0 auto 3rem auto;
+  padding: 2.5rem;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.recruitmentInfo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-radius: 24px;
+  pointer-events: none;
+}
+
+.recruitmentInfo p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  font-weight: 300;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.joinSection {
+  max-width: 1000px;
+  margin: 0 auto 3rem auto;
+  position: relative;
+  z-index: 1;
+}
+
+.joinSection h2 {
+  font-size: 2.5rem;
+  font-weight: 100;
+  color: #ffffff;
+  margin: 0 0 3rem 0;
+  text-align: center;
+  letter-spacing: -0.01em;
+  background: linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.7));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.positionCard {
+  margin-bottom: 2rem;
+  padding: 2rem;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 
+    0 6px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.positionCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  border-radius: 20px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.positionCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 12px 48px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.positionCard:hover::before {
+  opacity: 1;
+}
+
+.positionCard h3 {
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: #ffffff;
+  margin: 0 0 1rem 0;
+  letter-spacing: 0.05em;
+  position: relative;
+  z-index: 1;
+}
+
+.positionCard p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  font-weight: 300;
+  position: relative;
+  z-index: 1;
+}
+
+.welcomeMessage {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2.5rem;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  text-align: center;
+}
+
+.welcomeMessage::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06));
+  border-radius: 24px;
+  pointer-events: none;
+}
+
+.welcomeMessage p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  font-weight: 300;
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contactContainer {
+    padding: 1rem;
+  }
+  
+  .backLink {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
+  }
+  
+  .mainTitle {
+    margin: 4rem 0 2rem 0;
+  }
+  
+  .contactInfo,
+  .recruitmentInfo,
+  .welcomeMessage {
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .positionCard {
+    padding: 1.5rem;
+  }
+  
+  .contactInfo p,
+  .positionCard p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contactContainer {
+    padding: 0.5rem;
+  }
+  
+  .contactInfo,
+  .recruitmentInfo,
+  .welcomeMessage,
+  .positionCard {
+    padding: 1.5rem;
+  }
+  
+  .welcomeMessage p {
+    font-size: 1.1rem;
+  }
+}
