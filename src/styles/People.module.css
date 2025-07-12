@@ -79,6 +79,32 @@
   padding-bottom: 0.2em;
 }
 
+.pageTitle:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.pageTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.8), transparent);
+  transform: translateX(-50%);
+  animation: expandUnderline 1.5s ease-out 0.5s forwards;
+}
+
+@keyframes expandUnderline {
+  from {
+    width: 0;
+  }
+  to {
+    width: 300px;
+  }
+}
+
 .sectionTitle {
   font-size: clamp(1.8rem, 4vw, 2.5rem);
   font-weight: 200;
