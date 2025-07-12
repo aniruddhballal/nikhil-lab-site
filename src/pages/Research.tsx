@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styles from './Research.module.css';
+import styles from '../styles/Research.module.css';
 
 export default function Research() {
   const methods = [

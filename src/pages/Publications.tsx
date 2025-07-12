@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import { memo } from 'react';
-import styles from './Publications.module.css';
+import styles from '../styles/Publications.module.css';
 
-// Import data from JSON files
 import publicationsData from '../data/pubcom/publications.json';
 import bookChaptersData from '../data/pubcom/bookChapters.json';
 import lecturesData from '../data/pubcom/lectures.json';

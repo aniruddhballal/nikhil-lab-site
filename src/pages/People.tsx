@@ -3,7 +3,7 @@ import principalInvestigator from '../data/people/principalInvestigator.json';
 import currentMembers from '../data/people/currentMembers.json';
 import pastMembers from '../data/people/pastMembers.json';
 import { Link } from 'react-router-dom';
-import styles from './People.module.css';
+import styles from '../styles/People.module.css';
 
 const People = () => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import styles from './Layout.module.css';
+import styles from '../styles/Layout.module.css';
 
 interface LayoutProps {
   children: React.ReactNode;

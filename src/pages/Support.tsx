@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import { memo } from 'react';
-import styles from './Support.module.css';
+import styles from '../styles/Support.module.css';
 
-// Move static data outside component to prevent re-creation on every render
 const fundingItems = [
   "Science and Engineering Research Board - Start-up grant - 2024",
   "Indian Council of Medical Research - Grant in Aid Scheme - 2023",
