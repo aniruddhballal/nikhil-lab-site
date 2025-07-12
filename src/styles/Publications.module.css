@@ -327,21 +327,21 @@
 /* Improved Responsive Design */
 @media (max-width: 768px) {
   .publications-page {
-    padding: 1.5rem; /* Increased from 0rem */
+    padding: 1.5rem 2rem 1.5rem 1rem; /* Less left, more right */
   }
   
   .publications-content {
     gap: 2rem;
-    width: calc(100% - 3rem); /* Increased margin for more space */
-    margin: 0 1.5rem;
+    width: calc(100% - 2rem); /* Back to original width calculation */
+    margin: 0 1rem 0 1rem;
   }
   
   .publications-section {
-    padding: 1.5rem; /* Increased from 0.5rem */
+    padding: 1.5rem 2rem 1.5rem 1.5rem; /* More padding on right */
   }
   
   .publication-item {
-    padding: 1rem;
+    padding: 1rem 1.5rem 1rem 1rem; /* More padding on right */
     margin: 0;
   }
   
@@ -357,17 +357,17 @@
 
 @media (max-width: 480px) {
   .publications-page {
-    padding: 1.5rem; /* Increased from 0rem */
+    padding: 1.5rem 2rem 1.5rem 0.75rem; /* Less left, more right */
   }
   
   .publications-content {
-    width: calc(100% - 3rem); /* Much more generous spacing */
-    margin: 0 1.5rem;
+    width: calc(100% - 1.5rem); /* Back to tighter left constraint */
+    margin: 0 1.5rem 0 0.75rem; /* Less left margin, more right */
     gap: 1.5rem;
   }
   
   .publications-section {
-    padding: 1.5rem; /* Much more generous padding */
+    padding: 1.5rem 2rem 1.5rem 1rem; /* More padding on right */
   }
   
   .back-link {
@@ -376,7 +376,7 @@
   }
   
   .publication-item {
-    padding: 1rem; /* More generous padding */
+    padding: 1rem 1.5rem 1rem 0.75rem; /* More padding on right */
   }
   
   .publication-item p {
@@ -393,19 +393,19 @@
 /* Extra small screens */
 @media (max-width: 360px) {
   .publications-page {
-    padding: 1.5rem; /* Increased from 0.5rem */
+    padding: 1.5rem 2rem 1.5rem 0.5rem; /* Less left, more right */
   }
   
   .publications-content {
-    width: calc(100% - 3rem); /* More generous spacing */
-    margin: 0 1.5rem;
+    width: calc(100% - 1rem); /* Back to tighter left constraint */
+    margin: 0 1.5rem 0 0.5rem; /* Less left margin, more right */
   }
   
   .publications-section {
-    padding: 1.5rem; /* More generous padding */
+    padding: 1.5rem 2rem 1.5rem 0.75rem; /* More padding on right */
   }
   
   .publication-item {
-    padding: 1rem; /* More generous padding */
+    padding: 1rem 1.5rem 1rem 0.5rem; /* More padding on right */
   }
 }
