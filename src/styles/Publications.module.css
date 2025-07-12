@@ -327,7 +327,7 @@
 /* Improved Responsive Design */
 @media (max-width: 768px) {
   .publications-page {
-    padding: 1rem; /* Reduced from 1.5rem */
+    padding: 0rem; /* Reduced from 1.5rem */
   }
   
   .publications-content {
@@ -337,7 +337,7 @@
   }
   
   .publications-section {
-    padding: 1.5rem; /* Reduced from 2rem */
+    padding: 0.5rem; /* Reduced from 2rem */
   }
   
   .publication-item {
