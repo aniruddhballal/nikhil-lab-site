@@ -263,6 +263,7 @@
 @media (max-width: 768px) {
   .peopleContainer {
     padding: 1rem;
+    margin: 1rem;
   }
   
   .principalInvestigator {
