@@ -401,21 +401,6 @@
   }
 }
 
-/* Tablets (769px - 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .publications-page {
-    padding: 1.5rem;
-  }
-  
-  .publications-section {
-    padding: 2.5rem;
-  }
-  
-  .publications-content {
-    gap: 2.5rem;
-  }
-}
-
 /* Touch device improvements */
 @media (hover: none) and (pointer: coarse) {
   .back-link:hover,
@@ -452,25 +437,5 @@
   /* Better spacing for mobile */
   .publications-section::before {
     border-radius: 16px;
-  }
-}
-
-/* Very small screens (max-width: 320px) */
-@media (max-width: 320px) {
-  .publications-page {
-    padding: 0.75rem;
-  }
-  
-  .publications-section {
-    padding: 1rem;
-  }
-  
-  .publication-item {
-    padding: 0.75rem;
-  }
-  
-  .back-link {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.75rem;
   }
 }
