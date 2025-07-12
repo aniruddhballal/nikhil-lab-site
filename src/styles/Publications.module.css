@@ -1,4 +1,4 @@
-/* Publications.module.css - Light Theme */
+/* Publications.module.css - Light Theme with Mobile Responsiveness */
 .publications-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
@@ -74,17 +74,6 @@
   z-index: 1;
 }
 
-/* .page-header::before {
-  content: '';
-  position: absolute;
-  top: -2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.3), transparent);
-} */
-
 .page-header h1 {
   font-size: clamp(3rem, 6vw, 5rem);
   font-weight: 100;
@@ -107,6 +96,7 @@
   gap: 3rem;
   position: relative;
   z-index: 1;
+  width: 100%;
 }
 
 .publications-section {
@@ -159,6 +149,9 @@
   border-radius: 12px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .publication-item:hover {
@@ -294,33 +287,190 @@
   margin: 0;
 }
 
-/* Add this to the top of your CSS for better box model */
+/* Box model for all elements */
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
-/* Update the publications-content for better mobile containment */
-.publications-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  gap: 3rem;
-  position: relative;
-  z-index: 1;
-  width: 100%; /* Ensure it doesn't exceed container */
+/* ========== MOBILE RESPONSIVENESS ========== */
+
+/* Mobile First - Small phones (320px - 480px) */
+@media (max-width: 480px) {
+  .publications-page {
+    padding: 1rem;
+  }
+  
+  .breadcrumb-nav {
+    margin-bottom: 2rem;
+  }
+  
+  .back-link {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .page-header {
+    margin-bottom: 2rem;
+  }
+  
+  .page-header h1 {
+    font-size: clamp(2rem, 8vw, 3rem);
+    line-height: 1.1;
+  }
+  
+  .publications-content {
+    gap: 1.5rem;
+  }
+  
+  .publications-section {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+  
+  .publications-section h2 {
+    font-size: clamp(1.2rem, 5vw, 1.5rem);
+    margin-bottom: 1.5rem;
+  }
+  
+  .publications-list {
+    gap: 1rem;
+  }
+  
+  .publication-item {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  
+  .publication-item p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  .scholar-section a {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+  }
+  
+  .links-section .link-item {
+    padding: 0.8rem 1rem;
+  }
+  
+  .links-section .link-item a {
+    font-size: 0.9rem;
+  }
 }
 
-/* Enhanced publication item for better text wrapping */
-.publication-item {
-  padding: 1.5rem;
-  backdrop-filter: blur(10px);
-  background: rgba(0, 0, 0, 0.02);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 12px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  hyphens: auto;
+/* Medium phones (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .publications-page {
+    padding: 1.5rem;
+  }
+  
+  .breadcrumb-nav {
+    margin-bottom: 2.5rem;
+  }
+  
+  .page-header {
+    margin-bottom: 3rem;
+  }
+  
+  .publications-content {
+    gap: 2rem;
+  }
+  
+  .publications-section {
+    padding: 2rem;
+    border-radius: 20px;
+  }
+  
+  .publications-section h2 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .publications-list {
+    gap: 1.25rem;
+  }
+  
+  .publication-item {
+    padding: 1.25rem;
+    border-radius: 10px;
+  }
+  
+  .publication-item p {
+    font-size: 0.95rem;
+  }
 }
 
+/* Tablets (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .publications-page {
+    padding: 1.5rem;
+  }
+  
+  .publications-section {
+    padding: 2.5rem;
+  }
+  
+  .publications-content {
+    gap: 2.5rem;
+  }
+}
+
+/* Touch device improvements */
+@media (hover: none) and (pointer: coarse) {
+  .back-link:hover,
+  .publication-item:hover,
+  .scholar-section a:hover,
+  .links-section .link-item:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .back-link:active,
+  .publication-item:active,
+  .scholar-section a:active,
+  .links-section .link-item:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+}
+
+/* Improve readability on small screens */
+@media (max-width: 768px) {
+  .publication-item strong,
+  .publication-item em,
+  .publication-item span {
+    word-break: break-word;
+  }
+  
+  /* Ensure links don't break layout */
+  .scholar-section a {
+    word-break: break-word;
+    max-width: 100%;
+  }
+  
+  /* Better spacing for mobile */
+  .publications-section::before {
+    border-radius: 16px;
+  }
+}
+
+/* Very small screens (max-width: 320px) */
+@media (max-width: 320px) {
+  .publications-page {
+    padding: 0.75rem;
+  }
+  
+  .publications-section {
+    padding: 1rem;
+  }
+  
+  .publication-item {
+    padding: 0.75rem;
+  }
+  
+  .back-link {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+  }
+}
