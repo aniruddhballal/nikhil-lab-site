@@ -313,7 +313,7 @@
 /* Improved Responsive Design */
 @media (max-width: 768px) {
   .publications-page {
-    padding: 1rem; /* Reduced from 1.5rem */
+    padding: 3rem; /* Reduced from 1.5rem */
   }
   
   .publications-content {
