@@ -1,4 +1,4 @@
-import { useState, memo } from 'react';
+import { useState, memo , useEffect} from 'react';
 import Sidebar from '../components/Sidebar';
 import styles from '../styles/Publications.module.css';
 import publicationsData from '../data/pubcom/publications.json';
@@ -9,7 +9,9 @@ import scholarData from '../data/pubcom/scholar.json';
 
 const Publications = memo(function Publications() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -18,11 +20,39 @@ const Publications = memo(function Publications() {
     setSidebarOpen(false);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Determine scroll direction
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        // Scrolling down and past threshold
+        setIsScrolled(true);
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up
+        if (currentScrollY <= 50) {
+          setIsScrolled(false);
+        }
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    // Add event listener
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY]);
+
   return (
     <div className={styles['publications-page']}>
+    {!sidebarOpen && (
       <button
         onClick={toggleSidebar}
-        className={styles.menuButton}
+        className={`${styles.menuButton} ${isScrolled ? styles.menuButtonMinimized : ''}`}
         aria-label="Open navigation menu"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -31,6 +61,7 @@ const Publications = memo(function Publications() {
           <line x1="3" y1="18" x2="21" y2="18"></line>
         </svg>
       </button>
+    )}
       
       <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
      
