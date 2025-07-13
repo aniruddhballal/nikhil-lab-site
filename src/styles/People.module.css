@@ -2,9 +2,8 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  background: #000000; /* optional: matches your container bg */
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
 }
-
 
 /* People.module.css - Medical Research Blue Theme */
 .peopleContainer {
