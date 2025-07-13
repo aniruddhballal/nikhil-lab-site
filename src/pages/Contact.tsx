@@ -30,7 +30,7 @@ const Contact = () => {
       <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
       
       <header className={styles['page-header']}>
-        <h1>Get In Touch!</h1>
+        <h1>Contact</h1>
         <p className={styles['lab-name']}>NRG Laboratory</p>
       </header>
 
