@@ -293,6 +293,11 @@
   z-index: 1;
 }
 
+/* Box model for all elements */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .peopleContainer {
@@ -308,10 +313,6 @@
   .memberCard {
     padding: 1.5rem;
     margin: 1rem 0;
-  }
-  
-  .backLink {
-    margin-bottom: 2rem;
   }
   
   .sectionTitle {
@@ -330,10 +331,5 @@
   
   .memberCard {
     padding: 1rem;
-  }
-  
-  .backLink {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
   }
 }
