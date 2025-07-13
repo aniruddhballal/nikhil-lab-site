@@ -19,18 +19,23 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         <div 
           className={styles.sidebarOverlay}
           onClick={onClose}
+          onTouchEnd={onClose} // Add touch support
           aria-hidden="true"
         />
       )}
 
       <nav 
         className={`${styles.sidebar} ${isOpen ? styles.sidebarOpen : ''}`}
+        style={{ 
+          left: isOpen ? '0' : undefined // Force inline style as fallback
+        }}
         aria-label="Main navigation"
       >
         <div className={styles.sidebarHeader}>
           <h3>NRG Laboratory</h3>
           <button 
             onClick={onClose}
+            onTouchEnd={onClose} // Add touch support
             className={styles.closeSidebar}
             aria-label="Close navigation menu"
           >
@@ -47,6 +52,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               <Link 
                 to="/" 
                 onClick={onClose} 
+                onTouchEnd={onClose} // Add touch support
                 className={`${styles.sidebarLink} ${isActive('/') ? styles.sidebarLinkActive : ''}`}
               >
                 <span>Home</span>
@@ -60,6 +66,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               <Link 
                 to="/research" 
                 onClick={onClose} 
+                onTouchEnd={onClose}
                 className={`${styles.sidebarLink} ${isActive('/research') ? styles.sidebarLinkActive : ''}`}
               >
                 <span>Research</span>
@@ -73,6 +80,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               <Link 
                 to="/support" 
                 onClick={onClose} 
+                onTouchEnd={onClose}
                 className={`${styles.sidebarLink} ${isActive('/support') ? styles.sidebarLinkActive : ''}`}
               >
                 <span>Support</span>
@@ -86,6 +94,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               <Link 
                 to="/publications" 
                 onClick={onClose} 
+                onTouchEnd={onClose}
                 className={`${styles.sidebarLink} ${isActive('/publications') ? styles.sidebarLinkActive : ''}`}
               >
                 <span>Publications</span>
@@ -99,6 +108,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               <Link 
                 to="/people" 
                 onClick={onClose} 
+                onTouchEnd={onClose}
                 className={`${styles.sidebarLink} ${isActive('/people') ? styles.sidebarLinkActive : ''}`}
               >
                 <span>People</span>
@@ -112,6 +122,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               <Link 
                 to="/contact" 
                 onClick={onClose} 
+                onTouchEnd={onClose}
                 className={`${styles.sidebarLink} ${isActive('/contact') ? styles.sidebarLinkActive : ''}`}
               >
                 <span>Contact</span>

@@ -9,6 +9,7 @@
   backdrop-filter: blur(4px);
   z-index: 1000;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-backdrop-filter: blur(4px); /* Safari support */
 }
 
 /* Main sidebar */
@@ -26,8 +27,10 @@
     4px 0 32px rgba(30, 58, 138, 0.1),
     inset -1px 0 0 rgba(30, 58, 138, 0.1);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px); /* Safari support */
   display: flex;
   flex-direction: column;
+  overflow: hidden; /* Prevent content overflow */
 }
 
 .sidebar::before {
@@ -43,8 +46,9 @@
   pointer-events: none;
 }
 
-.sidebarOpen {
-  left: 0;
+/* Open state - more specific selector */
+.sidebar.sidebarOpen {
+  left: 0 !important;
 }
 
 /* Sidebar header */
@@ -55,9 +59,11 @@
   border-bottom: 1px solid rgba(59, 130, 246, 0.15);
   background: rgba(239, 246, 255, 0.4);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .sidebarHeader h3 {
@@ -86,9 +92,14 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   color: #1e3a8a;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  /* Better touch target */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
-.closeSidebar:hover {
+.closeSidebar:hover,
+.closeSidebar:focus {
   background: rgba(219, 234, 254, 0.8);
   transform: scale(1.05);
   box-shadow: 0 4px 16px rgba(30, 58, 138, 0.15);
@@ -107,6 +118,7 @@
   position: relative;
   z-index: 1;
   padding: 1rem 0;
+  overflow-y: auto; /* Allow scrolling if content overflows */
 }
 
 /* Navigation */
@@ -136,21 +148,19 @@
   margin-right: 1rem;
   position: relative;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
   border-bottom: none !important;
+  /* Better touch target */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .sidebarLink::after {
   display: none !important;
 }
 
-.sidebarLink:hover::after {
-  display: none !important;
-}
-
-.sidebarLink:active::after {
-  display: none !important;
-}
-
+.sidebarLink:hover::after,
+.sidebarLink:active::after,
 .sidebarLink:focus::after {
   display: none !important;
 }
@@ -167,17 +177,20 @@
   border-radius: 0 12px 12px 0;
 }
 
-.sidebarLink:hover {
+.sidebarLink:hover,
+.sidebarLink:focus {
   background: rgba(219, 234, 254, 0.4);
   color: #1e3a8a;
   transform: translateX(8px);
 }
 
-.sidebarLink:hover::before {
+.sidebarLink:hover::before,
+.sidebarLink:focus::before {
   width: 4px;
 }
 
-.sidebarLink:hover span {
+.sidebarLink:hover span,
+.sidebarLink:focus span {
   background: linear-gradient(135deg, #1e3a8a, #3b82f6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -189,7 +202,8 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.sidebarLink:hover svg {
+.sidebarLink:hover svg,
+.sidebarLink:focus svg {
   opacity: 1;
   transform: translateX(4px);
 }
@@ -227,8 +241,10 @@
   border-top: 1px solid rgba(59, 130, 246, 0.15);
   background: rgba(239, 246, 255, 0.4);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
   position: relative;
   z-index: 1;
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .sidebarFooter p {
@@ -246,6 +262,10 @@
   .sidebar {
     width: 280px;
     left: -280px;
+  }
+  
+  .sidebar.sidebarOpen {
+    left: 0 !important;
   }
   
   .sidebarHeader {
@@ -274,6 +294,10 @@
   .sidebar {
     width: 260px;
     left: -260px;
+  }
+  
+  .sidebar.sidebarOpen {
+    left: 0 !important;
   }
   
   .sidebarHeader {
