@@ -49,7 +49,7 @@ const Support = memo(function Support() {
      
       <main className={styles['support-content']}>
         <section className={styles['funding-section']}>
-          <h2>Funding</h2>
+          <h2 className={styles.sectionTitle}>Funding</h2>
           <ul className={styles['funding-list']}>
             {fundingItems.map((item, index) => (
               <li key={index} className={styles['funding-item']}>

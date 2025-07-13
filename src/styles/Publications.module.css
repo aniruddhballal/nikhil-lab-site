@@ -55,17 +55,11 @@
   margin: 0;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  padding-bottom: 0.2em;
   text-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
   background: linear-gradient(135deg, #000000, rgba(0, 0, 0, 0.7));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-}
-
-.page-header:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.1);
 }
 
 .page-header::after {
@@ -101,7 +95,6 @@
   border-radius: 30px;
   backdrop-filter: blur(10px);
   background: rgba(0, 0, 0, 0.05);
-  margin: 0;
   display: inline-block;
 }
 

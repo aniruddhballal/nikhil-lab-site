@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import styles from '../styles/Contact.module.css';
 
-export default function Contact() {
+const Contact = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   
   const toggleSidebar = () => {
@@ -32,39 +32,61 @@ export default function Contact() {
       <header className={styles['page-header']}>
         <h1>Get In Touch!</h1>
         <p className={styles['lab-name']}>NRG Laboratory</p>
-      </header>     
-      <div className={styles.contactInfo}>
-        <h2>Nikhil R. Gandasi (NRG)</h2>
-        <p>Email: grnikhil@iisc.ac.in</p>
-        <p>Linkedin: https://www.linkedin.com/in/nikhil-gandasi-246743153/</p>
-      </div>
-     
-      <div className={styles.recruitmentInfo}>
-        <p>We are looking for candidates from Interdisciplinary backgrounds - Biophysics, Optics, Machine learning and Biology backgrounds</p>
-      </div>
-     
-      <div className={styles.joinSection}>
-        <h2>Join Us</h2>
-       
-        <div className={styles.positionCard}>
-          <h3>Competitive Postdoc</h3>
-          <p>Individuals interested in pursuing a Competitive Postdoc: Please check this link for eligibility. If the prospective candidates meet the eligibility criteria and are interested in work we do, please write to Nikhil. Candidates are advised to attach a short motivation letter and a CV.</p>
-        </div>
-       
-        <div className={styles.positionCard}>
-          <h3>Ph.D. Students</h3>
-          <p>We are looking for Ph.D. students: Please check this link for eligibility, procedures and deadlines for the institute's Ph.D. program. If you are interviewing at the institute and considering joining the lab - check our labs interests in Links section of Publications and Communications page and please write to Nikhil.</p>
-        </div>
-       
-        <div className={styles.positionCard}>
-          <h3>Masters Thesis</h3>
-          <p>Look through the interests of the lab and see if it aligns with your plans. If it does write to any of the current lab members. At least 4-6 months duration is a must for thesis projects/lab experience. Candidates are advised to attach a short motivation letter and a CV. Please write to us at least 4-6 months in advance. We are constantly looking for "motivated candidates".</p>
-        </div>
-      </div>
-     
-      <div className={styles.welcomeMessage}>
-        <p>Joining Us means you will receive complete support and mentorship to navigate through your science career! Welcome..</p>
-      </div>
+      </header>
+
+      <main className={styles['contact-content']}>
+        <section className={styles['contact-info-section']}>
+          <h2 className={styles.sectionTitle}>Principal Investigator</h2>
+          <div className={styles.contactInvestigator}>
+            <h3 className={styles.contactName}>Nikhil R. Gandasi (NRG)</h3>
+            <div className={styles.contactSection}>
+              <p className={styles.infoText}>Email: grnikhil@iisc.ac.in</p>
+              <p className={styles.infoText}>Linkedin: https://www.linkedin.com/in/nikhil-gandasi-246743153/</p>
+            </div>
+          </div>
+        </section>
+
+        <section className={styles['recruitment-section']}>
+          <h2 className={styles.sectionTitle}>We Are Looking For</h2>
+          <div className={styles.recruitmentCard}>
+            <p className={styles.infoText}>We are looking for candidates from Interdisciplinary backgrounds - Biophysics, Optics, Machine learning and Biology backgrounds</p>
+          </div>
+        </section>
+
+        <section className={styles['positions-section']}>
+          <h2 className={styles.sectionTitle}>Join Us</h2>
+          
+          <div className={styles.positionCard}>
+            <h3 className={styles.positionName}>Competitive Postdoc</h3>
+            <div className={styles.positionInfo}>
+              <p className={styles.infoText}>Individuals interested in pursuing a Competitive Postdoc: Please check this link for eligibility. If the prospective candidates meet the eligibility criteria and are interested in work we do, please write to Nikhil. Candidates are advised to attach a short motivation letter and a CV.</p>
+            </div>
+          </div>
+
+          <div className={styles.positionCard}>
+            <h3 className={styles.positionName}>Ph.D. Students</h3>
+            <div className={styles.positionInfo}>
+              <p className={styles.infoText}>We are looking for Ph.D. students: Please check this link for eligibility, procedures and deadlines for the institute's Ph.D. program. If you are interviewing at the institute and considering joining the lab - check our labs interests in Links section of Publications and Communications page and please write to Nikhil.</p>
+            </div>
+          </div>
+
+          <div className={styles.positionCard}>
+            <h3 className={styles.positionName}>Masters Thesis</h3>
+            <div className={styles.positionInfo}>
+              <p className={styles.infoText}>Look through the interests of the lab and see if it aligns with your plans. If it does write to any of the current lab members. At least 4-6 months duration is a must for thesis projects/lab experience. Candidates are advised to attach a short motivation letter and a CV. Please write to us at least 4-6 months in advance. We are constantly looking for "motivated candidates".</p>
+            </div>
+          </div>
+        </section>
+
+        <section className={styles['welcome-section']}>
+          <h2 className={styles.sectionTitle}>Welcome</h2>
+          <div className={styles.welcomeCard}>
+            <p className={styles.infoText}>Joining Us means you will receive complete support and mentorship to navigate through your science career! Welcome..</p>
+          </div>
+        </section>
+      </main>
     </div>
   );
 };
+
+export default Contact;

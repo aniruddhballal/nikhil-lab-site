@@ -38,65 +38,70 @@ const People = () => {
         <p className={styles['lab-name']}>NRG Laboratory</p>
       </header>
 
-     
-      <h2 className={styles.sectionTitle}>Principal Investigator</h2>
-      <div className={styles.principalInvestigator}>
-        <h3 className={styles.piName}>{principalInvestigator.name}</h3>
-        <h4 className={styles.subsectionTitle}>Education and Career</h4>
-        {principalInvestigator.education.map((edu, index) => (
-          <p key={index} className={styles.infoText}>{edu}</p>
-        ))}
-       
-        <h4 className={styles.subsectionTitle}>Awards</h4>
-        {principalInvestigator.awards.map((award, index) => (
-          <p key={index} className={styles.infoText}>{award}</p>
-        ))}
-       
-        <h4 className={styles.subsectionTitle}>Contact</h4>
-        <div className={styles.contactSection}>
-          <p className={styles.infoText}>Email: {principalInvestigator.contact.email.join(", ")}</p>
-          <p className={styles.infoText}>Phone: {principalInvestigator.contact.phone}</p>
-        </div>
-      </div>
-      <div className={styles.currentMembersSection}>
-        <h2 className={styles.sectionTitle}>Current Lab Members</h2>
-        {currentMembers.map((member, index) => (
-          <div key={index} className={styles.memberCard}>
-            <h3 className={styles.memberName}>{member.name}</h3>
-            <div className={styles.memberInfo}>
-              <p className={styles.infoText}><strong>Position:</strong> {member.position}</p>
-              {member.duration && <p className={styles.infoText}><strong>Duration:</strong> {member.duration}</p>}
-              {member.education && <p className={styles.infoText}><strong>Education:</strong> {member.education}</p>}
-              {member.achievements && member.achievements.length > 0 && (
-                <div className={styles.achievementsList}>
-                  <strong className={styles.subsectionTitle}>Achievements:</strong>
-                  {member.achievements.map((achievement, achIndex) => (
-                    <p key={achIndex} className={styles.infoText}>{achievement}</p>
-                  ))}
+      <main className={styles['people-content']}>
+        <section className={styles['pi-section']}>
+          <h2 className={styles.sectionTitle}>Principal Investigator</h2>
+          <div className={styles.principalInvestigator}>
+            <h3 className={styles.piName}>{principalInvestigator.name}</h3>
+            <h4 className={styles.subsectionTitle}>Education and Career</h4>
+            {principalInvestigator.education.map((edu, index) => (
+              <p key={index} className={styles.infoText}>{edu}</p>
+            ))}
+           
+            <h4 className={styles.subsectionTitle}>Awards</h4>
+            {principalInvestigator.awards.map((award, index) => (
+              <p key={index} className={styles.infoText}>{award}</p>
+            ))}
+           
+            <h4 className={styles.subsectionTitle}>Contact</h4>
+            <div className={styles.contactSection}>
+              <p className={styles.infoText}>Email: {principalInvestigator.contact.email.join(", ")}</p>
+              <p className={styles.infoText}>Phone: {principalInvestigator.contact.phone}</p>
+            </div>
+          </div>
+        </section>
+
+        <section className={styles['current-members-section']}>
+          <h2 className={styles.sectionTitle}>Current Lab Members</h2>
+          {currentMembers.map((member, index) => (
+            <div key={index} className={styles.memberCard}>
+              <h3 className={styles.memberName}>{member.name}</h3>
+              <div className={styles.memberInfo}>
+                <p className={styles.infoText}><strong>Position:</strong> {member.position}</p>
+                {member.duration && <p className={styles.infoText}><strong>Duration:</strong> {member.duration}</p>}
+                {member.education && <p className={styles.infoText}><strong>Education:</strong> {member.education}</p>}
+                {member.achievements && member.achievements.length > 0 && (
+                  <div className={styles.achievementsList}>
+                    <strong className={styles.subsectionTitle}>Achievements:</strong>
+                    {member.achievements.map((achievement, achIndex) => (
+                      <p key={achIndex} className={styles.infoText}>{achievement}</p>
+                    ))}
+                  </div>
+                )}
+                <div className={styles.contactSection}>
+                  <strong className={styles.subsectionTitle}>Contact:</strong>
+                  {member.contact.email && <p className={styles.infoText}>Email: {member.contact.email}</p>}
+                  {member.contact.phone && <p className={styles.infoText}>Phone: {member.contact.phone}</p>}
                 </div>
-              )}
-              <div className={styles.contactSection}>
-                <strong className={styles.subsectionTitle}>Contact:</strong>
-                {member.contact.email && <p className={styles.infoText}>Email: {member.contact.email}</p>}
-                {member.contact.phone && <p className={styles.infoText}>Phone: {member.contact.phone}</p>}
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-      <div className={styles.pastMembersSection}>
-        <h2 className={styles.sectionTitle}>Past Members</h2>
-        {pastMembers.map((member, index) => (
-          <div key={index} className={styles.memberCard}>
-            <h3 className={styles.memberName}>{member.name}</h3>
-            <div className={styles.memberInfo}>
-              <p className={styles.infoText}><strong>Position:</strong> {member.position}</p>
-              {member.education && <p className={styles.infoText}><strong>Education:</strong> {member.education}</p>}
-              {member.currentStatus && <p className={styles.infoText}><strong>Current Status:</strong> {member.currentStatus}</p>}
+          ))}
+        </section>
+
+        <section className={styles['past-members-section']}>
+          <h2 className={styles.sectionTitle}>Past Members</h2>
+          {pastMembers.map((member, index) => (
+            <div key={index} className={styles.memberCard}>
+              <h3 className={styles.memberName}>{member.name}</h3>
+              <div className={styles.memberInfo}>
+                <p className={styles.infoText}><strong>Position:</strong> {member.position}</p>
+                {member.education && <p className={styles.infoText}><strong>Education:</strong> {member.education}</p>}
+                {member.currentStatus && <p className={styles.infoText}><strong>Current Status:</strong> {member.currentStatus}</p>}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </section>
+      </main>
     </div>
   );
 };
