@@ -298,38 +298,46 @@
   box-sizing: border-box;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Mobile First - Small phones (320px - 480px) */
+@media (max-width: 480px) {
+  .peopleContainer {
+    padding: 0.5rem;
+    margin: 1rem;
+  }
+
+  .principalInvestigator {
+    padding: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .memberCard {
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  .sectionTitle {
+    margin: 2rem 0 1rem 0;
+  }
+}
+
+/* Medium phones (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
   .peopleContainer {
     padding: 1rem;
     margin: 1rem;
   }
-  
+
   .principalInvestigator {
     padding: 2rem;
     margin: 1rem 0;
   }
-  
+
   .memberCard {
     padding: 1.5rem;
     margin: 1rem 0;
   }
-  
+
   .sectionTitle {
     margin: 3rem 0 1.5rem 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .peopleContainer {
-    padding: 0.5rem;
-  }
-  
-  .principalInvestigator {
-    padding: 1.5rem;
-  }
-  
-  .memberCard {
-    padding: 1rem;
   }
 }
