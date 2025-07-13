@@ -28,26 +28,199 @@ html, body {
   pointer-events: none;
 }
 
+/* Hamburger menu button */
 .menuButton {
   position: fixed;
   top: 2rem;
   left: 2rem;
-  z-index: 1001;
+  z-index: 1002;
+  width: 56px;
+  height: 56px;
   background: rgba(239, 246, 255, 0.9);
-  border: 1px solid rgba(30, 58, 138, 0.2);
-  border-radius: 12px;
-  padding: 0.75rem;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(20px);
-  box-shadow: 0 4px 20px rgba(30, 58, 138, 0.1);
+  -webkit-backdrop-filter: blur(20px);
+  color: #1e3a8a;
+  box-shadow: 
+    0 8px 32px rgba(30, 58, 138, 0.12),
+    0 2px 8px rgba(30, 58, 138, 0.08);
+  
+  /* Better touch target */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
-.menuButton:hover {
-  background: rgba(219, 234, 254, 0.95);
+.menuButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(30, 58, 138, 0.05));
+  border-radius: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.menuButton:hover::before,
+.menuButton:focus::before {
+  opacity: 1;
+}
+
+.menuButton:hover,
+.menuButton:focus {
+  transform: scale(1.05);
+  box-shadow: 
+    0 12px 40px rgba(30, 58, 138, 0.16),
+    0 4px 12px rgba(30, 58, 138, 0.12);
   border-color: rgba(59, 130, 246, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(30, 58, 138, 0.2);
+}
+
+.menuButton:active {
+  transform: scale(0.95);
+}
+
+.menuButton svg {
+  transition: all 0.3s ease;
+}
+
+.menuButton:hover svg,
+.menuButton:focus svg {
+  transform: scale(1.1);
+  color: #3b82f6;
+}
+
+/* Minimized state when scrolled */
+.menuButtonMinimized {
+  width: 48px;
+  height: 48px;
+  left: 1rem;
+  top: 1rem;
+  border-radius: 12px;
+  background: rgba(239, 246, 255, 0.95);
+  box-shadow: 
+    0 6px 24px rgba(30, 58, 138, 0.15),
+    0 2px 6px rgba(30, 58, 138, 0.1);
+}
+
+.menuButtonMinimized::before {
+  border-radius: 12px;
+}
+
+.menuButtonMinimized svg {
+  width: 20px;
+  height: 20px;
+}
+
+.menuButtonMinimized:hover,
+.menuButtonMinimized:focus {
+  transform: scale(1.08);
+  left: 1.25rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .menuButton {
+    width: 52px;
+    height: 52px;
+    top: 1.5rem;
+    left: 1.5rem;
+  }
+  
+  .menuButtonMinimized {
+    width: 44px;
+    height: 44px;
+    left: 0.75rem;
+    top: 0.75rem;
+  }
+  
+  .menuButtonMinimized:hover,
+  .menuButtonMinimized:focus {
+    left: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .menuButton {
+    width: 48px;
+    height: 48px;
+    top: 1rem;
+    left: 1rem;
+  }
+  
+  .menuButtonMinimized {
+    width: 40px;
+    height: 40px;
+    left: 0.5rem;
+    top: 0.5rem;
+  }
+  
+  .menuButtonMinimized svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Animation for smooth transitions */
+@keyframes slideToEdge {
+  from {
+    left: 2rem;
+    width: 56px;
+    height: 56px;
+  }
+  to {
+    left: 1rem;
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@keyframes slideFromEdge {
+  from {
+    left: 1rem;
+    width: 48px;
+    height: 48px;
+  }
+  to {
+    left: 2rem;
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* Enhanced visual feedback */
+.menuButton:focus {
+  outline: none;
+  box-shadow: 
+    0 12px 40px rgba(30, 58, 138, 0.16),
+    0 4px 12px rgba(30, 58, 138, 0.12),
+    0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* Subtle pulse animation when minimized */
+.menuButtonMinimized {
+  animation: subtlePulse 3s ease-in-out infinite;
+}
+
+@keyframes subtlePulse {
+  0%, 100% {
+    box-shadow: 
+      0 6px 24px rgba(30, 58, 138, 0.15),
+      0 2px 6px rgba(30, 58, 138, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 8px 28px rgba(30, 58, 138, 0.18),
+      0 3px 8px rgba(30, 58, 138, 0.12);
+  }
 }
 
 .page-header {
