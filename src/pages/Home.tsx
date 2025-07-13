@@ -44,6 +44,7 @@ export default function Home() {
 
   return (
     <div className={styles.homeContainer}>
+    {!sidebarOpen && (
       <button
         onClick={toggleSidebar}
         className={`${styles.menuButton} ${isScrolled ? styles.menuButtonMinimized : ''}`}
@@ -55,7 +56,7 @@ export default function Home() {
           <line x1="3" y1="18" x2="21" y2="18"></line>
         </svg>
       </button>
-      
+    )}
       <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
      
       <main className={styles.heroSection}>
