@@ -150,29 +150,29 @@ export default function Home() {
           </div>
          
           <div className={`flex-1 transition-all duration-700 delay-500 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
-            <div className="relative group cursor-pointer">
+            <div className="relative group cursor-pointer p-3">
               {/* Corporate frame that appears on hover */}
-              <div className="absolute -inset-3 border-2 border-blue-600/0 rounded-xl transition-all duration-500 group-hover:border-blue-600/30 group-hover:shadow-lg group-hover:shadow-blue-600/20"></div>
+              <div className="absolute inset-0 border-2 border-blue-600/0 rounded-xl transition-all duration-500 group-hover:border-blue-600/30 group-hover:shadow-lg group-hover:shadow-blue-600/20"></div>
               
               <img
                 src={heroImage}
                 alt="Diabetes research visualization"
-                className="w-full max-w-2xl h-auto rounded-xl shadow-lg shadow-blue-200/20 transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-blue-900/20 group-hover:translate-y-[-4px] relative z-10"
+                className="w-full max-w-2xl h-auto rounded-xl shadow-lg shadow-blue-200/20 transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-blue-900/20 relative z-10"
               />
               
               {/* Professional data overlay */}
-              <div className="absolute bottom-4 left-4 right-4 bg-blue-900/90 backdrop-blur-sm rounded-lg p-3 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+              <div className="absolute bottom-7 left-7 right-7 bg-blue-900/90 backdrop-blur-sm rounded-lg p-3 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
                 <div className="text-white text-sm font-medium">Research Visualization</div>
                 <div className="text-blue-200 text-xs">Pancreatic Islet Tissue Analysis</div>
               </div>
               
               {/* Corporate corner indicators */}
-              <div className="absolute top-3 right-3 w-6 h-6 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-200">
+              <div className="absolute top-6 right-6 w-6 h-6 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-200">
                 <div className="w-full h-0.5 bg-blue-600 absolute top-0"></div>
                 <div className="h-full w-0.5 bg-blue-600 absolute right-0"></div>
               </div>
               
-              <div className="absolute bottom-3 left-3 w-6 h-6 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-300">
+              <div className="absolute bottom-6 left-6 w-6 h-6 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-300">
                 <div className="w-full h-0.5 bg-blue-600 absolute bottom-0"></div>
                 <div className="h-full w-0.5 bg-blue-600 absolute left-0"></div>
               </div>
