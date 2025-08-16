@@ -133,38 +133,49 @@ export default function Home() {
         {/* Hero Content */}
         <section className={`flex flex-col lg:flex-row items-center gap-12 max-w-6xl mx-auto transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="flex-1 max-w-3xl text-center lg:text-left">
-            <div className="relative p-12 backdrop-blur-xl bg-blue-50/60 border border-blue-500/20 rounded-3xl shadow-xl shadow-blue-200/40 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-200/50 hover:bg-blue-50/70 hover:border-blue-500/30 hover:scale-[1.02] group cursor-default">
-              {/* Subtle gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-900/5 to-blue-500/3 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-              
+            <div className="relative p-8 backdrop-blur-xl bg-blue-50/60 border border-blue-500/20 rounded-2xl shadow-lg shadow-blue-200/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/15 hover:bg-blue-50/80 hover:border-blue-600/30 hover:translate-y-[-2px] group cursor-default">
               <div className="relative z-10">
-                <p className="text-2xl md:text-3xl leading-relaxed text-blue-900/90 mb-8 font-light transition-all duration-300 group-hover:text-blue-900">
-                  The prevalence of diabetes is about <strong className="text-blue-900 font-normal bg-gradient-to-r from-blue-900 to-blue-600 bg-clip-text text-transparent transition-all duration-300 hover:from-blue-800 hover:to-blue-500">10%</strong> for people aged above 25 in most parts of the world. World Health Organization projects that the diabetes related deaths will <strong className="text-blue-900 font-normal bg-gradient-to-r from-blue-900 to-blue-600 bg-clip-text text-transparent transition-all duration-300 hover:from-blue-800 hover:to-blue-500">double by 2030</strong>.
+                <p className="text-lg md:text-xl leading-relaxed text-blue-900/90 mb-6 font-light transition-all duration-300 group-hover:text-blue-900/95">
+                  The prevalence of diabetes is about <strong className="text-blue-900 font-semibold transition-all duration-300 group-hover:text-blue-800 px-1 py-0.5 rounded hover:bg-blue-100/50">10%</strong> for people aged above 25 in most parts of the world. World Health Organization projects that the diabetes related deaths will <strong className="text-blue-900 font-semibold transition-all duration-300 group-hover:text-blue-800 px-1 py-0.5 rounded hover:bg-blue-100/50">double by 2030</strong>.
                 </p>
                
-                <p className="text-2xl md:text-3xl leading-relaxed text-blue-900/90 font-light transition-all duration-300 group-hover:text-blue-900">
-                  Diabetes is a life-long disease caused by the body's inability to metabolize glucose. The focus of our work is to look in to <strong className="text-blue-900 font-normal bg-gradient-to-r from-blue-900 to-blue-600 bg-clip-text text-transparent transition-all duration-300 hover:from-blue-800 hover:to-blue-500">pancreatic islet tissue</strong> in subcellular resolution to find treatment strategies, diagnostic and prognostic tools to fight diabetes.
+                <p className="text-lg md:text-xl leading-relaxed text-blue-900/90 font-light transition-all duration-300 group-hover:text-blue-900/95">
+                  Diabetes is a life-long disease caused by the body's inability to metabolize glucose. The focus of our work is to look in to <strong className="text-blue-900 font-semibold transition-all duration-300 group-hover:text-blue-800 px-1 py-0.5 rounded hover:bg-blue-100/50">pancreatic islet tissue</strong> in subcellular resolution to find treatment strategies, diagnostic and prognostic tools to fight diabetes.
                 </p>
               </div>
+              
+              {/* Corporate side accent line */}
+              <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-blue-900 to-blue-600 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-16 transition-all duration-500"></div>
             </div>
           </div>
          
-          <div className={`flex-1 transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
-            <div className="relative group">
+          <div className={`flex-1 transition-all duration-700 delay-500 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
+            <div className="relative group cursor-pointer">
+              {/* Corporate frame that appears on hover */}
+              <div className="absolute -inset-3 border-2 border-blue-600/0 rounded-xl transition-all duration-500 group-hover:border-blue-600/30 group-hover:shadow-lg group-hover:shadow-blue-600/20"></div>
+              
               <img
                 src={heroImage}
                 alt="Diabetes research visualization"
-                className="w-full max-w-2xl h-auto rounded-2xl shadow-xl shadow-blue-200/30 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-200/50 hover:scale-105 hover:-rotate-1 cursor-pointer"
+                className="w-full max-w-2xl h-auto rounded-xl shadow-lg shadow-blue-200/20 transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-blue-900/20 group-hover:translate-y-[-4px] relative z-10"
               />
               
-              {/* Image overlay on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-blue-900/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none"></div>
+              {/* Professional data overlay */}
+              <div className="absolute bottom-4 left-4 right-4 bg-blue-900/90 backdrop-blur-sm rounded-lg p-3 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                <div className="text-white text-sm font-medium">Research Visualization</div>
+                <div className="text-blue-200 text-xs">Pancreatic Islet Tissue Analysis</div>
+              </div>
               
-              {/* Decorative corner elements */}
-              <div className="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-blue-500/30 rounded-tl-lg opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110"></div>
-              <div className="absolute -top-2 -right-2 w-8 h-8 border-t-2 border-r-2 border-blue-500/30 rounded-tr-lg opacity-0 group-hover:opacity-100 transition-all duration-500 delay-75 transform group-hover:scale-110"></div>
-              <div className="absolute -bottom-2 -left-2 w-8 h-8 border-b-2 border-l-2 border-blue-500/30 rounded-bl-lg opacity-0 group-hover:opacity-100 transition-all duration-500 delay-150 transform group-hover:scale-110"></div>
-              <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-blue-500/30 rounded-br-lg opacity-0 group-hover:opacity-100 transition-all duration-500 delay-225 transform group-hover:scale-110"></div>
+              {/* Corporate corner indicators */}
+              <div className="absolute top-3 right-3 w-6 h-6 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-200">
+                <div className="w-full h-0.5 bg-blue-600 absolute top-0"></div>
+                <div className="h-full w-0.5 bg-blue-600 absolute right-0"></div>
+              </div>
+              
+              <div className="absolute bottom-3 left-3 w-6 h-6 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-300">
+                <div className="w-full h-0.5 bg-blue-600 absolute bottom-0"></div>
+                <div className="h-full w-0.5 bg-blue-600 absolute left-0"></div>
+              </div>
             </div>
           </div>
         </section>
