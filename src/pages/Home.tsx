@@ -111,9 +111,9 @@ export default function Home() {
      
       <main className="flex flex-col items-center justify-center min-h-screen px-8 py-8 relative z-10">
         {/* Hero Header */}
-        <header className={`text-center mb-16 relative transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <header className={`text-center mb-12 relative transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* Decorative line */}
-          <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-25 h-1 bg-gradient-to-r from-blue-900 to-blue-500 rounded-full animate-pulse"></div>
+          <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-25 h-1 bg-gradient-to-r from-blue-900 to-blue-500 rounded-full animate-pulse"></div>
           
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-thin text-transparent bg-gradient-to-br from-blue-900 to-blue-600 bg-clip-text leading-[0.9] tracking-tight mb-4 drop-shadow-sm transition-all duration-700 hover:scale-105 hover:drop-shadow-md cursor-default">
             Diabetes
