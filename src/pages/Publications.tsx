@@ -46,6 +46,46 @@ const Publications = memo(function Publications() {
     };
   }, [lastScrollY]);
 
+  // Helper function to parse status from note field
+  const parsePublicationStatus = (note: string | undefined) => {
+    if (!note) return [];
+    const statuses: { label: string; color: string }[] = [];
+    const lowerNote = note.toLowerCase();
+    
+    if (lowerNote.includes('corresponding author')) statuses.push({ label: 'Corresponding Author', color: 'amber' });
+    if (lowerNote.includes('equal contribution')) statuses.push({ label: 'Equal Contribution', color: 'purple' });
+    if (lowerNote.includes('in the news')) statuses.push({ label: 'In the News', color: 'green' });
+    
+    return statuses;
+  };
+
+  // Helper function to parse book chapter status
+  const parseBookChapterStatus = (note: string | undefined) => {
+    if (!note) return [];
+    const statuses: { label: string; color: string }[] = [];
+    
+    if (note.includes('#corresponding author')) statuses.push({ label: 'Corresponding Author', color: 'amber' });
+    
+    return statuses;
+  };
+
+  // Helper function to parse lecture type status
+  const parseLectureStatus = (type: string | undefined) => {
+    if (!type) return [];
+    const statuses: { label: string; color: string }[] = [];
+    const lowerType = type.toLowerCase();
+    
+    if (lowerType.includes('invited lecture during a conference')) statuses.push({ label: 'Invited Conference Lecture', color: 'emerald' });
+    else if (lowerType.includes('invited lecture')) statuses.push({ label: 'Invited Lecture', color: 'emerald' });
+    else if (lowerType.includes('early investigator award lecture')) statuses.push({ label: 'Early Investigator Award', color: 'gold' });
+    else if (lowerType.includes('young investigator speaker')) statuses.push({ label: 'Young Investigator Speaker', color: 'blue' });
+    else if (lowerType.includes('rising star award lecture')) statuses.push({ label: 'Rising Star Award', color: 'pink' });
+    else if (lowerType.includes('lecture')) statuses.push({ label: 'Lecture', color: 'slate' });
+    else if (lowerType.includes('poster')) statuses.push({ label: 'Poster', color: 'slate' });
+    
+    return statuses;
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 relative overflow-hidden">
       {/* Background gradient overlays */}
@@ -142,28 +182,44 @@ const Publications = memo(function Publications() {
             <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-blue-900 to-blue-600 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-20 transition-all duration-500"></div>
             
             <div className="space-y-6">
-              {publicationsData.map((pub, index) => (
-                <div
-                  key={pub.id}
-                  className={`p-6 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/50 hover:border-blue-500/25 hover:shadow-md group/item ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-                  style={{
-                    animationDelay: `${400 + index * 100}ms`,
-                    animation: isLoaded ? `fadeInUp 0.6s ease-out ${400 + index * 100}ms both` : 'none'
-                  }}
-                >
-                  <div className="flex items-start space-x-4">
-                    <div className="flex-shrink-0 mt-2">
-                      <div className="w-2 h-2 bg-blue-600 rounded-full transition-all duration-300 group-hover/item:bg-blue-800 group-hover/item:scale-125"></div>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-base md:text-lg font-light text-blue-900/90 leading-relaxed transition-all duration-300 group-hover/item:text-blue-900">
-                        <strong className="font-semibold text-blue-900">{pub.id}.</strong> {pub.authors} ({pub.year}). {pub.title} <em className="text-blue-800">{pub.journal}</em>, {pub.pages}
-                        {pub.note && <span className="text-blue-700 font-medium"> - {pub.note}</span>}
-                      </p>
+              {publicationsData.map((pub, index) => {
+                const statuses = parsePublicationStatus(pub.note);
+                return (
+                  <div
+                    key={pub.id}
+                    className={`p-6 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/50 hover:border-blue-500/25 hover:shadow-md group/item ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                    style={{
+                      animationDelay: `${400 + index * 100}ms`,
+                      animation: isLoaded ? `fadeInUp 0.6s ease-out ${400 + index * 100}ms both` : 'none'
+                    }}
+                  >
+                    <div className="flex items-start space-x-4">
+                      <div className="flex-shrink-0 mt-2">
+                        <div className="w-2 h-2 bg-blue-600 rounded-full transition-all duration-300 group-hover/item:bg-blue-800 group-hover/item:scale-125"></div>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-base md:text-lg font-light text-blue-900/90 leading-relaxed transition-all duration-300 group-hover/item:text-blue-900">
+                          <strong className="font-semibold text-blue-900">{pub.id}.</strong> {pub.authors} ({pub.year}). {pub.title} <em className="text-blue-800">{pub.journal}</em>, {pub.pages}
+                        </p>
+                      </div>
+                      
+                      {/* Status indicators */}
+                      {statuses.length > 0 && (
+                        <div className="flex-shrink-0 flex flex-col space-y-2">
+                          {statuses.map((status, statusIndex) => (
+                            <span
+                              key={statusIndex}
+                              className="px-2 py-1 text-xs font-medium text-blue-700 bg-blue-100/60 border border-blue-300/40 rounded-full transition-all duration-300 group-hover/item:bg-blue-200/80 group-hover/item:border-blue-400/60 group-hover/item:scale-105"
+                            >
+                              {status.label}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
@@ -181,28 +237,44 @@ const Publications = memo(function Publications() {
             <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-blue-900 to-blue-600 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-20 transition-all duration-500"></div>
             
             <div className="space-y-6">
-              {bookChaptersData.map((chapter, index) => (
-                <div
-                  key={index}
-                  className={`p-6 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/50 hover:border-blue-500/25 hover:shadow-md group/item ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-                  style={{
-                    animationDelay: `${600 + index * 100}ms`,
-                    animation: isLoaded ? `fadeInUp 0.6s ease-out ${600 + index * 100}ms both` : 'none'
-                  }}
-                >
-                  <div className="flex items-start space-x-4">
-                    <div className="flex-shrink-0 mt-2">
-                      <div className="w-2 h-2 bg-blue-600 rounded-full transition-all duration-300 group-hover/item:bg-blue-800 group-hover/item:scale-125"></div>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-base md:text-lg font-light text-blue-900/90 leading-relaxed transition-all duration-300 group-hover/item:text-blue-900">
-                        {chapter.authors} ({chapter.year}). {chapter.title}, <em className="text-blue-800">{chapter.book}</em>
-                        {chapter.note && <span className="text-blue-700 font-medium"> - {chapter.note}</span>}
-                      </p>
+              {bookChaptersData.map((chapter, index) => {
+                const statuses = parseBookChapterStatus(chapter.note);
+                return (
+                  <div
+                    key={index}
+                    className={`p-6 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/50 hover:border-blue-500/25 hover:shadow-md group/item ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                    style={{
+                      animationDelay: `${600 + index * 100}ms`,
+                      animation: isLoaded ? `fadeInUp 0.6s ease-out ${600 + index * 100}ms both` : 'none'
+                    }}
+                  >
+                    <div className="flex items-start space-x-4">
+                      <div className="flex-shrink-0 mt-2">
+                        <div className="w-2 h-2 bg-blue-600 rounded-full transition-all duration-300 group-hover/item:bg-blue-800 group-hover/item:scale-125"></div>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-base md:text-lg font-light text-blue-900/90 leading-relaxed transition-all duration-300 group-hover/item:text-blue-900">
+                          {chapter.authors} ({chapter.year}). {chapter.title}, <em className="text-blue-800">{chapter.book}</em>
+                        </p>
+                      </div>
+                      
+                      {/* Status indicators */}
+                      {statuses.length > 0 && (
+                        <div className="flex-shrink-0">
+                          {statuses.map((status, statusIndex) => (
+                            <span
+                              key={statusIndex}
+                              className="px-2 py-1 text-xs font-medium text-blue-700 bg-blue-100/60 border border-blue-300/40 rounded-full transition-all duration-300 group-hover/item:bg-blue-200/80 group-hover/item:border-blue-400/60 group-hover/item:scale-105"
+                            >
+                              {status.label}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
@@ -243,27 +315,44 @@ const Publications = memo(function Publications() {
             <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-blue-900 to-blue-600 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-20 transition-all duration-500"></div>
             
             <div className="space-y-6">
-              {lecturesData.map((item, index) => (
-                <div
-                  key={index}
-                  className={`p-6 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/50 hover:border-blue-500/25 hover:shadow-md group/item ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-                  style={{
-                    animationDelay: `${1000 + index * 100}ms`,
-                    animation: isLoaded ? `fadeInUp 0.6s ease-out ${1000 + index * 100}ms both` : 'none'
-                  }}
-                >
-                  <div className="flex items-start space-x-4">
-                    <div className="flex-shrink-0 mt-2">
-                      <div className="w-2 h-2 bg-blue-600 rounded-full transition-all duration-300 group-hover/item:bg-blue-800 group-hover/item:scale-125"></div>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-base md:text-lg font-light text-blue-900/90 leading-relaxed transition-all duration-300 group-hover/item:text-blue-900">
-                        <strong className="font-semibold text-blue-900">NR Gandasi</strong> ({item.year}) {item.title}, {item.location} - <span className="text-blue-700 font-medium">{item.type}</span>
-                      </p>
+              {lecturesData.map((item, index) => {
+                const statuses = parseLectureStatus(item.type);
+                return (
+                  <div
+                    key={index}
+                    className={`p-6 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/50 hover:border-blue-500/25 hover:shadow-md group/item ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                    style={{
+                      animationDelay: `${1000 + index * 100}ms`,
+                      animation: isLoaded ? `fadeInUp 0.6s ease-out ${1000 + index * 100}ms both` : 'none'
+                    }}
+                  >
+                    <div className="flex items-start space-x-4">
+                      <div className="flex-shrink-0 mt-2">
+                        <div className="w-2 h-2 bg-blue-600 rounded-full transition-all duration-300 group-hover/item:bg-blue-800 group-hover/item:scale-125"></div>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-base md:text-lg font-light text-blue-900/90 leading-relaxed transition-all duration-300 group-hover/item:text-blue-900">
+                          <strong className="font-semibold text-blue-900">NR Gandasi</strong> ({item.year}) {item.title}, {item.location}
+                        </p>
+                      </div>
+                      
+                      {/* Status indicators */}
+                      {statuses.length > 0 && (
+                        <div className="flex-shrink-0 flex flex-col space-y-2">
+                          {statuses.map((status, statusIndex) => (
+                            <span
+                              key={statusIndex}
+                              className="px-2 py-1 text-xs font-medium text-blue-700 bg-blue-100/60 border border-blue-300/40 rounded-full transition-all duration-300 group-hover/item:bg-blue-200/80 group-hover/item:border-blue-400/60 group-hover/item:scale-105"
+                            >
+                              {status.label}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
@@ -299,7 +388,7 @@ const Publications = memo(function Publications() {
                         href={link.url} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="text-base md:text-lg text-blue-600 hover:text-blue-800 font-medium underline decoration-blue-500/50 hover:decoration-blue-800 transition-all duration-300 hover:scale-105 inline-block"
+                        className="text-base md:text-lg text-blue-600 hover:text-blue-800 font-medium underline decoration-blue-500/50 hover:decoration-blue-800 transition-all duration-300 hover:scale-102 inline-block transform-gpu origin-left"
                       >
                         {link.title}
                       </a>
