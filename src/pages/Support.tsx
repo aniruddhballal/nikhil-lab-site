@@ -169,47 +169,8 @@ const Support = memo(function Support() {
           </div>
           
           <div className="space-y-12">
-            {/* Funding List */}
-            <div className="relative p-8 backdrop-blur-xl bg-blue-50/60 border border-blue-500/20 rounded-2xl shadow-lg shadow-blue-200/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/15 hover:bg-blue-50/80 hover:border-blue-600/30 hover:translate-y-[-2px] group cursor-default">
-              {/* Corporate side accent line */}
-              <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-blue-900 to-blue-600 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-20 transition-all duration-500"></div>
-              
-              <div className="space-y-4">
-                {fundingItems.map((item, index) => (
-                  <div
-                    key={index}
-                    className={`flex items-start space-x-4 p-4 rounded-lg transition-all duration-300 hover:bg-blue-100/30 group/item ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-                    style={{
-                      animationDelay: `${600 + index * 80}ms`,
-                      animation: isLoaded ? `fadeInUp 0.6s ease-out ${600 + index * 80}ms both` : 'none'
-                    }}
-                  >
-                    {/* Funding year indicator */}
-                    <div className="flex-shrink-0 mt-2">
-                      <div className="w-3 h-3 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full transition-all duration-300 group-hover/item:scale-125 group-hover/item:shadow-sm group-hover/item:shadow-blue-600/30"></div>
-                    </div>
-                    
-                    <div className="flex-1">
-                      <p className="text-base md:text-lg font-light text-blue-900/90 leading-relaxed transition-all duration-300 group-hover/item:text-blue-900">
-                        {item}
-                      </p>
-                    </div>
-                    
-                    {/* Status indicator for utilized grants */}
-                    {item.includes('Utilized') && (
-                      <div className="flex-shrink-0">
-                        <span className="px-2 py-1 text-xs font-medium text-blue-700 bg-blue-100/60 rounded-full border border-blue-300/40 transition-all duration-300 group-hover/item:bg-blue-200/80 group-hover/item:border-blue-400/60">
-                          Utilized
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-
             {/* Funding Image */}
-            <div className={`transition-all duration-700 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className={`transition-all duration-700 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <div 
                 className="group relative overflow-hidden rounded-2xl backdrop-blur-xl bg-blue-50/60 border border-blue-500/20 shadow-lg shadow-blue-200/20 transition-all duration-700 hover:shadow-2xl hover:shadow-blue-900/20 hover:bg-blue-50/80 hover:border-blue-600/30 hover:scale-[1.02] cursor-pointer"
                 onClick={() => openImageModal(imageData)}
@@ -248,6 +209,45 @@ const Support = memo(function Support() {
                   {/* Bottom accent line */}
                   <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-blue-800 group-hover:w-16 transition-all duration-500"></div>
                 </div>
+              </div>
+            </div>
+
+            {/* Funding List */}
+            <div className="relative p-8 backdrop-blur-xl bg-blue-50/60 border border-blue-500/20 rounded-2xl shadow-lg shadow-blue-200/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/15 hover:bg-blue-50/80 hover:border-blue-600/30 hover:translate-y-[-2px] group cursor-default">
+              {/* Corporate side accent line */}
+              <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-blue-900 to-blue-600 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-20 transition-all duration-500"></div>
+              
+              <div className="space-y-4">
+                {fundingItems.map((item, index) => (
+                  <div
+                    key={index}
+                    className={`flex items-start space-x-4 p-4 rounded-lg transition-all duration-300 hover:bg-blue-100/30 group/item ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                    style={{
+                      animationDelay: `${800 + index * 80}ms`,
+                      animation: isLoaded ? `fadeInUp 0.6s ease-out ${800 + index * 80}ms both` : 'none'
+                    }}
+                  >
+                    {/* Funding year indicator */}
+                    <div className="flex-shrink-0 mt-2">
+                      <div className="w-3 h-3 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full transition-all duration-300 group-hover/item:scale-125 group-hover/item:shadow-sm group-hover/item:shadow-blue-600/30"></div>
+                    </div>
+                    
+                    <div className="flex-1">
+                      <p className="text-base md:text-lg font-light text-blue-900/90 leading-relaxed transition-all duration-300 group-hover/item:text-blue-900">
+                        {item}
+                      </p>
+                    </div>
+                    
+                    {/* Status indicator for utilized grants */}
+                    {item.includes('Utilized') && (
+                      <div className="flex-shrink-0">
+                        <span className="px-2 py-1 text-xs font-medium text-blue-700 bg-blue-100/60 rounded-full border border-blue-300/40 transition-all duration-300 group-hover/item:bg-blue-200/80 group-hover/item:border-blue-400/60">
+                          Utilized
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
