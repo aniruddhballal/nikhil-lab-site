@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
-import heroImage from '../images/img-website_home/1.png';
+import img1 from '../images/img-website_home/1.png';
 
 interface ResearchImage {
   src: string;
@@ -23,8 +23,8 @@ export default function Home() {
     setSidebarOpen(false);
   };
 
-  const heroImageData: ResearchImage = {
-    src: heroImage,
+  const imageData: ResearchImage = {
+    src: img1,
     alt: "Diabetes research visualization - Pancreatic islet tissue analysis",
     caption: "Advanced visualization of pancreatic islet tissue"
   };
@@ -131,7 +131,7 @@ export default function Home() {
       <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
       
       <main className="flex flex-col items-center justify-center min-h-screen px-8 py-8 relative z-10">
-        {/* Hero Header */}
+        {/* Header */}
         <header className={`text-center mb-12 relative transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* Decorative line */}
           <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-25 h-1 bg-gradient-to-r from-blue-900 to-blue-500 rounded-full animate-pulse"></div>
@@ -154,7 +154,7 @@ export default function Home() {
           </div>
         </header>
         
-        {/* Hero Content */}
+        {/* Content */}
         <section className={`flex flex-col lg:flex-row items-center gap-12 max-w-6xl mx-auto transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="flex-1 max-w-3xl text-center lg:text-left">
             <div className="relative p-8 backdrop-blur-xl bg-blue-50/60 border border-blue-500/20 rounded-2xl shadow-lg shadow-blue-200/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/15 hover:bg-blue-50/80 hover:border-blue-600/30 hover:translate-y-[-2px] group cursor-default">
@@ -176,13 +176,13 @@ export default function Home() {
           <div className={`flex-1 transition-all duration-700 delay-500 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
             <div 
               className="group relative overflow-hidden rounded-2xl backdrop-blur-xl bg-blue-50/60 border border-blue-500/20 shadow-lg shadow-blue-200/20 transition-all duration-700 hover:shadow-2xl hover:shadow-blue-900/20 hover:bg-blue-50/80 hover:border-blue-600/30 hover:scale-[1.02] cursor-pointer"
-              onClick={() => openImageModal(heroImageData)}
+              onClick={() => openImageModal(imageData)}
             >
               {/* Image container with aspect ratio */}
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img
-                  src={heroImageData.src}
-                  alt={heroImageData.alt}
+                  src={imageData.src}
+                  alt={imageData.alt}
                   className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
                 />
                 
@@ -206,7 +206,7 @@ export default function Home() {
               {/* Caption */}
               <div className="p-6 relative">
                 <p className="text-blue-900/80 font-light text-center leading-relaxed transition-all duration-300 group-hover:text-blue-900">
-                  {heroImageData.caption}
+                  {imageData.caption}
                 </p>
                 
                 {/* Bottom accent line */}
