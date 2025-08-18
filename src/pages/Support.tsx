@@ -1,5 +1,12 @@
 import { useState, memo, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
+import fundingImg from '../images/img-website_Support/funding.png';
+
+interface SupportImage {
+  src: string;
+  alt: string;
+  caption: string;
+}
 
 const fundingItems = [
   "Science and Engineering Research Board - Start-up grant - 2024",
@@ -19,6 +26,7 @@ const Support = memo(function Support() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<SupportImage | null>(null);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -26,6 +34,20 @@ const Support = memo(function Support() {
   
   const closeSidebar = () => {
     setSidebarOpen(false);
+  };
+
+  const imageData: SupportImage = {
+    src: fundingImg,
+    alt: "Funding visualization - Research support and grants",
+    caption: "Research funding and grant support visualization"
+  };
+
+  const openImageModal = (image: SupportImage) => {
+    setSelectedImage(image);
+  };
+
+  const closeImageModal = () => {
+    setSelectedImage(null);
   };
 
   useEffect(() => {
@@ -146,47 +168,93 @@ const Support = memo(function Support() {
             <div className="w-16 h-0.5 bg-gradient-to-r from-blue-600 to-blue-800 mx-auto rounded-full"></div>
           </div>
           
-          <div className="relative p-8 backdrop-blur-xl bg-blue-50/60 border border-blue-500/20 rounded-2xl shadow-lg shadow-blue-200/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/15 hover:bg-blue-50/80 hover:border-blue-600/30 hover:translate-y-[-2px] group cursor-default">
-            {/* Corporate side accent line */}
-            <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-blue-900 to-blue-600 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-20 transition-all duration-500"></div>
-            
-            <div className="space-y-4">
-              {fundingItems.map((item, index) => (
-                <div
-                  key={index}
-                  className={`flex items-start space-x-4 p-4 rounded-lg transition-all duration-300 hover:bg-blue-100/30 group/item ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-                  style={{
-                    animationDelay: `${600 + index * 80}ms`,
-                    animation: isLoaded ? `fadeInUp 0.6s ease-out ${600 + index * 80}ms both` : 'none'
-                  }}
-                >
-                  {/* Funding year indicator */}
-                  <div className="flex-shrink-0 mt-2">
-                    <div className="w-3 h-3 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full transition-all duration-300 group-hover/item:scale-125 group-hover/item:shadow-sm group-hover/item:shadow-blue-600/30"></div>
-                  </div>
-                  
-                  <div className="flex-1">
-                    <p className="text-base md:text-lg font-light text-blue-900/90 leading-relaxed transition-all duration-300 group-hover/item:text-blue-900">
-                      {item}
-                    </p>
-                  </div>
-                  
-                  {/* Status indicator for utilized grants */}
-                  {item.includes('Utilized') && (
-                    <div className="flex-shrink-0">
-                      <span className="px-2 py-1 text-xs font-medium text-blue-700 bg-blue-100/60 rounded-full border border-blue-300/40 transition-all duration-300 group-hover/item:bg-blue-200/80 group-hover/item:border-blue-400/60">
-                        Utilized
-                      </span>
+          <div className="space-y-12">
+            {/* Funding List */}
+            <div className="relative p-8 backdrop-blur-xl bg-blue-50/60 border border-blue-500/20 rounded-2xl shadow-lg shadow-blue-200/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/15 hover:bg-blue-50/80 hover:border-blue-600/30 hover:translate-y-[-2px] group cursor-default">
+              {/* Corporate side accent line */}
+              <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-blue-900 to-blue-600 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-20 transition-all duration-500"></div>
+              
+              <div className="space-y-4">
+                {fundingItems.map((item, index) => (
+                  <div
+                    key={index}
+                    className={`flex items-start space-x-4 p-4 rounded-lg transition-all duration-300 hover:bg-blue-100/30 group/item ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                    style={{
+                      animationDelay: `${600 + index * 80}ms`,
+                      animation: isLoaded ? `fadeInUp 0.6s ease-out ${600 + index * 80}ms both` : 'none'
+                    }}
+                  >
+                    {/* Funding year indicator */}
+                    <div className="flex-shrink-0 mt-2">
+                      <div className="w-3 h-3 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full transition-all duration-300 group-hover/item:scale-125 group-hover/item:shadow-sm group-hover/item:shadow-blue-600/30"></div>
                     </div>
-                  )}
+                    
+                    <div className="flex-1">
+                      <p className="text-base md:text-lg font-light text-blue-900/90 leading-relaxed transition-all duration-300 group-hover/item:text-blue-900">
+                        {item}
+                      </p>
+                    </div>
+                    
+                    {/* Status indicator for utilized grants */}
+                    {item.includes('Utilized') && (
+                      <div className="flex-shrink-0">
+                        <span className="px-2 py-1 text-xs font-medium text-blue-700 bg-blue-100/60 rounded-full border border-blue-300/40 transition-all duration-300 group-hover/item:bg-blue-200/80 group-hover/item:border-blue-400/60">
+                          Utilized
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Funding Image */}
+            <div className={`transition-all duration-700 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <div 
+                className="group relative overflow-hidden rounded-2xl backdrop-blur-xl bg-blue-50/60 border border-blue-500/20 shadow-lg shadow-blue-200/20 transition-all duration-700 hover:shadow-2xl hover:shadow-blue-900/20 hover:bg-blue-50/80 hover:border-blue-600/30 hover:scale-[1.02] cursor-pointer"
+                onClick={() => openImageModal(imageData)}
+              >
+                {/* Image container with aspect ratio */}
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img
+                    src={imageData.src}
+                    alt={imageData.alt}
+                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
+                  />
+                  
+                  {/* Overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                  
+                  {/* Hover overlay with zoom icon */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    <div className="bg-blue-50/90 backdrop-blur-sm rounded-full p-3 shadow-lg transform scale-75 group-hover:scale-100 transition-all duration-300">
+                      <svg className="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                      </svg>
+                    </div>
+                  </div>
+                  
+                  {/* Scientific corner accent */}
+                  <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-blue-300/60 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200"></div>
+                  <div className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-blue-300/60 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-300"></div>
                 </div>
-              ))}
+                
+                {/* Caption */}
+                <div className="p-6 relative">
+                  <p className="text-blue-900/80 font-light text-center leading-relaxed transition-all duration-300 group-hover:text-blue-900">
+                    {imageData.caption}
+                  </p>
+                  
+                  {/* Bottom accent line */}
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-blue-800 group-hover:w-16 transition-all duration-500"></div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
        
         {/* Donate Section */}
-        <section className={`transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <section className={`transition-all duration-1000 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-light text-blue-900 mb-4 transition-all duration-500 hover:text-blue-700 cursor-default">
               Donate
@@ -214,6 +282,40 @@ const Support = memo(function Support() {
           </div>
         </section>
       </main>
+
+      {/* Image Modal */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 bg-blue-900/80 backdrop-blur-lg z-[2000] flex items-center justify-center p-4 animate-fadeIn"
+          onClick={closeImageModal}
+        >
+          <div className="relative max-w-4xl max-h-[90vh] bg-blue-50/95 rounded-2xl shadow-2xl overflow-hidden animate-modalSlideIn">
+            {/* Close button */}
+            <button
+              onClick={closeImageModal}
+              className="absolute top-4 right-4 z-10 bg-blue-900/80 text-white rounded-full p-2 hover:bg-blue-900 transition-all duration-200 hover:scale-110"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            
+            {/* Modal content */}
+            <div className="p-2">
+              <img
+                src={selectedImage.src}
+                alt={selectedImage.alt}
+                className="w-full h-auto max-h-[70vh] object-contain rounded-xl"
+              />
+              <div className="p-6 text-center">
+                <p className="text-blue-900 font-light text-lg leading-relaxed">
+                  {selectedImage.caption}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       
       <style>{`
         .bg-gradient-radial {
@@ -228,6 +330,30 @@ const Support = memo(function Support() {
             opacity: 1;
             transform: translateY(0);
           }
+        }
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+        @keyframes modalSlideIn {
+          from {
+            opacity: 0;
+            transform: scale(0.95) translateY(-1rem);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease-out;
+        }
+        .animate-modalSlideIn {
+          animation: modalSlideIn 0.4s ease-out;
         }
         @keyframes expandUnderline {
           from {
