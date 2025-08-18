@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 
+import img1 from '../images/img-website_Research/islet-cell-ldcv-min.jpg';
+import img3 from '../images/img-website_Research/3.png';
+import img4 from '../images/img-website_Research/4.png';
+import img5 from '../images/img-website_Research/5.png';
+
 interface ResearchImage {
   src: string;
   alt: string;
@@ -36,22 +41,22 @@ export default function Research() {
 
   const researchImages: ResearchImage[] = [
     {
-      src: "src/images/img-website_Research/islet-cell-ldcv-min.jpg",
+      src: img1,
       alt: "Research Image 1 - Islet Cell LDCVs",
       caption: "Islet cell LDCVs (Large Dense-Core Vesicles)"
     },
     {
-      src: "src/images/img-website_Research/3.png",
+      src: img3,
       alt: "Research Image 3",
       caption: "Research Image 3"
     },
     {
-      src: "src/images/img-website_Research/4.png",
+      src: img4,
       alt: "Research Image 4",
       caption: "Research Image 4"
     },
     {
-      src: "src/images/img-website_Research/5.png",
+      src: img5,
       alt: "Research Image 5",
       caption: "Research Image 5"
     }
