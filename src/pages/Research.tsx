@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 
 import img1 from '../images/img-website_Research/islet-cell-ldcv-min.jpg';
+import img2 from '../images/img-website_Research/2.png';
 import img3 from '../images/img-website_Research/3.png';
 import img4 from '../images/img-website_Research/4.png';
-import img5 from '../images/img-website_Research/5.png';
 
 interface ResearchImage {
   src: string;
@@ -46,6 +46,11 @@ export default function Research() {
       caption: "Islet cell LDCVs (Large Dense-Core Vesicles)"
     },
     {
+      src: img2,
+      alt: "Research Image 2",
+      caption: "Research Image 2"
+    },
+    {
       src: img3,
       alt: "Research Image 3",
       caption: "Research Image 3"
@@ -54,11 +59,6 @@ export default function Research() {
       src: img4,
       alt: "Research Image 4",
       caption: "Research Image 4"
-    },
-    {
-      src: img5,
-      alt: "Research Image 5",
-      caption: "Research Image 5"
     }
   ];
 
