@@ -176,8 +176,7 @@ const Support = memo(function Support() {
                 onClick={() => openImageModal(imageData)}
               >
                 {/* Image container with aspect ratio */}
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <img
+                  <div className="relative min-h-[300px] max-h-[500px] overflow-hidden"> {/* Replace aspect-[4/3] with this */}                  <img
                     src={imageData.src}
                     alt={imageData.alt}
                     className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
