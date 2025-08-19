@@ -16,6 +16,7 @@ const Contact = memo(function Contact() {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0); // Add this line to scroll to top
     setIsLoaded(true);
   }, []);
 
