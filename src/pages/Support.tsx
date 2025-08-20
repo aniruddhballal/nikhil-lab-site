@@ -277,14 +277,14 @@ const Support = memo(function Support() {
               </p>
               
               <p className="text-lg md:text-xl leading-relaxed text-blue-900/90 font-light transition-all duration-300 group-hover:text-blue-900/95">
-  If you are interested to contribute, please contact{' '}
-  <Link
-    to="/contact"
-    className="text-blue-900 font-semibold transition-all duration-300 group-hover:text-blue-800 px-1 py-0.5 rounded hover:bg-blue-100/50 underline"
-  >
-    Dr. Nikhil Gandasi
-  </Link>.
-</p>
+                If you are interested to contribute, please contact{' '}
+                <Link
+                  to="/contact"
+                  className="text-blue-900 font-semibold transition-all duration-300 group-hover:text-blue-800 px-1 py-0.5 rounded hover:bg-blue-100/50 underline"
+                >
+                  Dr. Nikhil Gandasi
+                </Link>.
+              </p>
             </div>
           </div>
         </section>
