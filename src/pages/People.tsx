@@ -9,6 +9,12 @@ const People = memo(function People() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [visibleCurrentMembers, setVisibleCurrentMembers] = useState(4);
+  const [visiblePastMembers, setVisiblePastMembers] = useState(4);
+  const [loadingCurrentMembers, setLoadingCurrentMembers] = useState(false);
+  const [loadingPastMembers, setLoadingPastMembers] = useState(false);
+
+  const MEMBERS_PER_LOAD = 4;
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -21,6 +27,22 @@ const People = memo(function People() {
   const handleContactClick = () => {
     // Navigate to contact page
     window.location.href = '/contact';
+  };
+
+  const handleShowMoreCurrentMembers = () => {
+    setLoadingCurrentMembers(true);
+    setTimeout(() => {
+      setVisibleCurrentMembers(prev => Math.min(prev + MEMBERS_PER_LOAD, currentMembers.length));
+      setLoadingCurrentMembers(false);
+    }, 800); // Simulate loading delay for better UX
+  };
+
+  const handleShowMorePastMembers = () => {
+    setLoadingPastMembers(true);
+    setTimeout(() => {
+      setVisiblePastMembers(prev => Math.min(prev + MEMBERS_PER_LOAD, pastMembers.length));
+      setLoadingPastMembers(false);
+    }, 800); // Simulate loading delay for better UX
   };
 
   useEffect(() => {
@@ -262,7 +284,7 @@ const People = memo(function People() {
           </div>
           
           <div className="space-y-8">
-            {currentMembers.map((member: any, index: number) => (
+            {currentMembers.slice(0, visibleCurrentMembers).map((member: any, index: number) => (
               <div
                 key={index}
                 className={`relative p-8 backdrop-blur-xl bg-blue-50/60 border border-blue-500/20 rounded-2xl shadow-lg shadow-blue-200/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/15 hover:bg-blue-50/80 hover:border-blue-600/30 hover:translate-y-[-2px] group cursor-default ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
@@ -330,6 +352,50 @@ const People = memo(function People() {
                 </div>
               </div>
             ))}
+            
+            {/* Show More Button for Current Members */}
+            {visibleCurrentMembers < currentMembers.length && (
+              <div className="flex justify-center pt-8">
+                <button
+                  onClick={handleShowMoreCurrentMembers}
+                  disabled={loadingCurrentMembers}
+                  className="group relative px-8 py-4 bg-blue-50/60 border border-blue-500/20 rounded-xl backdrop-blur-xl shadow-lg shadow-blue-200/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/15 hover:bg-blue-50/80 hover:border-blue-600/30 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:scale-105 active:scale-95 active:duration-75 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
+                >
+                  <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-blue-900 to-blue-600 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-10 transition-all duration-500 group-disabled:group-hover:opacity-0"></div>
+                  
+                  <div className="flex items-center space-x-3">
+                    {loadingCurrentMembers ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-blue-600/30 border-t-blue-600 rounded-full animate-spin"></div>
+                        <span className="text-base font-medium text-blue-900/80">Loading...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="text-base font-medium text-blue-900 transition-colors duration-300 group-hover:text-blue-800">
+                          Show More Members
+                        </span>
+                        <div className="flex items-center justify-center w-6 h-6 rounded-full bg-blue-600/10 border border-blue-600/20 transition-all duration-300 group-hover:bg-blue-600/20 group-hover:border-blue-600/40 group-hover:translate-x-1">
+                          <svg 
+                            width="12" 
+                            height="12" 
+                            viewBox="0 0 24 24" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            strokeWidth="2" 
+                            className="text-blue-600 transition-all duration-300 group-hover:text-blue-700"
+                          >
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                          </svg>
+                        </div>
+                        <span className="text-sm text-blue-700/60 font-light">
+                          ({currentMembers.length - visibleCurrentMembers} remaining)
+                        </span>
+                      </>
+                    )}
+                  </div>
+                </button>
+              </div>
+            )}
           </div>
         </section>
 
@@ -343,7 +409,7 @@ const People = memo(function People() {
           </div>
           
           <div className="space-y-8">
-            {pastMembers.map((member: any, index: number) => (
+            {pastMembers.slice(0, visiblePastMembers).map((member: any, index: number) => (
               <div
                 key={index}
                 className={`relative p-8 backdrop-blur-xl bg-blue-50/60 border border-blue-500/20 rounded-2xl shadow-lg shadow-blue-200/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/15 hover:bg-blue-50/80 hover:border-blue-600/30 hover:translate-y-[-2px] group cursor-default ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
@@ -389,6 +455,50 @@ const People = memo(function People() {
                 </div>
               </div>
             ))}
+            
+            {/* Show More Button for Past Members */}
+            {visiblePastMembers < pastMembers.length && (
+              <div className="flex justify-center pt-8">
+                <button
+                  onClick={handleShowMorePastMembers}
+                  disabled={loadingPastMembers}
+                  className="group relative px-8 py-4 bg-blue-50/60 border border-blue-500/20 rounded-xl backdrop-blur-xl shadow-lg shadow-blue-200/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/15 hover:bg-blue-50/80 hover:border-blue-600/30 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:scale-105 active:scale-95 active:duration-75 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
+                >
+                  <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-slate-600 to-slate-800 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-10 transition-all duration-500 group-disabled:group-hover:opacity-0"></div>
+                  
+                  <div className="flex items-center space-x-3">
+                    {loadingPastMembers ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-blue-600/30 border-t-blue-600 rounded-full animate-spin"></div>
+                        <span className="text-base font-medium text-blue-900/80">Loading...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="text-base font-medium text-blue-900 transition-colors duration-300 group-hover:text-blue-800">
+                          Show More Alumni
+                        </span>
+                        <div className="flex items-center justify-center w-6 h-6 rounded-full bg-slate-600/10 border border-slate-600/20 transition-all duration-300 group-hover:bg-slate-600/20 group-hover:border-slate-600/40 group-hover:translate-x-1">
+                          <svg 
+                            width="12" 
+                            height="12" 
+                            viewBox="0 0 24 24" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            strokeWidth="2" 
+                            className="text-slate-600 transition-all duration-300 group-hover:text-slate-700"
+                          >
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                          </svg>
+                        </div>
+                        <span className="text-sm text-blue-700/60 font-light">
+                          ({pastMembers.length - visiblePastMembers} remaining)
+                        </span>
+                      </>
+                    )}
+                  </div>
+                </button>
+              </div>
+            )}
           </div>
         </section>
       </main>
