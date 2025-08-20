@@ -145,12 +145,36 @@ const Contact = memo(function Contact() {
               <div className="space-y-4">
                 <div className="p-4 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/50 hover:border-blue-500/25">
                   <p className="text-base md:text-lg font-light text-blue-900/90 leading-relaxed">
-                    <strong className="font-semibold text-blue-900">Email:</strong>{' '}
+                    <strong className="font-semibold text-blue-900">Primary Email:</strong>{' '}
                     <a 
                       href="mailto:grnikhil@iisc.ac.in" 
                       className="text-blue-700 hover:text-blue-800 transition-colors duration-300 hover:underline"
                     >
                       grnikhil@iisc.ac.in
+                    </a>
+                  </p>
+                </div>
+                
+                <div className="p-4 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/50 hover:border-blue-500/25">
+                  <p className="text-base md:text-lg font-light text-blue-900/90 leading-relaxed">
+                    <strong className="font-semibold text-blue-900">Secondary Email:</strong>{' '}
+                    <a 
+                      href="mailto:nikhil.gandasi@mcb.uu.se" 
+                      className="text-blue-700 hover:text-blue-800 transition-colors duration-300 hover:underline"
+                    >
+                      nikhil.gandasi@mcb.uu.se
+                    </a>
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/50 hover:border-blue-500/25">
+                  <p className="text-base md:text-lg font-light text-blue-900/90 leading-relaxed">
+                    <strong className="font-semibold text-blue-900">Phone:</strong>{' '}
+                    <a 
+                      href="tel:+91-80-22933460" 
+                      className="text-blue-700 hover:text-blue-800 transition-colors duration-300 hover:underline"
+                    >
+                      +91-80-22933460
                     </a>
                   </p>
                 </div>

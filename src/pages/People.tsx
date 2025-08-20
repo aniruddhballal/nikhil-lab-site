@@ -18,6 +18,11 @@ const People = memo(function People() {
     setSidebarOpen(false);
   };
 
+  const handleContactClick = () => {
+    // Navigate to contact page
+    window.location.href = '/contact';
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0); // Add this line to scroll to top
     setIsLoaded(true);
@@ -189,21 +194,58 @@ const People = memo(function People() {
                 </div>
               </div>
               
-              {/* Contact */}
+              {/* Contact - Now redirects to /contact page */}
               <div className="space-y-4">
                 <h4 className="text-xl font-medium text-blue-900 mb-4 flex items-center">
                   <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
                   Contact
                 </h4>
-                <div className="ml-5 p-6 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/50 hover:border-blue-500/25">
-                  <div className="space-y-3">
-                    <p className="text-base md:text-lg font-light text-blue-900/90">
-                      <strong className="font-semibold text-blue-900">Email:</strong> {principalInvestigator.contact.email.join(", ")}
-                    </p>
-                    <p className="text-base md:text-lg font-light text-blue-900/90">
-                      <strong className="font-semibold text-blue-900">Phone:</strong> {principalInvestigator.contact.phone}
-                    </p>
-                  </div>
+                <div className="ml-5">
+                  <button
+                    onClick={handleContactClick}
+                    className="w-full p-6 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/60 hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-200/30 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-blue-500/20 group cursor-pointer"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <div className="flex items-center justify-center w-10 h-10 bg-blue-600/10 rounded-full border border-blue-600/20 transition-all duration-300 group-hover:bg-blue-600/20 group-hover:border-blue-600/40 group-hover:scale-110">
+                          <svg 
+                            width="18" 
+                            height="18" 
+                            viewBox="0 0 24 24" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            strokeWidth="2" 
+                            className="text-blue-600 transition-colors duration-300 group-hover:text-blue-700"
+                          >
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                          </svg>
+                        </div>
+                        <div className="text-left">
+                          <p className="text-base md:text-lg font-medium text-blue-900 transition-colors duration-300 group-hover:text-blue-800">
+                            Get in Touch
+                          </p>
+                          <p className="text-sm text-blue-700/70 transition-colors duration-300 group-hover:text-blue-800/80">
+                            Click here to view contact information
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-600/10 border border-blue-600/20 transition-all duration-300 group-hover:bg-blue-600/20 group-hover:border-blue-600/40 group-hover:translate-x-1">
+                        <svg 
+                          width="14" 
+                          height="14" 
+                          viewBox="0 0 24 24" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="2" 
+                          className="text-blue-600 transition-all duration-300 group-hover:text-blue-700"
+                        >
+                          <polyline points="9,18 15,12 9,6"></polyline>
+                        </svg>
+                      </div>
+                    </div>
+                  </button>
                 </div>
               </div>
             </div>
