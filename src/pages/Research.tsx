@@ -2,9 +2,12 @@ import { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 
 import img1 from '../images/img-website_Research/islet-cell-ldcv-min.jpg';
-import img2 from '../images/img-website_Research/2.png';
-import img3 from '../images/img-website_Research/3.png';
-import img4 from '../images/img-website_Research/4.png';
+import img2 from '../images/img-website_Research/beta-cell-glucose-uptake-t2d.jpg';
+import img3 from '../images/img-website_Research/cell-glucose-transporter.jpg';
+import img4 from '../images/img-website_Research/pancreas-changes-cancer.jpg';
+import img5 from '../images/img-website_Research/mvb-beta-cells.jpg';
+import img6 from '../images/img-website_Research/mvb-imaging-beta-cells.jpg';
+import img7 from '../images/img-website_Research/mvb-secretion-dysregulation-t2d.jpg';
 
 interface ResearchImage {
   src: string;
@@ -42,23 +45,38 @@ export default function Research() {
   const researchImages: ResearchImage[] = [
     {
       src: img1,
-      alt: "Research Image 1 - Islet Cell LDCVs",
+      alt: "Research Image 1 - islet-cell-ldcv-min",
       caption: "Islet cell LDCVs (Large Dense-Core Vesicles)"
     },
     {
       src: img2,
-      alt: "Research Image 2",
-      caption: "Research Image 2"
+      alt: "Research Image 2 - beta-cell-glucose-uptake-t2d",
+      caption: "Glucose uptake in pancreatic beta cells and how it is disrupted during type-2-diabetes"
     },
     {
       src: img3,
-      alt: "Research Image 3",
-      caption: "Research Image 3"
+      alt: "Research Image 3 - cell-glucose-transporter",
+      caption: "Cell image with glucose transporter"
     },
     {
       src: img4,
-      alt: "Research Image 4",
-      caption: "Research Image 4"
+      alt: "Research Image 4 - pancreas-changes-cancer",
+      caption: "Changes in pancreas during pancreatic cancer"
+    },
+    {
+      src: img5,
+      alt: "Research Image 5 - mvb-beta-cells",
+      caption: "Visualizing multi-vesicular bodies in pancreatic beta cells"
+    },
+    {
+      src: img6,
+      alt: "Research Image 6 - mvb-imaging-beta-cells",
+      caption: "Multivesicular bodies imaging in pancreatic beta cells"
+    },
+    {
+      src: img7,
+      alt: "Research Image 7 - mvb-secretion-dysregulation-t2d",
+      caption: "Multivesicular bodies secretion dysregulation in type-2-diabetes"
     }
   ];
 
