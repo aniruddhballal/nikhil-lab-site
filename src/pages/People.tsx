@@ -31,18 +31,36 @@ const People = memo(function People() {
 
   const handleShowMoreCurrentMembers = () => {
     setLoadingCurrentMembers(true);
+    
+    // Store current scroll position
+    const currentScrollY = window.scrollY;
+    
     setTimeout(() => {
       setVisibleCurrentMembers(prev => Math.min(prev + MEMBERS_PER_LOAD, currentMembers.length));
       setLoadingCurrentMembers(false);
-    }, 800); // Simulate loading delay for better UX
+      
+      // Restore scroll position after a brief delay to allow DOM update
+      requestAnimationFrame(() => {
+        window.scrollTo(0, currentScrollY);
+      });
+    }, 300); // Reduced delay
   };
 
   const handleShowMorePastMembers = () => {
     setLoadingPastMembers(true);
+    
+    // Store current scroll position
+    const currentScrollY = window.scrollY;
+    
     setTimeout(() => {
       setVisiblePastMembers(prev => Math.min(prev + MEMBERS_PER_LOAD, pastMembers.length));
       setLoadingPastMembers(false);
-    }, 800); // Simulate loading delay for better UX
+      
+      // Restore scroll position after a brief delay to allow DOM update
+      requestAnimationFrame(() => {
+        window.scrollTo(0, currentScrollY);
+      });
+    }, 300); // Reduced delay
   };
 
   useEffect(() => {
