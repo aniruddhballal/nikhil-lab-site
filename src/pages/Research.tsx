@@ -22,6 +22,10 @@ export default function Research() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [selectedImage, setSelectedImage] = useState<ResearchImage | null>(null);
 
+  // Pagination states
+  const [visibleImages, setVisibleImages] = useState(4); // Show 3 images initially
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -42,7 +46,7 @@ export default function Research() {
     "Cell culture - primary culture and cell lines"
   ];
 
-  const researchImages: ResearchImage[] = [
+  const allResearchImages: ResearchImage[] = [
     {
       src: img1,
       alt: "Research Image 1 - islet-cell-ldcv-min",
@@ -80,8 +84,23 @@ export default function Research() {
     }
   ];
 
+  const IMAGES_PER_LOAD = 3; // Load 3 images at a time
+  const currentImages = allResearchImages.slice(0, visibleImages);
+  const hasMoreImages = visibleImages < allResearchImages.length;
+
+  // Load more images function
+  const loadMoreImages = () => {
+    setIsLoadingMore(true);
+    
+    // Simulate loading delay for better UX
+    setTimeout(() => {
+      setVisibleImages(prev => Math.min(prev + IMAGES_PER_LOAD, allResearchImages.length));
+      setIsLoadingMore(false);
+    }, 500);
+  };
+
   useEffect(() => {
-    window.scrollTo(0, 0); // Add this line to scroll to top
+    window.scrollTo(0, 0);
     setIsLoaded(true);
   }, []);
 
@@ -230,10 +249,15 @@ export default function Research() {
               Research Gallery
             </h2>
             <div className="w-16 h-0.5 bg-gradient-to-r from-blue-600 to-blue-800 mx-auto rounded-full"></div>
+            
+            {/* Image counter */}
+            <p className="text-blue-900/60 text-sm mt-4 font-light">
+              Showing {currentImages.length} of {allResearchImages.length} images
+            </p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {researchImages.map((image, index) => (
+            {currentImages.map((image, index) => (
               <div
                 key={index}
                 className={`group relative overflow-hidden rounded-2xl backdrop-blur-xl bg-blue-50/60 border border-blue-500/20 shadow-lg shadow-blue-200/20 transition-all duration-700 hover:shadow-2xl hover:shadow-blue-900/20 hover:bg-blue-50/80 hover:border-blue-600/30 hover:scale-[1.02] cursor-pointer ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
@@ -281,6 +305,42 @@ export default function Research() {
               </div>
             ))}
           </div>
+
+          {/* Load More Button */}
+          {hasMoreImages && (
+            <div className="text-center mt-12">
+              <button
+                onClick={loadMoreImages}
+                disabled={isLoadingMore}
+                className="group relative inline-flex items-center gap-3 px-8 py-4 bg-blue-50/60 backdrop-blur-xl border border-blue-500/20 rounded-2xl shadow-lg shadow-blue-200/20 text-blue-900 font-light text-lg transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/15 hover:bg-blue-50/80 hover:border-blue-600/30 hover:scale-105 hover:translate-y-[-2px] focus:outline-none focus:ring-4 focus:ring-blue-500/30 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:translate-y-0"
+              >
+                {/* Loading spinner */}
+                {isLoadingMore && (
+                  <div className="animate-spin rounded-full h-5 w-5 border-2 border-blue-900/20 border-t-blue-900"></div>
+                )}
+                
+                {/* Button text */}
+                <span className="transition-all duration-300 group-hover:text-blue-800">
+                  {isLoadingMore ? 'Loading...' : `Show More Images (${Math.min(IMAGES_PER_LOAD, allResearchImages.length - visibleImages)} more)`}
+                </span>
+                
+                {/* Arrow icon */}
+                {!isLoadingMore && (
+                  <svg 
+                    className="w-5 h-5 transition-all duration-300 group-hover:translate-y-0.5" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                )}
+                
+                {/* Side accent line */}
+                <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-blue-900 to-blue-600 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-8 transition-all duration-500"></div>
+              </button>
+            </div>
+          )}
         </section>
        
         {/* Methods Section */}
