@@ -43,7 +43,7 @@ const People = memo(function People() {
       requestAnimationFrame(() => {
         window.scrollTo(0, currentScrollY);
       });
-    }, 300); // Reduced delay
+    }, 100); // Much faster delay
   };
 
   const handleShowMorePastMembers = () => {
@@ -60,7 +60,7 @@ const People = memo(function People() {
       requestAnimationFrame(() => {
         window.scrollTo(0, currentScrollY);
       });
-    }, 300); // Reduced delay
+    }, 100); // Much faster delay
   };
 
   useEffect(() => {
