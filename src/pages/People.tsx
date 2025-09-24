@@ -5,45 +5,45 @@ import currentMembers from '../data/people/currentMembers.json';
 import pastMembers from '../data/people/pastMembers.json';
 
 // Import PI image
-import piImage from '../images/img-website_People/PI/1.jpg';
+import piImage from '../images/img-website_People/PI/1.png';
 
 // Import current member images - you'll need to add more based on your actual count
-import currentImage1 from '../images/img-website_People/current/1.jpg';
-import currentImage2 from '../images/img-website_People/current/2.jpg';
-import currentImage3 from '../images/img-website_People/current/3.jpg';
-import currentImage4 from '../images/img-website_People/current/4.jpg';
-import currentImage5 from '../images/img-website_People/current/5.jpg';
-import currentImage6 from '../images/img-website_People/current/6.jpg';
-import currentImage7 from '../images/img-website_People/current/7.jpg';
-import currentImage8 from '../images/img-website_People/current/8.jpg';
-import currentImage9 from '../images/img-website_People/current/9.jpg';
-import currentImage10 from '../images/img-website_People/current/10.jpg';
-import currentImage11 from '../images/img-website_People/current/11.jpg';
+import currentImage1 from '../images/img-website_People/current/1.png';
+import currentImage2 from '../images/img-website_People/current/2.png';
+import currentImage3 from '../images/img-website_People/current/3.png';
+import currentImage4 from '../images/img-website_People/current/4.png';
+import currentImage5 from '../images/img-website_People/current/5.png';
+import currentImage6 from '../images/img-website_People/current/6.png';
+import currentImage7 from '../images/img-website_People/current/7.png';
+import currentImage8 from '../images/img-website_People/current/8.png';
+import currentImage9 from '../images/img-website_People/current/9.png';
+import currentImage10 from '../images/img-website_People/current/10.png';
+import currentImage11 from '../images/img-website_People/current/11.png';
 
 // Import past member images - you'll need to add more based on your actual count
-import pastImage1 from '../images/img-website_People/past/1.jpg';
-import pastImage2 from '../images/img-website_People/past/2.jpg';
-import pastImage3 from '../images/img-website_People/past/3.jpg';
-import pastImage4 from '../images/img-website_People/past/4.jpg';
-import pastImage5 from '../images/img-website_People/past/5.jpg';
-import pastImage6 from '../images/img-website_People/past/6.jpg';
-import pastImage7 from '../images/img-website_People/past/7.jpg';
-import pastImage8 from '../images/img-website_People/past/8.jpg';
-import pastImage9 from '../images/img-website_People/past/9.jpg';
-import pastImage10 from '../images/img-website_People/past/10.jpg';
-import pastImage11 from '../images/img-website_People/past/11.jpg';
-import pastImage12 from '../images/img-website_People/past/12.jpg';
-import pastImage13 from '../images/img-website_People/past/13.jpg';
-import pastImage14 from '../images/img-website_People/past/14.jpg';
-import pastImage15 from '../images/img-website_People/past/15.jpg';
-import pastImage16 from '../images/img-website_People/past/16.jpg';
-import pastImage17 from '../images/img-website_People/past/17.jpg';
-import pastImage18 from '../images/img-website_People/past/18.jpg';
-import pastImage19 from '../images/img-website_People/past/19.jpg';
-import pastImage20 from '../images/img-website_People/past/20.jpg';
-import pastImage21 from '../images/img-website_People/past/21.jpg';
-import pastImage22 from '../images/img-website_People/past/22.jpg';
-import pastImage23 from '../images/img-website_People/past/23.jpg';
+import pastImage1 from '../images/img-website_People/past/1.png';
+import pastImage2 from '../images/img-website_People/past/2.png';
+import pastImage3 from '../images/img-website_People/past/3.png';
+import pastImage4 from '../images/img-website_People/past/4.png';
+import pastImage5 from '../images/img-website_People/past/5.png';
+import pastImage6 from '../images/img-website_People/past/6.png';
+import pastImage7 from '../images/img-website_People/past/7.png';
+import pastImage8 from '../images/img-website_People/past/8.png';
+import pastImage9 from '../images/img-website_People/past/9.png';
+import pastImage10 from '../images/img-website_People/past/10.png';
+import pastImage11 from '../images/img-website_People/past/11.png';
+import pastImage12 from '../images/img-website_People/past/12.png';
+import pastImage13 from '../images/img-website_People/past/13.png';
+import pastImage14 from '../images/img-website_People/past/14.png';
+import pastImage15 from '../images/img-website_People/past/15.png';
+import pastImage16 from '../images/img-website_People/past/16.png';
+import pastImage17 from '../images/img-website_People/past/17.png';
+import pastImage18 from '../images/img-website_People/past/18.png';
+import pastImage19 from '../images/img-website_People/past/19.png';
+import pastImage20 from '../images/img-website_People/past/20.png';
+import pastImage21 from '../images/img-website_People/past/21.png';
+import pastImage22 from '../images/img-website_People/past/22.png';
+import pastImage23 from '../images/img-website_People/past/23.png';
 
 const People = memo(function People() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
