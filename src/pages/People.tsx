@@ -13,6 +13,7 @@ const People = memo(function People() {
   const [visiblePastMembers, setVisiblePastMembers] = useState(4);
   const [loadingCurrentMembers, setLoadingCurrentMembers] = useState(false);
   const [loadingPastMembers, setLoadingPastMembers] = useState(false);
+  const [imageErrors, setImageErrors] = useState(new Set());
 
   const MEMBERS_PER_LOAD = 4;
 
@@ -27,6 +28,14 @@ const People = memo(function People() {
   const handleContactClick = () => {
     // Navigate to contact page
     window.location.href = '/contact';
+  };
+
+  const handleImageError = (imageId: string) => {
+    setImageErrors(prev => new Set(prev).add(imageId));
+  };
+
+  const getImagePath = (type: string, index: number): string => {
+    return `/src/images/img-website_People/${type}/${index}.png`;
   };
 
   const handleShowMoreCurrentMembers = () => {
@@ -89,6 +98,56 @@ const People = memo(function People() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [lastScrollY]);
+
+  interface PersonImageProps {
+    type: string;
+    index: number;
+    name: string;
+    className?: string;
+  }
+
+  const PersonImage = ({ type, index, name, className = "" }: PersonImageProps) => {
+    const imageId = `${type}-${index}`;
+    const imagePath = getImagePath(type, index);
+    
+    if (imageErrors.has(imageId)) {
+      return (
+        <div className={`bg-gradient-to-br from-blue-100 to-blue-200 border-2 border-blue-300/40 flex items-center justify-center ${className}`}>
+          <div className="text-center p-4">
+            <div className="w-12 h-12 mx-auto mb-3 bg-blue-400/30 rounded-full flex items-center justify-center">
+              <svg 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="1.5" 
+                className="text-blue-600"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <p className="text-xs text-blue-700/60 font-medium leading-tight">
+              {name?.split(' ')[0] || 'Photo'}
+            </p>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className={`overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100 ${className}`}>
+        <img
+          src={imagePath}
+          alt={name}
+          className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
+          onError={() => handleImageError(imageId)}
+          loading="lazy"
+        />
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 relative overflow-hidden">
@@ -185,107 +244,124 @@ const People = memo(function People() {
           <div className="relative p-8 backdrop-blur-xl bg-blue-50/60 border border-blue-500/20 rounded-2xl shadow-lg shadow-blue-200/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/15 hover:bg-blue-50/80 hover:border-blue-600/30 hover:translate-y-[-2px] group cursor-default">
             <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-blue-900 to-blue-600 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-20 transition-all duration-500"></div>
             
-            <div className="space-y-8">
-              <h3 className="text-2xl md:text-3xl font-light text-blue-900 mb-6 transition-all duration-300 group-hover:text-blue-800">
-                {principalInvestigator.name}
-              </h3>
-              
-              {/* Education and Career */}
-              <div className="space-y-4">
-                <h4 className="text-xl font-medium text-blue-900 mb-4 flex items-center">
-                  <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
-                  Education and Career
-                </h4>
-                <div className="ml-5 space-y-3">
-                  {principalInvestigator.education.map((edu: string, index: number) => (
-                    <div
-                      key={index}
-                      className={`p-4 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/50 hover:border-blue-500/25 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-                      style={{
-                        animationDelay: `${400 + index * 100}ms`,
-                        animation: isLoaded ? `fadeInUp 0.6s ease-out ${400 + index * 100}ms both` : 'none'
-                      }}
-                    >
-                      <p className="text-base md:text-lg font-light text-blue-900/90 leading-relaxed">{edu}</p>
-                    </div>
-                  ))}
+            <div className="grid lg:grid-cols-4 gap-8 items-start">
+              {/* Image Section */}
+              <div className="lg:col-span-1">
+                <div className="relative">
+                  <PersonImage
+                    type="PI"
+                    index={1}
+                    name={principalInvestigator.name}
+                    className="w-full aspect-[3/4] rounded-xl border-2 border-blue-300/40 shadow-lg shadow-blue-200/30 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-blue-900/20 group-hover:border-blue-400/60"
+                  />
+                  {/* Decorative corner accent */}
+                  <div className="absolute -top-2 -right-2 w-4 h-4 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-125"></div>
                 </div>
               </div>
               
-              {/* Awards */}
-              <div className="space-y-4">
-                <h4 className="text-xl font-medium text-blue-900 mb-4 flex items-center">
-                  <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
-                  Awards
-                </h4>
-                <div className="ml-5 space-y-3">
-                  {principalInvestigator.awards.map((award: string, index: number) => (
-                    <div
-                      key={index}
-                      className={`p-4 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/50 hover:border-blue-500/25 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-                      style={{
-                        animationDelay: `${600 + index * 100}ms`,
-                        animation: isLoaded ? `fadeInUp 0.6s ease-out ${600 + index * 100}ms both` : 'none'
-                      }}
-                    >
-                      <p className="text-base md:text-lg font-light text-blue-900/90 leading-relaxed">{award}</p>
-                    </div>
-                  ))}
+              {/* Content Section */}
+              <div className="lg:col-span-3 space-y-8">
+                <h3 className="text-2xl md:text-3xl font-light text-blue-900 mb-6 transition-all duration-300 group-hover:text-blue-800">
+                  {principalInvestigator.name}
+                </h3>
+                
+                {/* Education and Career */}
+                <div className="space-y-4">
+                  <h4 className="text-xl font-medium text-blue-900 mb-4 flex items-center">
+                    <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+                    Education and Career
+                  </h4>
+                  <div className="ml-5 space-y-3">
+                    {principalInvestigator.education.map((edu: string, index: number) => (
+                      <div
+                        key={index}
+                        className={`p-4 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/50 hover:border-blue-500/25 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                        style={{
+                          animationDelay: `${400 + index * 100}ms`,
+                          animation: isLoaded ? `fadeInUp 0.6s ease-out ${400 + index * 100}ms both` : 'none'
+                        }}
+                      >
+                        <p className="text-base md:text-lg font-light text-blue-900/90 leading-relaxed">{edu}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              
-              {/* Contact - Now redirects to /contact page */}
-              <div className="space-y-4">
-                <h4 className="text-xl font-medium text-blue-900 mb-4 flex items-center">
-                  <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
-                  Contact
-                </h4>
-                <div className="ml-5">
-                  <button
-                    onClick={handleContactClick}
-                    className="w-full p-6 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/60 hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-200/30 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-blue-500/20 group cursor-pointer"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4">
-                        <div className="flex items-center justify-center w-10 h-10 bg-blue-600/10 rounded-full border border-blue-600/20 transition-all duration-300 group-hover:bg-blue-600/20 group-hover:border-blue-600/40 group-hover:scale-110">
+                
+                {/* Awards */}
+                <div className="space-y-4">
+                  <h4 className="text-xl font-medium text-blue-900 mb-4 flex items-center">
+                    <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+                    Awards
+                  </h4>
+                  <div className="ml-5 space-y-3">
+                    {principalInvestigator.awards.map((award: string, index: number) => (
+                      <div
+                        key={index}
+                        className={`p-4 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/50 hover:border-blue-500/25 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                        style={{
+                          animationDelay: `${600 + index * 100}ms`,
+                          animation: isLoaded ? `fadeInUp 0.6s ease-out ${600 + index * 100}ms both` : 'none'
+                        }}
+                      >
+                        <p className="text-base md:text-lg font-light text-blue-900/90 leading-relaxed">{award}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Contact - Now redirects to /contact page */}
+                <div className="space-y-4">
+                  <h4 className="text-xl font-medium text-blue-900 mb-4 flex items-center">
+                    <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+                    Contact
+                  </h4>
+                  <div className="ml-5">
+                    <button
+                      onClick={handleContactClick}
+                      className="w-full p-6 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/60 hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-200/30 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-blue-500/20 group cursor-pointer"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-4">
+                          <div className="flex items-center justify-center w-10 h-10 bg-blue-600/10 rounded-full border border-blue-600/20 transition-all duration-300 group-hover:bg-blue-600/20 group-hover:border-blue-600/40 group-hover:scale-110">
+                            <svg 
+                              width="18" 
+                              height="18" 
+                              viewBox="0 0 24 24" 
+                              fill="none" 
+                              stroke="currentColor" 
+                              strokeWidth="2" 
+                              className="text-blue-600 transition-colors duration-300 group-hover:text-blue-700"
+                            >
+                              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                              <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                          </div>
+                          <div className="text-left">
+                            <p className="text-base md:text-lg font-medium text-blue-900 transition-colors duration-300 group-hover:text-blue-800">
+                              Get in Touch
+                            </p>
+                            <p className="text-sm text-blue-700/70 transition-colors duration-300 group-hover:text-blue-800/80">
+                              Click here to view contact information
+                            </p>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-600/10 border border-blue-600/20 transition-all duration-300 group-hover:bg-blue-600/20 group-hover:border-blue-600/40 group-hover:translate-x-1">
                           <svg 
-                            width="18" 
-                            height="18" 
+                            width="14" 
+                            height="14" 
                             viewBox="0 0 24 24" 
                             fill="none" 
                             stroke="currentColor" 
                             strokeWidth="2" 
-                            className="text-blue-600 transition-colors duration-300 group-hover:text-blue-700"
+                            className="text-blue-600 transition-all duration-300 group-hover:text-blue-700"
                           >
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                            <polyline points="22,6 12,13 2,6"></polyline>
+                            <polyline points="9,18 15,12 9,6"></polyline>
                           </svg>
                         </div>
-                        <div className="text-left">
-                          <p className="text-base md:text-lg font-medium text-blue-900 transition-colors duration-300 group-hover:text-blue-800">
-                            Get in Touch
-                          </p>
-                          <p className="text-sm text-blue-700/70 transition-colors duration-300 group-hover:text-blue-800/80">
-                            Click here to view contact information
-                          </p>
-                        </div>
                       </div>
-                      
-                      <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-600/10 border border-blue-600/20 transition-all duration-300 group-hover:bg-blue-600/20 group-hover:border-blue-600/40 group-hover:translate-x-1">
-                        <svg 
-                          width="14" 
-                          height="14" 
-                          viewBox="0 0 24 24" 
-                          fill="none" 
-                          stroke="currentColor" 
-                          strokeWidth="2" 
-                          className="text-blue-600 transition-all duration-300 group-hover:text-blue-700"
-                        >
-                          <polyline points="9,18 15,12 9,6"></polyline>
-                        </svg>
-                      </div>
-                    </div>
-                  </button>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -313,92 +389,108 @@ const People = memo(function People() {
               >
                 <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-blue-900 to-blue-600 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-20 transition-all duration-500"></div>
                 
-                <div className="space-y-6">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-3 h-3 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full"></div>
-                    <h3 className="text-xl md:text-2xl font-medium text-blue-900 transition-all duration-300 group-hover:text-blue-800">
-                      {member.name}
-                    </h3>
+                <div className="grid md:grid-cols-5 gap-6 items-start">
+                  {/* Image Section */}
+                  <div className="md:col-span-1">
+                    <div className="relative">
+                      <PersonImage
+                        type="current"
+                        index={index + 1}
+                        name={member.name}
+                        className="w-full aspect-[3/4] rounded-lg border-2 border-blue-300/40 shadow-md shadow-blue-200/20 transition-all duration-500 group-hover:shadow-lg group-hover:shadow-blue-900/15 group-hover:border-blue-400/60"
+                      />
+                      <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110"></div>
+                    </div>
                   </div>
                   
-                  <div className="ml-7 space-y-4">
-                    <p className="text-base md:text-lg font-light text-blue-900/90">
-                      <strong className="font-semibold text-blue-900">Position:</strong> {member.position}
-                    </p>
+                  {/* Content Section */}
+                  <div className="md:col-span-4 space-y-6">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-3 h-3 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full"></div>
+                      <h3 className="text-xl md:text-2xl font-medium text-blue-900 transition-all duration-300 group-hover:text-blue-800">
+                        {member.name}
+                      </h3>
+                    </div>
                     
-                    {member.duration && (
+                    <div className="ml-7 space-y-4">
                       <p className="text-base md:text-lg font-light text-blue-900/90">
-                        <strong className="font-semibold text-blue-900">Duration:</strong> {member.duration}
+                        <strong className="font-semibold text-blue-900">Position:</strong> {member.position}
                       </p>
-                    )}
-                    
-                    {member.education && (
-                      <p className="text-base md:text-lg font-light text-blue-900/90">
-                        <strong className="font-semibold text-blue-900">Education:</strong> {member.education}
-                      </p>
-                    )}
-                    
-                    {member.achievements && member.achievements.length > 0 && (
-                      <div className="space-y-3">
-                        <h5 className="font-semibold text-blue-900 text-lg">Achievements:</h5>
-                        <div className="space-y-2 pl-4">
-                          {member.achievements.map((achievement: string, achIndex: number) => (
-                            <div key={achIndex} className="p-3 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/50">
-                              <p className="text-base font-light text-blue-900/90">{achievement}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                    
-                    <div className="space-y-3">
-                      <h5 className="font-semibold text-blue-900 text-lg">Contact:</h5>
-                      <div className="pl-4 space-y-2">
-                        {member.contact.email && (
-                          <div className="text-base md:text-lg font-light text-blue-900/90">
-                            <strong className="font-semibold text-blue-900">Email:</strong>{" "}
-                            <a 
-                              href={`mailto:${member.contact.email}`}
-                              className="group inline-flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/60 hover:border-blue-500/30 hover:shadow-md hover:shadow-blue-200/30 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:scale-[1.02] active:scale-95 active:duration-75"
-                            >
-                              <div className="flex items-center justify-center w-4 h-4 bg-blue-600/10 rounded-full border border-blue-600/20 transition-all duration-300 group-hover:bg-blue-600/20 group-hover:border-blue-600/40 group-hover:scale-110">
-                                <svg 
-                                  width="10" 
-                                  height="10" 
-                                  viewBox="0 0 24 24" 
-                                  fill="none" 
-                                  stroke="currentColor" 
-                                  strokeWidth="2.5" 
-                                  className="text-blue-600 transition-colors duration-300 group-hover:text-blue-700"
-                                >
-                                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                                  <polyline points="22,6 12,13 2,6"></polyline>
-                                </svg>
+                      
+                      {member.duration && (
+                        <p className="text-base md:text-lg font-light text-blue-900/90">
+                          <strong className="font-semibold text-blue-900">Duration:</strong> {member.duration}
+                        </p>
+                      )}
+                      
+                      {member.education && (
+                        <p className="text-base md:text-lg font-light text-blue-900/90">
+                          <strong className="font-semibold text-blue-900">Education:</strong> {member.education}
+                        </p>
+                      )}
+                      
+                      {member.achievements && member.achievements.length > 0 && (
+                        <div className="space-y-3">
+                          <h5 className="font-semibold text-blue-900 text-lg">Qualifications:</h5>
+                          <div className="space-y-2 pl-4">
+                            {member.achievements.map((achievement: string, achIndex: number) => (
+                              <div key={achIndex} className="p-3 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/50">
+                                <p className="text-base font-light text-blue-900/90">{achievement}</p>
                               </div>
-                              <span className="font-medium text-blue-900 transition-colors duration-300 group-hover:text-blue-800">
-                                {member.contact.email}
-                              </span>
-                              <div className="flex items-center justify-center w-4 h-4 rounded-full bg-blue-600/10 border border-blue-600/20 transition-all duration-300 group-hover:bg-blue-600/20 group-hover:border-blue-600/40 group-hover:translate-x-0.5 opacity-0 group-hover:opacity-100">
-                                <svg 
-                                  width="8" 
-                                  height="8" 
-                                  viewBox="0 0 24 24" 
-                                  fill="none" 
-                                  stroke="currentColor" 
-                                  strokeWidth="2.5" 
-                                  className="text-blue-600 transition-all duration-300 group-hover:text-blue-700"
-                                >
-                                  <path d="m9 18 6-6-6-6"/>
-                                </svg>
-                              </div>
-                            </a>
+                            ))}
                           </div>
-                        )}
-                        {member.contact.phone && (
-                          <p className="text-base md:text-lg font-light text-blue-900/90">
-                            <strong className="font-semibold text-blue-900">Phone:</strong> {member.contact.phone}
-                          </p>
-                        )}
+                        </div>
+                      )}
+                      
+                      <div className="space-y-3">
+                        <h5 className="font-semibold text-blue-900 text-lg">Contact:</h5>
+                        <div className="pl-4 space-y-2">
+                          {member.contact.email && (
+                            <div className="text-base md:text-lg font-light text-blue-900/90">
+                              <strong className="font-semibold text-blue-900">Email:</strong>{" "}
+                              <a 
+                                href={`mailto:${member.contact.email}`}
+                                className="group inline-flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/60 hover:border-blue-500/30 hover:shadow-md hover:shadow-blue-200/30 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:scale-[1.02] active:scale-95 active:duration-75"
+                              >
+                                <div className="flex items-center justify-center w-4 h-4 bg-blue-600/10 rounded-full border border-blue-600/20 transition-all duration-300 group-hover:bg-blue-600/20 group-hover:border-blue-600/40 group-hover:scale-110">
+                                  <svg 
+                                    width="10" 
+                                    height="10" 
+                                    viewBox="0 0 24 24" 
+                                    fill="none" 
+                                    stroke="currentColor" 
+                                    strokeWidth="2.5" 
+                                    className="text-blue-600 transition-colors duration-300 group-hover:text-blue-700"
+                                  >
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                  </svg>
+                                </div>
+                                <span className="font-medium text-blue-900 transition-colors duration-300 group-hover:text-blue-800">
+                                  {member.contact.email}
+                                </span>
+                                <div className="flex items-center justify-center w-4 h-4 rounded-full bg-blue-600/10 border border-blue-600/20 transition-all duration-300 group-hover:bg-blue-600/20 group-hover:border-blue-600/40 group-hover:translate-x-0.5 opacity-0 group-hover:opacity-100">
+                                  <svg 
+                                    width="8" 
+                                    height="8" 
+                                    viewBox="0 0 24 24" 
+                                    fill="none" 
+                                    stroke="currentColor" 
+                                    strokeWidth="2.5" 
+                                    className="text-blue-600 transition-all duration-300 group-hover:text-blue-700"
+                                  >
+                                    <path d="m9 18 6-6-6-6"/>
+                                  </svg>
+                                </div>
+                              </a>
+                            </div>
+                          )}
+                          {member.contact.phone && (
+                            <p className="text-base md:text-lg font-light text-blue-900/90">
+                              <strong className="font-semibold text-blue-900">Phone:</strong> {member.contact.phone}
+                            </p>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -473,37 +565,54 @@ const People = memo(function People() {
               >
                 <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-blue-900 to-blue-600 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-20 transition-all duration-500"></div>
                 
-                <div className="space-y-6">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-3 h-3 bg-gradient-to-br from-slate-500 to-slate-700 rounded-full"></div>
-                    <h3 className="text-xl md:text-2xl font-medium text-blue-900 transition-all duration-300 group-hover:text-blue-800">
-                      {member.name}
-                    </h3>
+                <div className="grid md:grid-cols-5 gap-6 items-start">
+                  {/* Image Section */}
+                  <div className="md:col-span-1">
+                    <div className="relative">
+                      <PersonImage
+                        type="past"
+                        index={index + 1}
+                        name={member.name}
+                        className="w-full aspect-[3/4] rounded-lg border-2 border-slate-300/40 shadow-md shadow-slate-200/20 transition-all duration-500 group-hover:shadow-lg group-hover:shadow-slate-900/15 group-hover:border-slate-400/60"
+                      />
+                      <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-br from-slate-500 to-slate-700 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110"></div>
+                      {/* Alumni badge */}
+                      <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
+                        <span className="px-2 py-1 text-xs font-medium text-slate-700 bg-slate-100/80 rounded-full border border-slate-300/60 shadow-sm backdrop-blur-sm">
+                          Alumni
+                        </span>
+                      </div>
+                    </div>
                   </div>
                   
-                  <div className="ml-7 space-y-4">
-                    <p className="text-base md:text-lg font-light text-blue-900/90">
-                      <strong className="font-semibold text-blue-900">Position:</strong> {member.position}
-                    </p>
+                  {/* Content Section */}
+                  <div className="md:col-span-4 space-y-6">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-3 h-3 bg-gradient-to-br from-slate-500 to-slate-700 rounded-full"></div>
+                      <h3 className="text-xl md:text-2xl font-medium text-blue-900 transition-all duration-300 group-hover:text-blue-800">
+                        {member.name}
+                      </h3>
+                    </div>
                     
-                    {member.education && (
+                    <div className="ml-7 space-y-4">
                       <p className="text-base md:text-lg font-light text-blue-900/90">
-                        <strong className="font-semibold text-blue-900">Education:</strong> {member.education}
+                        <strong className="font-semibold text-blue-900">Position:</strong> {member.position}
                       </p>
-                    )}
-                    
-                    {member.currentStatus && (
-                      <div className="flex items-start space-x-4">
-                        <p className="text-base md:text-lg font-light text-blue-900/90 flex-1">
-                          <strong className="font-semibold text-blue-900">Current Status:</strong> {member.currentStatus}
+                      
+                      {member.education && (
+                        <p className="text-base md:text-lg font-light text-blue-900/90">
+                          <strong className="font-semibold text-blue-900">Education:</strong> {member.education}
                         </p>
-                        <div className="flex-shrink-0">
-                          <span className="px-2 py-1 text-xs font-medium text-blue-700 bg-blue-100/60 rounded-full border border-blue-300/40 transition-all duration-300 group-hover:bg-blue-200/80 group-hover:border-blue-400/60 group-hover:scale-105">
-                            Alumni
-                          </span>
+                      )}
+                      
+                      {member.currentStatus && (
+                        <div className="flex items-start space-x-4">
+                          <p className="text-base md:text-lg font-light text-blue-900/90 flex-1">
+                            <strong className="font-semibold text-blue-900">Current Status:</strong> {member.currentStatus}
+                          </p>
                         </div>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
