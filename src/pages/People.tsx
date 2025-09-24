@@ -4,6 +4,47 @@ import principalInvestigator from '../data/people/principalInvestigator.json';
 import currentMembers from '../data/people/currentMembers.json';
 import pastMembers from '../data/people/pastMembers.json';
 
+// Import PI image
+import piImage from '../images/img-website_People/PI/1.jpg';
+
+// Import current member images - you'll need to add more based on your actual count
+import currentImage1 from '../images/img-website_People/current/1.jpg';
+import currentImage2 from '../images/img-website_People/current/2.jpg';
+import currentImage3 from '../images/img-website_People/current/3.jpg';
+import currentImage4 from '../images/img-website_People/current/4.jpg';
+import currentImage5 from '../images/img-website_People/current/5.jpg';
+import currentImage6 from '../images/img-website_People/current/6.jpg';
+import currentImage7 from '../images/img-website_People/current/7.jpg';
+import currentImage8 from '../images/img-website_People/current/8.jpg';
+import currentImage9 from '../images/img-website_People/current/9.jpg';
+import currentImage10 from '../images/img-website_People/current/10.jpg';
+import currentImage11 from '../images/img-website_People/current/11.jpg';
+
+// Import past member images - you'll need to add more based on your actual count
+import pastImage1 from '../images/img-website_People/past/1.jpg';
+import pastImage2 from '../images/img-website_People/past/2.jpg';
+import pastImage3 from '../images/img-website_People/past/3.jpg';
+import pastImage4 from '../images/img-website_People/past/4.jpg';
+import pastImage5 from '../images/img-website_People/past/5.jpg';
+import pastImage6 from '../images/img-website_People/past/6.jpg';
+import pastImage7 from '../images/img-website_People/past/7.jpg';
+import pastImage8 from '../images/img-website_People/past/8.jpg';
+import pastImage9 from '../images/img-website_People/past/9.jpg';
+import pastImage10 from '../images/img-website_People/past/10.jpg';
+import pastImage11 from '../images/img-website_People/past/11.jpg';
+import pastImage12 from '../images/img-website_People/past/12.jpg';
+import pastImage13 from '../images/img-website_People/past/13.jpg';
+import pastImage14 from '../images/img-website_People/past/14.jpg';
+import pastImage15 from '../images/img-website_People/past/15.jpg';
+import pastImage16 from '../images/img-website_People/past/16.jpg';
+import pastImage17 from '../images/img-website_People/past/17.jpg';
+import pastImage18 from '../images/img-website_People/past/18.jpg';
+import pastImage19 from '../images/img-website_People/past/19.jpg';
+import pastImage20 from '../images/img-website_People/past/20.jpg';
+import pastImage21 from '../images/img-website_People/past/21.jpg';
+import pastImage22 from '../images/img-website_People/past/22.jpg';
+import pastImage23 from '../images/img-website_People/past/23.jpg';
+
 const People = memo(function People() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -13,9 +54,50 @@ const People = memo(function People() {
   const [visiblePastMembers, setVisiblePastMembers] = useState(4);
   const [loadingCurrentMembers, setLoadingCurrentMembers] = useState(false);
   const [loadingPastMembers, setLoadingPastMembers] = useState(false);
-  const [imageErrors, setImageErrors] = useState(new Set());
+  const [imageErrors, setImageErrors] = useState(new Set<string>());
 
   const MEMBERS_PER_LOAD = 4;
+
+  // Image mapping objects
+  const currentImages: { [key: number]: string } = {
+    1: currentImage1,
+    2: currentImage2,
+    3: currentImage3,
+    4: currentImage4,
+    5: currentImage5,
+    6: currentImage6,
+    7: currentImage7,
+    8: currentImage8,
+    9: currentImage9,
+    10: currentImage10,
+    11: currentImage11,
+  };
+
+  const pastImages: { [key: number]: string } = {
+    1: pastImage1,
+    2: pastImage2,
+    3: pastImage3,
+    4: pastImage4,
+    5: pastImage5,
+    6: pastImage6,
+    7: pastImage7,
+    8: pastImage8,
+    9: pastImage9,
+    10: pastImage10,
+    11: pastImage11,
+    12: pastImage12,
+    13: pastImage13,
+    14: pastImage14,
+    15: pastImage15,
+    16: pastImage16,
+    17: pastImage17,
+    18: pastImage18,
+    19: pastImage19,
+    20: pastImage20,
+    21: pastImage21,
+    22: pastImage22,
+    23: pastImage23,
+  };
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -31,11 +113,22 @@ const People = memo(function People() {
   };
 
   const handleImageError = (imageId: string) => {
+    console.log(`❌ Image failed to load: ${imageId}`);
     setImageErrors(prev => new Set(prev).add(imageId));
   };
 
-  const getImagePath = (type: string, index: number): string => {
-    return `/src/images/img-website_People/${type}/${index}.png`;
+  const getImageSrc = (type: string, index: number): string | null => {
+    console.log(`🔍 Getting image for ${type} member #${index}`);
+    
+    if (type === 'PI') {
+      return piImage;
+    } else if (type === 'current') {
+      return currentImages[index] || null;
+    } else if (type === 'past') {
+      return pastImages[index] || null;
+    }
+    
+    return null;
   };
 
   const handleShowMoreCurrentMembers = () => {
@@ -108,9 +201,12 @@ const People = memo(function People() {
 
   const PersonImage = ({ type, index, name, className = "" }: PersonImageProps) => {
     const imageId = `${type}-${index}`;
-    const imagePath = getImagePath(type, index);
+    const imageSrc = getImageSrc(type, index);
     
-    if (imageErrors.has(imageId)) {
+    console.log(`🖼️  Rendering PersonImage: ${name} (${imageId}) - Src available: ${!!imageSrc}`);
+    
+    if (imageErrors.has(imageId) || !imageSrc) {
+      console.log(`⚠️  Using fallback for ${imageId} - ${!imageSrc ? 'No image source' : 'image previously failed to load'}`);
       return (
         <div className={`bg-gradient-to-br from-blue-100 to-blue-200 border-2 border-blue-300/40 flex items-center justify-center ${className}`}>
           <div className="text-center p-4">
@@ -139,10 +235,16 @@ const People = memo(function People() {
     return (
       <div className={`overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100 ${className}`}>
         <img
-          src={imagePath}
+          src={imageSrc}
           alt={name}
           className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
-          onError={() => handleImageError(imageId)}
+          onError={() => {
+            console.log(`❌ Image load error for: ${imageId}`);
+            handleImageError(imageId);
+          }}
+          onLoad={() => {
+            console.log(`✅ Image loaded successfully: ${imageId}`);
+          }}
           loading="lazy"
         />
       </div>
