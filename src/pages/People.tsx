@@ -254,8 +254,6 @@ const People = memo(function People() {
                     name={principalInvestigator.name}
                     className="w-full aspect-[3/4] rounded-xl border-2 border-blue-300/40 shadow-lg shadow-blue-200/30 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-blue-900/20 group-hover:border-blue-400/60"
                   />
-                  {/* Decorative corner accent */}
-                  <div className="absolute -top-2 -right-2 w-4 h-4 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-125"></div>
                 </div>
               </div>
               
@@ -399,7 +397,6 @@ const People = memo(function People() {
                         name={member.name}
                         className="w-full aspect-[3/4] rounded-lg border-2 border-blue-300/40 shadow-md shadow-blue-200/20 transition-all duration-500 group-hover:shadow-lg group-hover:shadow-blue-900/15 group-hover:border-blue-400/60"
                       />
-                      <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110"></div>
                     </div>
                   </div>
                   
@@ -431,7 +428,7 @@ const People = memo(function People() {
                       
                       {member.achievements && member.achievements.length > 0 && (
                         <div className="space-y-3">
-                          <h5 className="font-semibold text-blue-900 text-lg">Qualifications:</h5>
+                          <h5 className="font-semibold text-blue-900 text-lg">Achievements:</h5>
                           <div className="space-y-2 pl-4">
                             {member.achievements.map((achievement: string, achIndex: number) => (
                               <div key={achIndex} className="p-3 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/50">
@@ -575,7 +572,6 @@ const People = memo(function People() {
                         name={member.name}
                         className="w-full aspect-[3/4] rounded-lg border-2 border-slate-300/40 shadow-md shadow-slate-200/20 transition-all duration-500 group-hover:shadow-lg group-hover:shadow-slate-900/15 group-hover:border-slate-400/60"
                       />
-                      <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-br from-slate-500 to-slate-700 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110"></div>
                       {/* Alumni badge */}
                       <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
                         <span className="px-2 py-1 text-xs font-medium text-slate-700 bg-slate-100/80 rounded-full border border-slate-300/60 shadow-sm backdrop-blur-sm">
