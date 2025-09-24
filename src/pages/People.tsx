@@ -355,9 +355,44 @@ const People = memo(function People() {
                       <h5 className="font-semibold text-blue-900 text-lg">Contact:</h5>
                       <div className="pl-4 space-y-2">
                         {member.contact.email && (
-                          <p className="text-base md:text-lg font-light text-blue-900/90">
-                            <strong className="font-semibold text-blue-900">Email:</strong> {member.contact.email}
-                          </p>
+                          <div className="text-base md:text-lg font-light text-blue-900/90">
+                            <strong className="font-semibold text-blue-900">Email:</strong>{" "}
+                            <a 
+                              href={`mailto:${member.contact.email}`}
+                              className="group inline-flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/60 hover:border-blue-500/30 hover:shadow-md hover:shadow-blue-200/30 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:scale-[1.02] active:scale-95 active:duration-75"
+                            >
+                              <div className="flex items-center justify-center w-4 h-4 bg-blue-600/10 rounded-full border border-blue-600/20 transition-all duration-300 group-hover:bg-blue-600/20 group-hover:border-blue-600/40 group-hover:scale-110">
+                                <svg 
+                                  width="10" 
+                                  height="10" 
+                                  viewBox="0 0 24 24" 
+                                  fill="none" 
+                                  stroke="currentColor" 
+                                  strokeWidth="2.5" 
+                                  className="text-blue-600 transition-colors duration-300 group-hover:text-blue-700"
+                                >
+                                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                  <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                              </div>
+                              <span className="font-medium text-blue-900 transition-colors duration-300 group-hover:text-blue-800">
+                                {member.contact.email}
+                              </span>
+                              <div className="flex items-center justify-center w-4 h-4 rounded-full bg-blue-600/10 border border-blue-600/20 transition-all duration-300 group-hover:bg-blue-600/20 group-hover:border-blue-600/40 group-hover:translate-x-0.5 opacity-0 group-hover:opacity-100">
+                                <svg 
+                                  width="8" 
+                                  height="8" 
+                                  viewBox="0 0 24 24" 
+                                  fill="none" 
+                                  stroke="currentColor" 
+                                  strokeWidth="2.5" 
+                                  className="text-blue-600 transition-all duration-300 group-hover:text-blue-700"
+                                >
+                                  <path d="m9 18 6-6-6-6"/>
+                                </svg>
+                              </div>
+                            </a>
+                          </div>
                         )}
                         {member.contact.phone && (
                           <p className="text-base md:text-lg font-light text-blue-900/90">
