@@ -91,11 +91,19 @@ export default function Research() {
   // Load more images function
   const loadMoreImages = () => {
     setIsLoadingMore(true);
-    
+  
+    // Store current scroll position BEFORE any DOM changes
+    const currentScrollY = window.scrollY;
+  
     // Simulate loading delay for better UX
     setTimeout(() => {
       setVisibleImages(prev => Math.min(prev + IMAGES_PER_LOAD, allResearchImages.length));
       setIsLoadingMore(false);
+    
+      // Restore scroll position after DOM updates
+      requestAnimationFrame(() => {
+        window.scrollTo(0, currentScrollY);
+      });
     }, 500);
   };
 
@@ -262,8 +270,7 @@ export default function Research() {
                 key={index}
                 className={`group relative overflow-hidden rounded-2xl backdrop-blur-xl bg-blue-50/60 border border-blue-500/20 shadow-lg shadow-blue-200/20 transition-all duration-700 hover:shadow-2xl hover:shadow-blue-900/20 hover:bg-blue-50/80 hover:border-blue-600/30 hover:scale-[1.02] cursor-pointer ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
                 style={{
-                  animationDelay: `${700 + index * 150}ms`,
-                  animation: isLoaded ? `fadeInUp 0.8s ease-out ${700 + index * 150}ms both` : 'none'
+                  animation: isLoaded ? 'fadeInUp 0.4s ease-out 0.3s both' : 'none'
                 }}
                 onClick={() => openImageModal(image)}
               >
@@ -362,8 +369,7 @@ export default function Research() {
                   key={index}
                   className={`flex items-start space-x-4 p-4 rounded-lg transition-all duration-300 hover:bg-blue-100/30 group/item ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
                   style={{
-                    animationDelay: `${900 + index * 80}ms`,
-                    animation: isLoaded ? `fadeInUp 0.6s ease-out ${900 + index * 80}ms both` : 'none'
+                    animation: isLoaded ? 'fadeInUp 0.4s ease-out 0.4s both' : 'none'
                   }}
                 >
                   {/* Scientific bullet point */}
