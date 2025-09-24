@@ -286,10 +286,7 @@ const Publications = memo(function Publications() {
                     }}
                   >
                     <div className="flex flex-col space-y-3">
-                      <div className="flex items-start space-x-3 sm:space-x-4">
-                        <div className="flex-shrink-0 mt-2">
-                          <div className="w-2 h-2 bg-blue-600 rounded-full transition-all duration-300 group-hover/item:bg-blue-800 group-hover/item:scale-125"></div>
-                        </div>
+                      <div className="flex items-start">
                         <div className="flex-1 min-w-0">
                           <p className="text-sm sm:text-base md:text-lg font-light text-blue-900/90 leading-relaxed transition-all duration-300 group-hover/item:text-blue-900 break-words">
                             <strong className="font-semibold text-blue-900">{pub.id}.</strong> {pub.authors} ({pub.year}). {pub.title} <em className="text-blue-800">{pub.journal}</em>, {pub.pages}
