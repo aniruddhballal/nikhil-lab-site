@@ -43,7 +43,7 @@ const People = memo(function People() {
       requestAnimationFrame(() => {
         window.scrollTo(0, currentScrollY);
       });
-    }, 100); // Much faster delay
+    }, 0); // Much faster delay
   };
 
   const handleShowMorePastMembers = () => {
@@ -60,7 +60,7 @@ const People = memo(function People() {
       requestAnimationFrame(() => {
         window.scrollTo(0, currentScrollY);
       });
-    }, 100); // Much faster delay
+    }, 0);
   };
 
   useEffect(() => {
@@ -307,8 +307,8 @@ const People = memo(function People() {
                 key={index}
                 className={`relative p-8 backdrop-blur-xl bg-blue-50/60 border border-blue-500/20 rounded-2xl shadow-lg shadow-blue-200/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/15 hover:bg-blue-50/80 hover:border-blue-600/30 hover:translate-y-[-2px] group cursor-default ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
                 style={{
-                  animationDelay: `${800 + index * 150}ms`,
-                  animation: isLoaded ? `fadeInUp 0.6s ease-out ${800 + index * 150}ms both` : 'none'
+                  animationDelay: isLoaded ? '0.3s' : '0s',
+                  animation: isLoaded ? 'fadeInUp 0.4s ease-out 0.3s both' : 'none'
                 }}
               >
                 <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-blue-900 to-blue-600 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-20 transition-all duration-500"></div>
@@ -432,8 +432,8 @@ const People = memo(function People() {
                 key={index}
                 className={`relative p-8 backdrop-blur-xl bg-blue-50/60 border border-blue-500/20 rounded-2xl shadow-lg shadow-blue-200/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/15 hover:bg-blue-50/80 hover:border-blue-600/30 hover:translate-y-[-2px] group cursor-default ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
                 style={{
-                  animationDelay: `${1000 + index * 150}ms`,
-                  animation: isLoaded ? `fadeInUp 0.6s ease-out ${1000 + index * 150}ms both` : 'none'
+                  animationDelay: isLoaded ? '0.4s' : '0s',
+                  animation: isLoaded ? 'fadeInUp 0.4s ease-out 0.4s both' : 'none'
                 }}
               >
                 <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-blue-900 to-blue-600 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-20 transition-all duration-500"></div>
