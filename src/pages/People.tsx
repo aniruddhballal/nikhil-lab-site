@@ -1,13 +1,10 @@
-import { useState, useEffect, memo } from 'react';
+import { useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import principalInvestigator from '../data/people/principalInvestigator.json';
 import currentMembers from '../data/people/currentMembers.json';
 import pastMembers from '../data/people/pastMembers.json';
 
-// Import PI image
 import piImage from '../images/img-website_People/PI/1.png';
-
-// Import current member images - you'll need to add more based on your actual count
 import currentImage1 from '../images/img-website_People/current/1.png';
 import currentImage2 from '../images/img-website_People/current/2.png';
 import currentImage3 from '../images/img-website_People/current/3.png';
@@ -20,7 +17,6 @@ import currentImage9 from '../images/img-website_People/current/9.png';
 import currentImage10 from '../images/img-website_People/current/10.png';
 import currentImage11 from '../images/img-website_People/current/11.png';
 
-// Import past member images - you'll need to add more based on your actual count
 import pastImage1 from '../images/img-website_People/past/1.png';
 import pastImage2 from '../images/img-website_People/past/2.png';
 import pastImage3 from '../images/img-website_People/past/3.png';
@@ -45,760 +41,102 @@ import pastImage21 from '../images/img-website_People/past/21.png';
 import pastImage22 from '../images/img-website_People/past/22.png';
 import pastImage23 from '../images/img-website_People/past/23.png';
 
-const People = memo(function People() {
+const People = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [visibleCurrentMembers, setVisibleCurrentMembers] = useState(4);
-  const [visiblePastMembers, setVisiblePastMembers] = useState(4);
-  const [loadingCurrentMembers, setLoadingCurrentMembers] = useState(false);
-  const [loadingPastMembers, setLoadingPastMembers] = useState(false);
-  const [imageErrors, setImageErrors] = useState(new Set<string>());
 
-  const MEMBERS_PER_LOAD = 4;
-
-  // Image mapping objects
-  const currentImages: { [key: number]: string } = {
-    1: currentImage1,
-    2: currentImage2,
-    3: currentImage3,
-    4: currentImage4,
-    5: currentImage5,
-    6: currentImage6,
-    7: currentImage7,
-    8: currentImage8,
-    9: currentImage9,
-    10: currentImage10,
-    11: currentImage11,
+  const currentImages = {
+    1: currentImage1, 2: currentImage2, 3: currentImage3, 4: currentImage4,
+    5: currentImage5, 6: currentImage6, 7: currentImage7, 8: currentImage8,
+    9: currentImage9, 10: currentImage10, 11: currentImage11
   };
 
-  const pastImages: { [key: number]: string } = {
-    1: pastImage1,
-    2: pastImage2,
-    3: pastImage3,
-    4: pastImage4,
-    5: pastImage5,
-    6: pastImage6,
-    7: pastImage7,
-    8: pastImage8,
-    9: pastImage9,
-    10: pastImage10,
-    11: pastImage11,
-    12: pastImage12,
-    13: pastImage13,
-    14: pastImage14,
-    15: pastImage15,
-    16: pastImage16,
-    17: pastImage17,
-    18: pastImage18,
-    19: pastImage19,
-    20: pastImage20,
-    21: pastImage21,
-    22: pastImage22,
-    23: pastImage23,
+  const pastImages = {
+    1: pastImage1, 2: pastImage2, 3: pastImage3, 4: pastImage4, 5: pastImage5,
+    6: pastImage6, 7: pastImage7, 8: pastImage8, 9: pastImage9, 10: pastImage10,
+    11: pastImage11, 12: pastImage12, 13: pastImage13, 14: pastImage14, 15: pastImage15,
+    16: pastImage16, 17: pastImage17, 18: pastImage18, 19: pastImage19, 20: pastImage20,
+    21: pastImage21, 22: pastImage22, 23: pastImage23
   };
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
-  
-  const closeSidebar = () => {
-    setSidebarOpen(false);
-  };
-
-  const handleContactClick = () => {
-    // Navigate to contact page
-    window.location.href = '/contact';
-  };
-
-  const handleImageError = (imageId: string) => {
-    console.log(`❌ Image failed to load: ${imageId}`);
-    setImageErrors(prev => new Set(prev).add(imageId));
-  };
-
-  const getImageSrc = (type: string, index: number): string | null => {
-    console.log(`🔍 Getting image for ${type} member #${index}`);
-    
-    if (type === 'PI') {
-      return piImage;
-    } else if (type === 'current') {
-      return currentImages[index] || null;
-    } else if (type === 'past') {
-      return pastImages[index] || null;
-    }
-    
+  const getImageSrc = (type, index) => {
+    if (type === 'PI') return piImage;
+    if (type === 'current') return currentImages[index];
+    if (type === 'past') return pastImages[index];
     return null;
   };
 
-  const handleShowMoreCurrentMembers = () => {
-    setLoadingCurrentMembers(true);
-    
-    // Store current scroll position
-    const currentScrollY = window.scrollY;
-    
-    setTimeout(() => {
-      setVisibleCurrentMembers(prev => Math.min(prev + MEMBERS_PER_LOAD, currentMembers.length));
-      setLoadingCurrentMembers(false);
-      
-      // Restore scroll position after a brief delay to allow DOM update
-      requestAnimationFrame(() => {
-        window.scrollTo(0, currentScrollY);
-      });
-    }, 0); // Much faster delay
-  };
-
-  const handleShowMorePastMembers = () => {
-    setLoadingPastMembers(true);
-    
-    // Store current scroll position
-    const currentScrollY = window.scrollY;
-    
-    setTimeout(() => {
-      setVisiblePastMembers(prev => Math.min(prev + MEMBERS_PER_LOAD, pastMembers.length));
-      setLoadingPastMembers(false);
-      
-      // Restore scroll position after a brief delay to allow DOM update
-      requestAnimationFrame(() => {
-        window.scrollTo(0, currentScrollY);
-      });
-    }, 0);
-  };
-
-  useEffect(() => {
-    window.scrollTo(0, 0); // Add this line to scroll to top
-    setIsLoaded(true);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      if (currentScrollY > lastScrollY && currentScrollY > 50) {
-        setIsScrolled(true);
-      } else if (currentScrollY < lastScrollY) {
-        if (currentScrollY <= 50) {
-          setIsScrolled(false);
-        }
-      }
-      
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [lastScrollY]);
-
-  interface PersonImageProps {
-    type: string;
-    index: number;
-    name: string;
-    className?: string;
-  }
-
-  const PersonImage = ({ type, index, name, className = "" }: PersonImageProps) => {
-    const imageId = `${type}-${index}`;
-    const imageSrc = getImageSrc(type, index);
-    
-    console.log(`🖼️  Rendering PersonImage: ${name} (${imageId}) - Src available: ${!!imageSrc}`);
-    
-    if (imageErrors.has(imageId) || !imageSrc) {
-      console.log(`⚠️  Using fallback for ${imageId} - ${!imageSrc ? 'No image source' : 'image previously failed to load'}`);
-      return (
-        <div className={`bg-gradient-to-br from-blue-100 to-blue-200 border-2 border-blue-300/40 flex items-center justify-center ${className}`}>
-          <div className="text-center p-4">
-            <div className="w-12 h-12 mx-auto mb-3 bg-blue-400/30 rounded-full flex items-center justify-center">
-              <svg 
-                width="24" 
-                height="24" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="1.5" 
-                className="text-blue-600"
-              >
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-            </div>
-            <p className="text-xs text-blue-700/60 font-medium leading-tight">
-              {name?.split(' ')[0] || 'Photo'}
-            </p>
-          </div>
-        </div>
-      );
-    }
-
-    return (
-      <div className={`overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100 ${className}`}>
-        <img
-          src={imageSrc}
-          alt={name}
-          className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
-          onError={() => {
-            console.log(`❌ Image load error for: ${imageId}`);
-            handleImageError(imageId);
-          }}
-          onLoad={() => {
-            console.log(`✅ Image loaded successfully: ${imageId}`);
-          }}
-          loading="lazy"
-        />
-      </div>
-    );
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 relative overflow-hidden">
-      {/* Background gradient overlays */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-radial from-blue-900/8 via-transparent to-transparent opacity-50 transform translate-x-[-60%] translate-y-[-40%] scale-150"></div>
-        <div className="absolute bottom-0 right-0 w-full h-full bg-gradient-radial from-blue-500/6 via-transparent to-transparent opacity-50 transform translate-x-[40%] translate-y-[30%] scale-150"></div>
-      </div>
+    <div>
+      <button onClick={() => setSidebarOpen(!sidebarOpen)}>☰</button>
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       
-      {/* Floating particles for scientific feel */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {[...Array(15)].map((_, i) => (
-          <div
-            key={i}
-            className={`absolute w-1 h-1 bg-blue-300/30 rounded-full animate-pulse`}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 3}s`
-            }}
-          />
+      <h1>People</h1>
+      <p>NRG Laboratory</p>
+      
+      <h2>Principal Investigator</h2>
+      <div>
+        <img src={piImage} alt={principalInvestigator.name} />
+        <h3>{principalInvestigator.name}</h3>
+        
+        <h4>Education and Career</h4>
+        {principalInvestigator.education.map((edu, index) => (
+          <p key={index}>{edu}</p>
         ))}
+        
+        <h4>Awards</h4>
+        {principalInvestigator.awards.map((award, index) => (
+          <p key={index}>{award}</p>
+        ))}
+        
+        <h4>Contact</h4>
+        <button onClick={() => window.location.href = '/contact'}>
+          Get in Touch - Click here to view contact information
+        </button>
       </div>
 
-      {/* Menu Button */}
-      {!sidebarOpen && (
-        <button
-          onClick={toggleSidebar}
-          className={`
-            fixed z-[1002] flex items-center justify-center cursor-pointer
-            bg-blue-50/90 border border-blue-500/20 text-blue-900
-            backdrop-blur-xl shadow-lg shadow-blue-900/12
-            transition-all duration-500 ease-out
-            hover:scale-105 hover:shadow-xl hover:shadow-blue-900/16 hover:border-blue-500/30
-            focus:outline-none focus:ring-4 focus:ring-blue-500/30 focus:scale-105
-            active:scale-95 active:duration-75
-            before:absolute before:inset-0 before:bg-gradient-to-br before:from-blue-500/10 before:to-blue-900/5 before:opacity-0 before:transition-opacity before:duration-300 before:pointer-events-none
-            hover:before:opacity-100 focus:before:opacity-100
-            group
-            ${isScrolled ? 
-              'w-12 h-12 left-4 top-4 rounded-xl before:rounded-xl animate-pulse' : 
-              'w-14 h-14 left-8 top-8 rounded-2xl before:rounded-2xl'
-            }
-          `}
-          aria-label="Open navigation menu"
-        >
-          <svg 
-            width={isScrolled ? "20" : "24"} 
-            height={isScrolled ? "20" : "24"} 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="2"
-            className="transition-all duration-300 ease-out group-hover:scale-110 group-hover:text-blue-600 group-focus:scale-110 group-focus:text-blue-600"
-          >
-            <line x1="3" y1="6" x2="21" y2="6" className="transition-all duration-300 group-hover:stroke-[2.5]"></line>
-            <line x1="3" y1="12" x2="21" y2="12" className="transition-all duration-300 group-hover:stroke-[2.5]"></line>
-            <line x1="3" y1="18" x2="21" y2="18" className="transition-all duration-300 group-hover:stroke-[2.5]"></line>
-          </svg>
-        </button>
-      )}
-
-      <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
-     
-      {/* Page Header */}
-      <header className={`text-center pt-24 pb-16 relative z-10 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-        <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-blue-900 to-blue-500 rounded-full animate-pulse"></div>
-        
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-thin text-transparent bg-gradient-to-br from-blue-900 to-blue-600 bg-clip-text leading-[0.9] tracking-tight mb-6 drop-shadow-sm transition-all duration-700 hover:scale-105 hover:drop-shadow-md cursor-default">
-          People
-        </h1>
-        
-        <div className="inline-block px-6 py-2 border border-blue-500/30 rounded-full backdrop-blur-md bg-blue-200/40 transition-all duration-300 hover:bg-blue-200/60 hover:border-blue-500/50 hover:scale-105 hover:shadow-lg hover:shadow-blue-300/30 cursor-default group relative">
-          <p className="text-sm text-blue-900/70 font-light tracking-[0.2em] uppercase mb-0 transition-colors duration-300 group-hover:text-blue-900">
-            NRG Laboratory
-          </p>
+      <h2>Current Lab Members</h2>
+      {currentMembers.map((member, index) => (
+        <div key={index}>
+          <img src={getImageSrc('current', index + 1)} alt={member.name} />
+          <h3>{member.name}</h3>
+          <p><strong>Position:</strong> {member.position}</p>
+          {member.duration && <p><strong>Duration:</strong> {member.duration}</p>}
+          {member.education && <p><strong>Education:</strong> {member.education}</p>}
           
-          {/* Sleek expanding underline */}
-          <div className="absolute -bottom-5 left-1/2 transform -translate-x-1/2 h-px bg-gradient-to-r from-transparent via-blue-900/80 to-transparent w-0 animate-expand-underline"></div>
-        </div>
-      </header>
-     
-      <main className="max-w-6xl mx-auto px-8 pb-16 relative z-10">
-        {/* Principal Investigator Section */}
-        <section className={`mb-16 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-light text-blue-900 mb-4 transition-all duration-500 hover:text-blue-700 cursor-default">
-              Principal Investigator
-            </h2>
-            <div className="w-16 h-0.5 bg-gradient-to-r from-blue-600 to-blue-800 mx-auto rounded-full"></div>
-          </div>
-          
-          <div className="relative p-8 backdrop-blur-xl bg-blue-50/60 border border-blue-500/20 rounded-2xl shadow-lg shadow-blue-200/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/15 hover:bg-blue-50/80 hover:border-blue-600/30 hover:translate-y-[-2px] group cursor-default">
-            <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-blue-900 to-blue-600 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-20 transition-all duration-500"></div>
-            
-            <div className="grid lg:grid-cols-4 gap-8 items-start">
-              {/* Image Section */}
-              <div className="lg:col-span-1">
-                <div className="relative">
-                  <PersonImage
-                    type="PI"
-                    index={1}
-                    name={principalInvestigator.name}
-                    className="w-full aspect-[3/4] rounded-xl border-2 border-blue-300/40 shadow-lg shadow-blue-200/30 transition-all duration-500 group-hover:shadow-xl group-hover:shadow-blue-900/20 group-hover:border-blue-400/60"
-                  />
-                </div>
-              </div>
-              
-              {/* Content Section */}
-              <div className="lg:col-span-3 space-y-8">
-                <h3 className="text-2xl md:text-3xl font-light text-blue-900 mb-6 transition-all duration-300 group-hover:text-blue-800">
-                  {principalInvestigator.name}
-                </h3>
-                
-                {/* Education and Career */}
-                <div className="space-y-4">
-                  <h4 className="text-xl font-medium text-blue-900 mb-4 flex items-center">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
-                    Education and Career
-                  </h4>
-                  <div className="ml-5 space-y-3">
-                    {principalInvestigator.education.map((edu: string, index: number) => (
-                      <div
-                        key={index}
-                        className={`p-4 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/50 hover:border-blue-500/25 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-                        style={{
-                          animationDelay: `${400 + index * 100}ms`,
-                          animation: isLoaded ? `fadeInUp 0.6s ease-out ${400 + index * 100}ms both` : 'none'
-                        }}
-                      >
-                        <p className="text-base md:text-lg font-light text-blue-900/90 leading-relaxed">{edu}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Awards */}
-                <div className="space-y-4">
-                  <h4 className="text-xl font-medium text-blue-900 mb-4 flex items-center">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
-                    Awards
-                  </h4>
-                  <div className="ml-5 space-y-3">
-                    {principalInvestigator.awards.map((award: string, index: number) => (
-                      <div
-                        key={index}
-                        className={`p-4 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/50 hover:border-blue-500/25 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-                        style={{
-                          animationDelay: `${600 + index * 100}ms`,
-                          animation: isLoaded ? `fadeInUp 0.6s ease-out ${600 + index * 100}ms both` : 'none'
-                        }}
-                      >
-                        <p className="text-base md:text-lg font-light text-blue-900/90 leading-relaxed">{award}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Contact - Now redirects to /contact page */}
-                <div className="space-y-4">
-                  <h4 className="text-xl font-medium text-blue-900 mb-4 flex items-center">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
-                    Contact
-                  </h4>
-                  <div className="ml-5">
-                    <button
-                      onClick={handleContactClick}
-                      className="w-full p-6 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/60 hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-200/30 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-blue-500/20 group cursor-pointer"
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-4">
-                          <div className="flex items-center justify-center w-10 h-10 bg-blue-600/10 rounded-full border border-blue-600/20 transition-all duration-300 group-hover:bg-blue-600/20 group-hover:border-blue-600/40 group-hover:scale-110">
-                            <svg 
-                              width="18" 
-                              height="18" 
-                              viewBox="0 0 24 24" 
-                              fill="none" 
-                              stroke="currentColor" 
-                              strokeWidth="2" 
-                              className="text-blue-600 transition-colors duration-300 group-hover:text-blue-700"
-                            >
-                              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                              <polyline points="22,6 12,13 2,6"></polyline>
-                            </svg>
-                          </div>
-                          <div className="text-left">
-                            <p className="text-base md:text-lg font-medium text-blue-900 transition-colors duration-300 group-hover:text-blue-800">
-                              Get in Touch
-                            </p>
-                            <p className="text-sm text-blue-700/70 transition-colors duration-300 group-hover:text-blue-800/80">
-                              Click here to view contact information
-                            </p>
-                          </div>
-                        </div>
-                        
-                        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-600/10 border border-blue-600/20 transition-all duration-300 group-hover:bg-blue-600/20 group-hover:border-blue-600/40 group-hover:translate-x-1">
-                          <svg 
-                            width="14" 
-                            height="14" 
-                            viewBox="0 0 24 24" 
-                            fill="none" 
-                            stroke="currentColor" 
-                            strokeWidth="2" 
-                            className="text-blue-600 transition-all duration-300 group-hover:text-blue-700"
-                          >
-                            <polyline points="9,18 15,12 9,6"></polyline>
-                          </svg>
-                        </div>
-                      </div>
-                    </button>
-                  </div>
-                </div>
-              </div>
+          {member.achievements && member.achievements.length > 0 && (
+            <div>
+              <h5>Achievements:</h5>
+              {member.achievements.map((achievement, achIndex) => (
+                <p key={achIndex}>{achievement}</p>
+              ))}
             </div>
-          </div>
-        </section>
-
-        {/* Current Lab Members Section */}
-        <section className={`mb-16 transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-light text-blue-900 mb-4 transition-all duration-500 hover:text-blue-700 cursor-default">
-              Current Lab Members
-            </h2>
-            <div className="w-16 h-0.5 bg-gradient-to-r from-blue-600 to-blue-800 mx-auto rounded-full"></div>
-          </div>
+          )}
           
-          <div className="space-y-8">
-            {currentMembers.slice(0, visibleCurrentMembers).map((member: any, index: number) => (
-              <div
-                key={index}
-                className={`relative p-8 backdrop-blur-xl bg-blue-50/60 border border-blue-500/20 rounded-2xl shadow-lg shadow-blue-200/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/15 hover:bg-blue-50/80 hover:border-blue-600/30 hover:translate-y-[-2px] group cursor-default ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-                style={{
-                  animationDelay: isLoaded ? '0.3s' : '0s',
-                  animation: isLoaded ? 'fadeInUp 0.4s ease-out 0.3s both' : 'none'
-                }}
-              >
-                <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-blue-900 to-blue-600 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-20 transition-all duration-500"></div>
-                
-                <div className="grid md:grid-cols-5 gap-6 items-start">
-                  {/* Image Section */}
-                  <div className="md:col-span-1">
-                    <div className="relative">
-                      <PersonImage
-                        type="current"
-                        index={index + 1}
-                        name={member.name}
-                        className="w-full aspect-[3/4] rounded-lg border-2 border-blue-300/40 shadow-md shadow-blue-200/20 transition-all duration-500 group-hover:shadow-lg group-hover:shadow-blue-900/15 group-hover:border-blue-400/60"
-                      />
-                    </div>
-                  </div>
-                  
-                  {/* Content Section */}
-                  <div className="md:col-span-4 space-y-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-3 h-3 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full"></div>
-                      <h3 className="text-xl md:text-2xl font-medium text-blue-900 transition-all duration-300 group-hover:text-blue-800">
-                        {member.name}
-                      </h3>
-                    </div>
-                    
-                    <div className="ml-7 space-y-4">
-                      <p className="text-base md:text-lg font-light text-blue-900/90">
-                        <strong className="font-semibold text-blue-900">Position:</strong> {member.position}
-                      </p>
-                      
-                      {member.duration && (
-                        <p className="text-base md:text-lg font-light text-blue-900/90">
-                          <strong className="font-semibold text-blue-900">Duration:</strong> {member.duration}
-                        </p>
-                      )}
-                      
-                      {member.education && (
-                        <p className="text-base md:text-lg font-light text-blue-900/90">
-                          <strong className="font-semibold text-blue-900">Education:</strong> {member.education}
-                        </p>
-                      )}
-                      
-                      {member.achievements && member.achievements.length > 0 && (
-                        <div className="space-y-3">
-                          <h5 className="font-semibold text-blue-900 text-lg">Achievements:</h5>
-                          <div className="space-y-2 pl-4">
-                            {member.achievements.map((achievement: string, achIndex: number) => (
-                              <div key={achIndex} className="p-3 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/50">
-                                <p className="text-base font-light text-blue-900/90">{achievement}</p>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                      
-                      <div className="space-y-3">
-                        <h5 className="font-semibold text-blue-900 text-lg">Contact:</h5>
-                        <div className="pl-4 space-y-2">
-                          {member.contact.email && (
-                            <div className="text-base md:text-lg font-light text-blue-900/90">
-                              <strong className="font-semibold text-blue-900">Email:</strong>{" "}
-                              <a 
-                                href={`mailto:${member.contact.email}`}
-                                className="group inline-flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-blue-50/40 border border-blue-500/15 transition-all duration-300 hover:bg-blue-100/60 hover:border-blue-500/30 hover:shadow-md hover:shadow-blue-200/30 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:scale-[1.02] active:scale-95 active:duration-75"
-                              >
-                                <div className="flex items-center justify-center w-4 h-4 bg-blue-600/10 rounded-full border border-blue-600/20 transition-all duration-300 group-hover:bg-blue-600/20 group-hover:border-blue-600/40 group-hover:scale-110">
-                                  <svg 
-                                    width="10" 
-                                    height="10" 
-                                    viewBox="0 0 24 24" 
-                                    fill="none" 
-                                    stroke="currentColor" 
-                                    strokeWidth="2.5" 
-                                    className="text-blue-600 transition-colors duration-300 group-hover:text-blue-700"
-                                  >
-                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                                    <polyline points="22,6 12,13 2,6"></polyline>
-                                  </svg>
-                                </div>
-                                <span className="font-medium text-blue-900 transition-colors duration-300 group-hover:text-blue-800">
-                                  {member.contact.email}
-                                </span>
-                                <div className="flex items-center justify-center w-4 h-4 rounded-full bg-blue-600/10 border border-blue-600/20 transition-all duration-300 group-hover:bg-blue-600/20 group-hover:border-blue-600/40 group-hover:translate-x-0.5 opacity-0 group-hover:opacity-100">
-                                  <svg 
-                                    width="8" 
-                                    height="8" 
-                                    viewBox="0 0 24 24" 
-                                    fill="none" 
-                                    stroke="currentColor" 
-                                    strokeWidth="2.5" 
-                                    className="text-blue-600 transition-all duration-300 group-hover:text-blue-700"
-                                  >
-                                    <path d="m9 18 6-6-6-6"/>
-                                  </svg>
-                                </div>
-                              </a>
-                            </div>
-                          )}
-                          {member.contact.phone && (
-                            <p className="text-base md:text-lg font-light text-blue-900/90">
-                              <strong className="font-semibold text-blue-900">Phone:</strong> {member.contact.phone}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-            
-            {/* Show More Button for Current Members */}
-            {visibleCurrentMembers < currentMembers.length && (
-              <div className="flex justify-center pt-8">
-                <button
-                  onClick={handleShowMoreCurrentMembers}
-                  disabled={loadingCurrentMembers}
-                  className="group relative px-8 py-4 bg-blue-50/60 border border-blue-500/20 rounded-xl backdrop-blur-xl shadow-lg shadow-blue-200/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/15 hover:bg-blue-50/80 hover:border-blue-600/30 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:scale-105 active:scale-95 active:duration-75 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
-                >
-                  <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-blue-900 to-blue-600 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-10 transition-all duration-500 group-disabled:group-hover:opacity-0"></div>
-                  
-                  <div className="flex items-center space-x-3">
-                    {loadingCurrentMembers ? (
-                      <>
-                        <div className="w-5 h-5 border-2 border-blue-600/30 border-t-blue-600 rounded-full animate-spin"></div>
-                        <span className="text-base font-medium text-blue-900/80">Loading...</span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="text-base font-medium text-blue-900 transition-colors duration-300 group-hover:text-blue-800">
-                          Show More Members
-                        </span>
-                        <div className="flex items-center justify-center w-6 h-6 rounded-full bg-blue-600/10 border border-blue-600/20 transition-all duration-300 group-hover:bg-blue-600/20 group-hover:border-blue-600/40 group-hover:translate-x-1">
-                          <svg 
-                            width="12" 
-                            height="12" 
-                            viewBox="0 0 24 24" 
-                            fill="none" 
-                            stroke="currentColor" 
-                            strokeWidth="2" 
-                            className="text-blue-600 transition-all duration-300 group-hover:text-blue-700"
-                          >
-                            <polyline points="6,9 12,15 18,9"></polyline>
-                          </svg>
-                        </div>
-                        <span className="text-sm text-blue-700/60 font-light">
-                          ({currentMembers.length - visibleCurrentMembers} remaining)
-                        </span>
-                      </>
-                    )}
-                  </div>
-                </button>
-              </div>
+          <div>
+            <h5>Contact:</h5>
+            {member.contact.email && (
+              <p><strong>Email:</strong> <a href={`mailto:${member.contact.email}`}>{member.contact.email}</a></p>
+            )}
+            {member.contact.phone && (
+              <p><strong>Phone:</strong> {member.contact.phone}</p>
             )}
           </div>
-        </section>
+        </div>
+      ))}
 
-        {/* Past Members Section */}
-        <section className={`transition-all duration-1000 delay-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-light text-blue-900 mb-4 transition-all duration-500 hover:text-blue-700 cursor-default">
-              Past Members
-            </h2>
-            <div className="w-16 h-0.5 bg-gradient-to-r from-blue-600 to-blue-800 mx-auto rounded-full"></div>
-          </div>
-          
-          <div className="space-y-8">
-            {pastMembers.slice(0, visiblePastMembers).map((member: any, index: number) => (
-              <div
-                key={index}
-                className={`relative p-8 backdrop-blur-xl bg-blue-50/60 border border-blue-500/20 rounded-2xl shadow-lg shadow-blue-200/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/15 hover:bg-blue-50/80 hover:border-blue-600/30 hover:translate-y-[-2px] group cursor-default ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-                style={{
-                  animationDelay: isLoaded ? '0.4s' : '0s',
-                  animation: isLoaded ? 'fadeInUp 0.4s ease-out 0.4s both' : 'none'
-                }}
-              >
-                <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-blue-900 to-blue-600 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-20 transition-all duration-500"></div>
-                
-                <div className="grid md:grid-cols-5 gap-6 items-start">
-                  {/* Image Section */}
-                  <div className="md:col-span-1">
-                    <div className="relative">
-                      <PersonImage
-                        type="past"
-                        index={index + 1}
-                        name={member.name}
-                        className="w-full aspect-[3/4] rounded-lg border-2 border-slate-300/40 shadow-md shadow-slate-200/20 transition-all duration-500 group-hover:shadow-lg group-hover:shadow-slate-900/15 group-hover:border-slate-400/60"
-                      />
-                      {/* Alumni badge */}
-                      <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
-                        <span className="px-2 py-1 text-xs font-medium text-slate-700 bg-slate-100/80 rounded-full border border-slate-300/60 shadow-sm backdrop-blur-sm">
-                          Alumni
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Content Section */}
-                  <div className="md:col-span-4 space-y-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-3 h-3 bg-gradient-to-br from-slate-500 to-slate-700 rounded-full"></div>
-                      <h3 className="text-xl md:text-2xl font-medium text-blue-900 transition-all duration-300 group-hover:text-blue-800">
-                        {member.name}
-                      </h3>
-                    </div>
-                    
-                    <div className="ml-7 space-y-4">
-                      <p className="text-base md:text-lg font-light text-blue-900/90">
-                        <strong className="font-semibold text-blue-900">Position:</strong> {member.position}
-                      </p>
-                      
-                      {member.education && (
-                        <p className="text-base md:text-lg font-light text-blue-900/90">
-                          <strong className="font-semibold text-blue-900">Education:</strong> {member.education}
-                        </p>
-                      )}
-                      
-                      {member.currentStatus && (
-                        <div className="flex items-start space-x-4">
-                          <p className="text-base md:text-lg font-light text-blue-900/90 flex-1">
-                            <strong className="font-semibold text-blue-900">Current Status:</strong> {member.currentStatus}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-            
-            {/* Show More Button for Past Members */}
-            {visiblePastMembers < pastMembers.length && (
-              <div className="flex justify-center pt-8">
-                <button
-                  onClick={handleShowMorePastMembers}
-                  disabled={loadingPastMembers}
-                  className="group relative px-8 py-4 bg-blue-50/60 border border-blue-500/20 rounded-xl backdrop-blur-xl shadow-lg shadow-blue-200/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/15 hover:bg-blue-50/80 hover:border-blue-600/30 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:scale-105 active:scale-95 active:duration-75 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
-                >
-                  <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-1 h-0 bg-gradient-to-b from-slate-600 to-slate-800 rounded-r-full opacity-0 group-hover:opacity-100 group-hover:h-10 transition-all duration-500 group-disabled:group-hover:opacity-0"></div>
-                  
-                  <div className="flex items-center space-x-3">
-                    {loadingPastMembers ? (
-                      <>
-                        <div className="w-5 h-5 border-2 border-blue-600/30 border-t-blue-600 rounded-full animate-spin"></div>
-                        <span className="text-base font-medium text-blue-900/80">Loading...</span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="text-base font-medium text-blue-900 transition-colors duration-300 group-hover:text-blue-800">
-                          Show More Alumni
-                        </span>
-                        <div className="flex items-center justify-center w-6 h-6 rounded-full bg-slate-600/10 border border-slate-600/20 transition-all duration-300 group-hover:bg-slate-600/20 group-hover:border-slate-600/40 group-hover:translate-x-1">
-                          <svg 
-                            width="12" 
-                            height="12" 
-                            viewBox="0 0 24 24" 
-                            fill="none" 
-                            stroke="currentColor" 
-                            strokeWidth="2" 
-                            className="text-slate-600 transition-all duration-300 group-hover:text-slate-700"
-                          >
-                            <polyline points="6,9 12,15 18,9"></polyline>
-                          </svg>
-                        </div>
-                        <span className="text-sm text-blue-700/60 font-light">
-                          ({pastMembers.length - visiblePastMembers} remaining)
-                        </span>
-                      </>
-                    )}
-                  </div>
-                </button>
-              </div>
-            )}
-          </div>
-        </section>
-      </main>
-      
-      <style>{`
-        .bg-gradient-radial {
-          background: radial-gradient(circle, var(--tw-gradient-stops));
-        }
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(1rem);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        @keyframes expandUnderline {
-          from {
-            width: 0;
-          }
-          to {
-            width: 300px;
-          }
-        }
-        .animate-expand-underline {
-          animation: expandUnderline 1.5s ease-out 0.5s forwards;
-        }
-        @keyframes pulse {
-          0%, 100% {
-            opacity: 0.3;
-          }
-          50% {
-            opacity: 0.8;
-          }
-        }
-      `}</style>
+      <h2>Past Members</h2>
+      {pastMembers.map((member, index) => (
+        <div key={index}>
+          <img src={getImageSrc('past', index + 1)} alt={member.name} />
+          <span>Alumni</span>
+          <h3>{member.name}</h3>
+          <p><strong>Position:</strong> {member.position}</p>
+          {member.education && <p><strong>Education:</strong> {member.education}</p>}
+          {member.currentStatus && <p><strong>Current Status:</strong> {member.currentStatus}</p>}
+        </div>
+      ))}
     </div>
   );
-});
+};
 
 export default People;
